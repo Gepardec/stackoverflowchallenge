@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="so-challenge-backend" type="javax.sql.DataSource">#Tue Jul 16 09:39:46 CEST 2019
+jdbcDriver=org.postgresql.Driver
+password=pgadminplaysdart31
+userName=postgres
+jdbcUrl=jdbc\:postgresql\://localhost\:5432/so-challenge
+</Resource>
+</resources>

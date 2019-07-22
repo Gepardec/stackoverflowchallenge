@@ -3,6 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <module-name>stackoverflowchallenge</module-name>
-    <display-name>stackoverflowchallenge</display-name>
+    <module-name>so-challenge-backend</module-name>
+    <display-name>so-challenge-backend</display-name>
 </web-app>

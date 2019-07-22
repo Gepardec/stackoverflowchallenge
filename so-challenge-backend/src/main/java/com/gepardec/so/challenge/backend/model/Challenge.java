@@ -9,18 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -53,7 +42,7 @@ public class Challenge implements Serializable {
     @JoinTable(name = "challenge_participant", joinColumns = {
         @JoinColumn(name = "challenge_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "participant_id", referencedColumnName = "profileid")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Participant> participantList = new ArrayList<>(0);
 
     public Challenge() {

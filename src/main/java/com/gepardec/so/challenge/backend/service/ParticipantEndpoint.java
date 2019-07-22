@@ -23,6 +23,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notAcceptable;
+import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
+
 /**
  * REST Web Service
  *
@@ -48,7 +51,7 @@ public class ParticipantEndpoint {
             if (o != null) {
                 return Response.ok(o).build();
             } else {
-                return Response.status(Response.Status.NOT_FOUND).build();
+                return notFound();
             }
         } else {
             return Response.ok(p).build();
@@ -63,7 +66,7 @@ public class ParticipantEndpoint {
         JsonObject o = EndpointUtils.sendRequestAndGetJson("users/" + profileId, "GET");
 
         if (o == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return notFound();
         }
 
         Participant p = new Participant(profileId);
@@ -75,7 +78,7 @@ public class ParticipantEndpoint {
         if (success) {
             return Response.status(Response.Status.CREATED).entity(p).build();
         } else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            return notAcceptable();
         }
 
     }
@@ -87,7 +90,7 @@ public class ParticipantEndpoint {
         List<Participant> p = dao.readAllParticipants();
 
         if (p.isEmpty()) {
-            return Response.status(Response.Status.NO_CONTENT).build();
+            return notFound();
         } else {
             return Response.ok(p).build();
         }
@@ -101,7 +104,7 @@ public class ParticipantEndpoint {
         if (p != null) {
             return Response.ok(p).build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return notFound();
         }
     }
 }

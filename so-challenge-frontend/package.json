@@ -5,7 +5,7 @@
     "ng": "node_modules/.bin/ng",
     "start": "node_modules/.bin/ng serve",
     "build": "node_modules/.bin/ng build --outputPath=${outputPath}",
-    "watch": "node_modules/.bin/ng build --outputPath=${outputPath} --watch",
+    "watch": "node_modules/.bin/ng build --outputPath=${outputPath} --watch --deleteOutputPath=false",
     "test": "node_modules/.bin/ng test",
     "lint": "node_modules/.bin/ng lint",
     "e2e": "node_modules/.bin/ng e2e"

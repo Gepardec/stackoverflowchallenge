@@ -6,9 +6,12 @@
 package com.gepardec.so.challenge.backend.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,21 +27,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Challenge implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(generator = "ch_id_seq")
     @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
+
     @Size(max = 500)
-    @Column(name = "title")
     private String title;
-    @Column(name = "begindate")
-    @Temporal(TemporalType.DATE)
-    private Date begindate = new Date();
-    @Column(name = "enddate")
-    @Temporal(TemporalType.DATE)
-    private Date enddate = new Date();
-    
+
+    @JsonbDateFormat
+    private LocalDateTime begindate;
+
+    @JsonbDateFormat
+    private LocalDateTime enddate;
+
+    private String award1;
+
+    private String award2;
+
+    private String award3;
+
+    public String getAward3() {
+        return award3;
+    }
+
+    public void setAward3(String award3) {
+        this.award3 = award3;
+    }
+
+    public String getAward2() {
+        return award2;
+    }
+
+    public void setAward2(String award2) {
+        this.award2 = award2;
+    }
+
+    public String getAward1() {
+        return award1;
+    }
+
+    public void setAward1(String award1) {
+        this.award1 = award1;
+    }
+
     @JoinTable(name = "challenge_participant", joinColumns = {
         @JoinColumn(name = "challenge_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "participant_id", referencedColumnName = "profileid")})
@@ -68,19 +101,19 @@ public class Challenge implements Serializable {
         this.title = title;
     }
 
-    public Date getBegindate() {
+    public LocalDateTime getBegindate() {
         return begindate;
     }
 
-    public void setBegindate(Date begindate) {
+    public void setBegindate(LocalDateTime begindate) {
         this.begindate = begindate;
     }
 
-    public Date getEnddate() {
+    public LocalDateTime getEnddate() {
         return enddate;
     }
 
-    public void setEnddate(Date enddate) {
+    public void setEnddate(LocalDateTime enddate) {
         this.enddate = enddate;
     }
 

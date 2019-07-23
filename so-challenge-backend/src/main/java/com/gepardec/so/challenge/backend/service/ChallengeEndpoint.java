@@ -7,8 +7,13 @@ package com.gepardec.so.challenge.backend.service;
 
 import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.Challenge;
+
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notAcceptable;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -81,7 +86,10 @@ public class ChallengeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createChallenge(Challenge c) {
-        if (c.getBegindate().after(c.getEnddate())
+        c.setEnddate(LocalDateTime.now());
+        c.setBegindate(c.getEnddate().minusDays(1));
+
+        if (c.getBegindate().isAfter(c.getEnddate())
                 || c.getBegindate().equals(c.getEnddate())
                 || !dao.createChallenge(c)) {
             return notAcceptable();

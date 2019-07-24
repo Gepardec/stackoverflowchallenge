@@ -27,6 +27,53 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>
+                            ${project.basedir}/src/main/assembly/assemblyDescriptor.xml
+                        </descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>5.2.4</version>
+
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/so-challenge</url>
+                    <user>postgres</user>
+                    <password>pgadminplaysdart31</password>
+                    <locations>
+                        <location>
+                            ${project.basedir}/src/main/resources/db/migration
+                        </location>
+                    </locations>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>9.1-901.jdbc4</version>
+                    </dependency>
+                </dependencies>
+
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -35,6 +82,7 @@
                     <release>11</release>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>

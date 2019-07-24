@@ -13,30 +13,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author praktikant_ankermann
  */
 @Entity
-@Table(name = "participant")
-@XmlRootElement
 public class Participant implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "profileid")
     private Long profileId;
+
     @Size(max = 500)
-    @Column(name = "link")
     private String link;
+
     @Size(max = 300)
-    @Column(name = "username")
     private String username;
-    @Column(name = "imageurl")
+
     private String imageURL;
 
     public String getImageURL() {

@@ -54,7 +54,7 @@ public class ParticipantEndpoint {
             return Response.ok(p).build();
         }
     }
-    
+
     @POST
     @Path("add")
     @Consumes(MediaType.TEXT_PLAIN)

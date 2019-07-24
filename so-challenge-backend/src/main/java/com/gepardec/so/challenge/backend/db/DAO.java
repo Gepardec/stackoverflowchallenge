@@ -7,13 +7,13 @@ package com.gepardec.so.challenge.backend.db;
 
 import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
  * @author praktikant_ankermann
  */
 @Stateless
@@ -37,7 +37,7 @@ public class DAO implements DAOLocal {
         if (c == null || c.getId() != null) {
             return false;
         } else {
-            for (Participant p : c.getParticipantList()) {
+            for (Participant p : c.getParticipantSet()) {
                 if (p == null || p.getProfileId() == null || findParticipant(p.getProfileId()) == null) {
                     return false;
                 }
@@ -75,8 +75,8 @@ public class DAO implements DAOLocal {
         } else {
             for (Challenge c : readAllChallenges()) {
                 c = findChallenge(c.getId());
-                if (c != null && c.getParticipantList().contains(p)) {
-                    c.getParticipantList().remove(p);
+                if (c != null && c.getParticipantSet().contains(p)) {
+                    c.getParticipantSet().remove(p);
                     em.merge(c);
                 }
             }
@@ -111,7 +111,7 @@ public class DAO implements DAOLocal {
         Challenge c = findChallenge(challengeId);
         Participant p = findParticipant(participantId);
 
-        if (c == null || p == null || c.getParticipantList().contains(p)) {
+        if (c == null || p == null || c.getParticipantSet().contains(p)) {
             return false;
         } else {
             c.addParticipant(p);
@@ -124,10 +124,10 @@ public class DAO implements DAOLocal {
         Challenge c = findChallenge(challengeId);
         Participant p = findParticipant(participantId);
 
-        if (c == null || p == null || !c.getParticipantList().contains(p)) {
+        if (c == null || p == null || !c.getParticipantSet().contains(p)) {
             return false;
         } else {
-            c.getParticipantList().remove(p);
+            c.getParticipantSet().remove(p);
             return true;
         }
     }

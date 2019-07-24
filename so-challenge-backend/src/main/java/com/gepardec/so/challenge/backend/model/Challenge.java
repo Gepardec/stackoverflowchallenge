@@ -5,24 +5,18 @@
  */
 package com.gepardec.so.challenge.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.json.bind.annotation.JsonbDateFormat;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author praktikant_ankermann
  */
 @Entity
-@Table(name = "challenge")
-@XmlRootElement
 @SequenceGenerator(sequenceName = "ch_id_seq", name = "ch_id_seq", allocationSize = 1)
 public class Challenge implements Serializable {
 
@@ -36,11 +30,20 @@ public class Challenge implements Serializable {
     @Size(max = 500)
     private String title;
 
-    @JsonbDateFormat
-    private LocalDateTime begindate;
+    @Size(max = 500)
+    private String description;
 
-    @JsonbDateFormat
-    private LocalDateTime enddate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date fromDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date toDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Status status;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Tag> tagSet = new LinkedHashSet<>();
 
     private String award1;
 
@@ -48,41 +51,25 @@ public class Challenge implements Serializable {
 
     private String award3;
 
-    public String getAward3() {
-        return award3;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Admin creator;
 
-    public void setAward3(String award3) {
-        this.award3 = award3;
-    }
-
-    public String getAward2() {
-        return award2;
-    }
-
-    public void setAward2(String award2) {
-        this.award2 = award2;
-    }
-
-    public String getAward1() {
-        return award1;
-    }
-
-    public void setAward1(String award1) {
-        this.award1 = award1;
-    }
-
-    @JoinTable(name = "challenge_participant", joinColumns = {
-        @JoinColumn(name = "challenge_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "participant_id", referencedColumnName = "profileid")})
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Participant> participantList = new ArrayList<>(0);
+    private Set<Participant> participantSet = new LinkedHashSet<>();
 
     public Challenge() {
     }
 
-    public Challenge(Integer id) {
-        this.id = id;
+    public Admin getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Admin creator) {
+        this.creator = creator;
+    }
+
+    public void setTagSet(Set<Tag> tagSet) {
+        this.tagSet = tagSet;
     }
 
     public Integer getId() {
@@ -101,59 +88,90 @@ public class Challenge implements Serializable {
         this.title = title;
     }
 
-    public LocalDateTime getBegindate() {
-        return begindate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBegindate(LocalDateTime begindate) {
-        this.begindate = begindate;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public LocalDateTime getEnddate() {
-        return enddate;
+    public Date getFromDate() {
+        return fromDate;
     }
 
-    public void setEnddate(LocalDateTime enddate) {
-        this.enddate = enddate;
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
     }
 
-    public List<Participant> getParticipantList() {
-        return participantList;
+    public Date getToDate() {
+        return toDate;
     }
 
-    public void setParticipantList(List<Participant> participantList) {
-        this.participantList = participantList;
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public Status getStatus() {
+        return status;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Challenge)) {
-            return false;
-        }
-        Challenge other = (Challenge) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "com.gepardec.so.challenge.backend.model.Challenge[ id=" + id + " ]";
+    public Set<Tag> getTagSet() {
+        return tagSet;
+    }
+
+    public String getAward1() {
+        return award1;
+    }
+
+    public void setAward1(String award1) {
+        this.award1 = award1;
+    }
+
+    public String getAward2() {
+        return award2;
+    }
+
+    public void setAward2(String award2) {
+        this.award2 = award2;
+    }
+
+    public String getAward3() {
+        return award3;
+    }
+
+    public void setAward3(String award3) {
+        this.award3 = award3;
+    }
+
+    public Set<Participant> getParticipantSet() {
+        return participantSet;
+    }
+
+    public void setParticipantSet(Set<Participant> participantSet) {
+        this.participantSet = participantSet;
     }
 
     public void addParticipant(Participant p) {
         if (p != null) {
-            this.participantList.add(p);
+            this.participantSet.add(p);
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Challenge challenge = (Challenge) o;
+        return Objects.equals(id, challenge.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

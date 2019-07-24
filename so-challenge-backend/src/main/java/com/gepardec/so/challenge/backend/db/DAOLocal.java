@@ -7,6 +7,9 @@ package com.gepardec.so.challenge.backend.db;
 
 import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
+import com.gepardec.so.challenge.backend.model.Status;
+import com.gepardec.so.challenge.backend.model.Tag;
+
 import java.util.List;
 import javax.ejb.Local;
 

@@ -16,6 +16,7 @@ export class ParticipantComponent implements OnInit {
   ngOnInit() {
     this.service.getParticipants().subscribe(
       data => {
+        console.log(data);
         this.participants = data;
         this.errorMessage = false;
       },
@@ -54,6 +55,13 @@ export class ParticipantComponent implements OnInit {
         alert('There was an error:\nTry to provide valid input.\nThis user does not exist or is already in the list.');
       }
     );
+  }
+
+  onEnterPressed(event, id: string) {
+
+    if (event.key === "Enter") {
+      this.addParticipant(id);
+    }
   }
 
 }

@@ -1,0 +1,12 @@
+<p>This tag is only to indicate that the router works fine xD</p>
+<div *ngIf="errorMessage">
+    <p>Could not connect to server.<br>Please try again later...</p>
+</div>
+
+<div *ngIf="!errorMessage">
+    <p>Some test data for the points of a participant:</p>
+</div>
+
+<div *ngIf="result">
+    <p *ngFor="let p of result">{{p}}</p>
+</div>

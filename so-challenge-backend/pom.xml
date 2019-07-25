@@ -55,13 +55,14 @@
 
                 <configuration>
                     <url>jdbc:postgresql://localhost:5432/so-challenge</url>
+                    <!--USER & PW-->
                     <user>postgres</user>
                     <password>pgadminplaysdart31</password>
-                    <locations>
-                        <location>
-                            ${project.basedir}/src/main/resources/db/migration
-                        </location>
-                    </locations>
+                        <locations>
+                            <location>
+                                classpath:/src/main/resource/db/migration
+                            </location>
+                        </locations>
                 </configuration>
 
                 <dependencies>

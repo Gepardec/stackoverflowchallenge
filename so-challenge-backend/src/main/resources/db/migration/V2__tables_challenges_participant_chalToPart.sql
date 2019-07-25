@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS challenge (
 	id serial,
 	title varchar(500),

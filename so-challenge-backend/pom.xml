@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>so-challenge-backend</artifactId>
+
     <packaging>war</packaging>
 
     <dependencies>
@@ -60,7 +61,7 @@
                     <password>pgadminplaysdart31</password>
                         <locations>
                             <location>
-                                classpath:/src/main/resource/db/migration
+                                filesystem:./src/main/assembly/data/
                             </location>
                         </locations>
                 </configuration>

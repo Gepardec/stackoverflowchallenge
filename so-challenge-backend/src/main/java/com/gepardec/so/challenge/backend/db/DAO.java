@@ -7,6 +7,7 @@ package com.gepardec.so.challenge.backend.db;
 
 import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
+import com.gepardec.so.challenge.backend.model.Status;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -130,5 +131,10 @@ public class DAO implements DAOLocal {
             c.getParticipantSet().remove(p);
             return true;
         }
+    }
+
+    @Override
+    public List<Status> getAllStatuses() {
+        return em.createQuery("SELECT s FROM Status s ORDER BY s.id", Status.class).getResultList();
     }
 }

@@ -118,4 +118,6 @@ public interface DAOLocal {
      * found or the participant is not part of this challenge, true otherwise
      */
     boolean removeParticipantFromChallenge(Integer challengeId, Long participantId);
+
+    List<Status> getAllStatuses();
 }

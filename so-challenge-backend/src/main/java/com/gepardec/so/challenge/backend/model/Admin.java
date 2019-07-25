@@ -20,6 +20,7 @@ public class Admin implements Serializable {
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     @JsonIgnore

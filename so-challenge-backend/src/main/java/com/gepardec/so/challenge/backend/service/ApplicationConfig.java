@@ -32,6 +32,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.gepardec.so.challenge.backend.service.ChallengeEndpoint.class);
         resources.add(com.gepardec.so.challenge.backend.service.CorsFilter.class);
         resources.add(com.gepardec.so.challenge.backend.service.ParticipantEndpoint.class);
+        resources.add(com.gepardec.so.challenge.backend.service.StatusEndpoint.class);
     }
     
 }

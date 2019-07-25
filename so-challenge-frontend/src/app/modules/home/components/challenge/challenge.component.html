@@ -1,28 +1,53 @@
-<p>My name is jeff and yours is Detlef</p>
+<table mat-table *ngIf="challenges" [dataSource]="challenges" class="mat-elevation-z8">
 
-<!--<div *ngIf="errorMessage">
-    <p>Could not connect to server.<br>Please try again later...</p>
-</div>
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
 
-<div *ngIf="!errorMessage">
-    <p>Add, edit and delete challenges here...</p>
-    <div>
-        TODO// adding comes here
-    </div>
-</div>
+    <!-- title Column -->
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Titel</th>
+        <td mat-cell *matCellDef="let c"> {{c.title}} </td>
+    </ng-container>
 
-<div *ngIf="challenges">
+    <!-- fromDate Column -->
+    <ng-container matColumnDef="fromDate">
+        <th mat-header-cell *matHeaderCellDef> Von (yyyy-mm-dd)</th>
+        <td mat-cell *matCellDef="let c"> {{c.fromDate}} </td>
+    </ng-container>
 
+    <!-- toDate Column -->
+    <ng-container matColumnDef="toDate">
+        <th mat-header-cell *matHeaderCellDef> Bis (yyyy-mm-dd)</th>
+        <td mat-cell *matCellDef="let c"> {{c.toDate}} </td>
+    </ng-container>
 
-    <div *ngFor="let c of challenges">
-        {{c.id}}  {{c.enddate}}   {{c.begindate}}
+    <!-- status Column -->
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status</th>
+        <td mat-cell *matCellDef="let c"> {{c.status == null ? '--kein Status--' : c.status.name }} </td>
+    </ng-container>
 
-        <div *ngFor="let p of c.participantList">
-            {{p}}
-        </div>
+    <!-- Action column -->
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Aktionen</th>
+        <td mat-cell *matCellDef="let c">
+            <button mat-icon-button (click)="selectChallenge(c)"
+                    matTooltip="Challenge '{{c.title}}' bearbeiten">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteChallenge(c)"
+                    matTooltip="Challenge '{{c.title}}' löschen"
+                    matTooltipClass="red">
+                <mat-icon>delete</mat-icon>
+            </button>
 
-    </div>
+        </td>
+    </ng-container>
 
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
 
-</div>-->
+</table>
 
+<app-challenge-detail [challenge]="challengeToEdit">
+</app-challenge-detail>

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Participant} from '../../../../shared/models/participant';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
 import {Challenge} from '../../../../shared/models/challenge';
 
@@ -9,13 +8,10 @@ import {Challenge} from '../../../../shared/models/challenge';
     styleUrls: ['./challenge.component.css']
 })
 export class ChallengeComponent implements OnInit {
-    ngOnInit() {
+    challenges: Challenge[];
+    challengeToEdit: Challenge;
 
-    }
-
-
-    /*challenges: Challenge[];
-    errorMessage: boolean;
+    columnsToDisplay = ['title', 'fromDate', 'toDate', 'status', 'action'];
 
     constructor(private service: EndpointService) {
     }
@@ -23,44 +19,33 @@ export class ChallengeComponent implements OnInit {
     ngOnInit() {
         this.service.getChallenges().subscribe(
             data => {
+                console.log(data);
                 this.challenges = data;
-                this.errorMessage = false;
+                console.log(this.challenges)
+                console.log(this.challenges[0].tagSet.toString())
             },
             error => {
                 console.log(error);
-                this.errorMessage = true;
             }
         );
     }
+
+    selectChallenge(c: Challenge) {
+        this.challengeToEdit = c;
+    }
+
 
     deleteChallenge(c: Challenge) {
-        this.service.deleteChallenge(c.id).subscribe(
-            data => {
-                console.log(data);
-                this.ngOnInit();
-            },
-            error => {
-                console.log(error);
-            }
-        );
+        if (confirm(`Wollen Sie die Challenge '${c.title}' wirklich löschen?`)) {
+            this.service.deleteChallenge(c.id).subscribe(
+                data => {
+                    // refreshing the UI
+                    this.ngOnInit()
+                },
+                error => {
+                    alert(`Die Challenge '${c.title}' konnte nicht gelöscht werden.`)
+                }
+            )
+        }
     }
-
-    /*addChallenge(id: string) {
-        /*if (id.trim().length === 0 || isNaN(+id)) {
-          alert('check your input again please');
-          return;
-        }*/
-
-        /*this.service.addParticipant((+id)).subscribe(
-            data => {
-                console.log(data);
-                this.ngOnInit();
-            },
-            error => {
-                console.log(error);
-                alert('There was an error:\nTry to provide valid input.\nThis user does not exist or is already in the list.');
-            }
-        );
-    }*/
-
 }

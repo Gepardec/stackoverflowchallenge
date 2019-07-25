@@ -6,6 +6,7 @@
 package com.gepardec.so.challenge.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -51,21 +52,10 @@ public class Challenge implements Serializable {
 
     private String award3;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Admin creator;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Participant> participantSet = new LinkedHashSet<>();
 
     public Challenge() {
-    }
-
-    public Admin getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Admin creator) {
-        this.creator = creator;
     }
 
     public void setTagSet(Set<Tag> tagSet) {

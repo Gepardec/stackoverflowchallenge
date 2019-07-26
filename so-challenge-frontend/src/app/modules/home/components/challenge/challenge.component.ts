@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
 import {Challenge} from '../../../../shared/models/challenge';
+import {SnackbarService} from "../../../../shared/services/snackbar.service";
 
 @Component({
     selector: 'app-challenge',
@@ -13,39 +14,43 @@ export class ChallengeComponent implements OnInit {
 
     columnsToDisplay = ['title', 'fromDate', 'toDate', 'status', 'action'];
 
-    constructor(private service: EndpointService) {
+    constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
     }
 
     ngOnInit() {
-        this.service.getChallenges().subscribe(
+        this.endpointService.getChallenges().subscribe(
             data => {
-                console.log(data);
                 this.challenges = data;
-                console.log(this.challenges)
-                console.log(this.challenges[0].tagSet.toString())
             },
             error => {
-                console.log(error);
+                this.challenges = null;
+                this.snackBarService.open('Es gibt noch keine Challenges!');
             }
         );
     }
 
     selectChallenge(c: Challenge) {
-        this.challengeToEdit = c;
+        let copy: Challenge = JSON.parse(JSON.stringify(c));
+
+        this.challengeToEdit = copy;
     }
 
-
     deleteChallenge(c: Challenge) {
+        console.log(c)
         if (confirm(`Wollen Sie die Challenge '${c.title}' wirklich löschen?`)) {
-            this.service.deleteChallenge(c.id).subscribe(
+            this.endpointService.deleteChallenge(c.id).subscribe(
                 data => {
-                    // refreshing the UI
-                    this.ngOnInit()
+                    this.refreshGUI();
+                    this.snackBarService.open('Gelöscht!');
                 },
                 error => {
-                    alert(`Die Challenge '${c.title}' konnte nicht gelöscht werden.`)
+                    this.snackBarService.open(`Die Challenge '${c.title}' konnte nicht gelöscht werden.`)
                 }
             )
         }
+    }
+
+    refreshGUI() {
+        this.ngOnInit();
     }
 }

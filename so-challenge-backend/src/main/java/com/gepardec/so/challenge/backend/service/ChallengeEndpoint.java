@@ -8,26 +8,16 @@ package com.gepardec.so.challenge.backend.service;
 import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.Challenge;
 
+import javax.ejb.EJB;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notAcceptable;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ws.rs.core.*;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.Produces;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
-import javax.ws.rs.PathParam;
 
 /**
  * REST Web Service
@@ -96,6 +86,11 @@ public class ChallengeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateChallenge(Challenge challenge) {
+        if (challenge.getFromDate().after(challenge.getToDate())
+                || challenge.getFromDate().equals(challenge.getToDate())) {
+            return notAcceptable();
+        }
+
         challenge = dao.updateChallenge(challenge);
         if (challenge != null) {
             return Response.ok(challenge).build();

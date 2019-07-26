@@ -13,9 +13,15 @@ export class EndpointService {
 
     private BASE_URL = 'http://localhost:8080/so-challenge-backend/api/';
 
-    private httpOptions = {
+    private TEXT_PLAIN_OPTIONS = {
         headers: new HttpHeaders({
             'Content-Type': 'text/plain'
+        })
+    };
+
+    private APPLICATION_JSON_OPTIONS = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
         })
     };
 
@@ -27,7 +33,7 @@ export class EndpointService {
     }
 
     addParticipant(profileId: number) {
-        return this.http.post(this.BASE_URL + 'participant/add', profileId, this.httpOptions);
+        return this.http.post(this.BASE_URL + 'participant/add', profileId, this.TEXT_PLAIN_OPTIONS);
     }
 
     deleteParticipant(profileId: number) {
@@ -47,4 +53,13 @@ export class EndpointService {
     getStatuses(): Observable<Status[]> {
         return this.http.get<Status[]>(this.BASE_URL + 'status/all');
     }
+
+    addChallenge(c: Challenge) {
+        return this.http.post(this.BASE_URL + 'participant/add', c, this.APPLICATION_JSON_OPTIONS);
+    }
+
+    updateChallenge(c:Challenge) {
+        return this.http.put(this.BASE_URL + 'challenge/update', c, this.APPLICATION_JSON_OPTIONS);
+    }
+
 }

@@ -8,18 +8,21 @@ import {ParticipantComponent} from './components/participant/participant.compone
 import {ChallengeComponent} from './components/challenge/challenge.component';
 import {ChallengeDetailComponent} from './components/challenge-detail/challenge-detail.component';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
     MatTableModule,
     MatTabsModule,
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
-
 
 @NgModule({
     declarations: [
@@ -50,10 +53,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatSelectModule
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatDividerModule,
+        MatListModule,
+        MatPaginatorModule
     ],
     providers: [MatDatepickerModule],
     bootstrap: [HeaderComponent]
 })
 export class HomeModule {
 }
+
+

@@ -23,6 +23,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
+
 /**
  * REST Web Service
  *
@@ -85,9 +87,8 @@ public class ParticipantEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllParticipants() {
         List<Participant> p = dao.readAllParticipants();
-
         if (p.isEmpty()) {
-            return Response.status(Response.Status.NO_CONTENT).build();
+            return notFound();
         } else {
             return Response.ok(p).build();
         }

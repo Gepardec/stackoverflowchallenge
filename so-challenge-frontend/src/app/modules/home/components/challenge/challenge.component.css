@@ -1,7 +1,0 @@
-table {
-    width: 100%;
-}
-
-::ng-deep .red {
-    background-color: #b71c1c;
-}

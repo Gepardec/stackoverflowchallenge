@@ -1,59 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import { Participant } from '../../../../shared/models/participant';
-import { EndpointService } from '../../../../shared/services/endpoint.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Participant} from '../../../../shared/models/participant';
+import {EndpointService} from '../../../../shared/services/endpoint.service';
+import {SnackbarService} from "../../../../shared/services/snackbar.service";
+import {MatPaginator} from "@angular/material";
 
 @Component({
-  selector: 'app-participant',
-  templateUrl: './participant.component.html',
-  styleUrls: ['./participant.component.css']
+    selector: 'app-participant',
+    templateUrl: './participant.component.html',
+    styleUrls: ['./participant.component.css']
 })
 export class ParticipantComponent implements OnInit {
-  participants: Participant[];
-  errorMessage: boolean;
+    participants: Participant[];
+    columnsToDisplay = ['imageURL', 'profileId', 'username', 'link', 'action'];
 
-  constructor(private service: EndpointService) { }
+    constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
+    }
 
-  ngOnInit() {
-    this.service.getParticipants().subscribe(
-      data => {
-        this.participants = data;
-        this.errorMessage = false;
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = true;
-      }
-    );
-  }
+    ngOnInit() {
+        this.endpointService.getParticipants().subscribe(
+            data => {
+                this.participants = data;
+            },
+            error => {
+                this.snackBarService.open(`Es gibt noch keine Teilnehmer!`);
+            }
+        );
+    }
 
-  deleteParticipant(p: Participant) {
-    this.service.deleteParticipant(p.profileId).subscribe(
-      data => {
-        console.log(data);
-        this.ngOnInit();
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
+    deleteParticipant(p: Participant) {
+        if (confirm(`Wollen Sie den Teilnehmer '${p.username}' aus der Teilnehmerliste entfernen?`)) {
 
-  addParticipant(id: string) {
-    /*if (id.trim().length === 0 || isNaN(+id)) {
-      alert('check your input again please');
-      return;
-    }*/
+            this.endpointService.deleteParticipant(p.profileId).subscribe(
+                data => {
+                    this.ngOnInit();
+                    this.snackBarService.open(`Teilnehmer '${p.username}' wurde aus der Teilnehmerliste gelöscht!`);
+                },
+                error => {
+                    this.snackBarService.open(`Fehler beim Löschen des Teilnehmers '${p.username}'!`);
+                }
+            );
+        }
+    }
 
-    this.service.addParticipant((+id)).subscribe(
-      data => {
-        console.log(data);
-        this.ngOnInit();
-      },
-      error => {
-        console.log(error);
-        alert('There was an error:\nTry to provide valid input.\nThis user does not exist or is already in the list.');
-      }
-    );
-  }
+    addParticipant(id: string) {
+        this.endpointService.addParticipant((+id)).subscribe(
+            data => {
+                this.ngOnInit();
+            },
+            error => {
+                this.snackBarService.open('Fehler beim Hinzufügen: Dieser Teilnehmer existiert nicht oder ist bereits hinzugefügt!');
+            }
+        );
+    }
 
 }

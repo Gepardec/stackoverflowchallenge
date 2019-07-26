@@ -1,307 +1,1063 @@
 {
   "items": [
     {
-      "score": 46
-    },
-    {
-      "score": 36
-    },
-    {
-      "score": 16
-    },
-    {
-      "score": 11
-    },
-    {
-      "score": 8
-    },
-    {
-      "score": 7
-    },
-    {
-      "score": 6
-    },
-    {
-      "score": 6
-    },
-    {
-      "score": 6
-    },
-    {
-      "score": 6
-    },
-    {
-      "score": 6
-    },
-    {
-      "score": 6
-    },
-    {
-      "score": 5
-    },
-    {
-      "score": 5
-    },
-    {
-      "score": 5
-    },
-    {
-      "score": 5
-    },
-    {
-      "score": 5
-    },
-    {
-      "score": 5
-    },
-    {
-      "score": 5
-    },
-    {
-      "score": 4
-    },
-    {
-      "score": 4
-    },
-    {
-      "score": 4
-    },
-    {
-      "score": 4
-    },
-    {
-      "score": 4
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 3
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 2
-    },
-    {
-      "score": 1
-    },
-    {
-      "score": 1
-    },
-    {
-      "score": 1
-    },
-    {
-      "score": 1
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "tampermonkey",
+        "ctrl",
+        "modifier-key"
+      ],
+      "score": 46,
+      "creation_date": 1464757276,
+      "answer_id": 37559790
+    },
+    {
+      "tags": [
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 36,
+      "creation_date": 1466833188,
+      "answer_id": 38025376
+    },
+    {
+      "tags": [
+        "iframe",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 16,
+      "creation_date": 1464991977,
+      "answer_id": 37624206
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 11,
+      "creation_date": 1461282115,
+      "answer_id": 36782285
+    },
+    {
+      "tags": [
+        "firefox",
+        "greasemonkey",
+        "greasemonkey-4",
+        "firefox-57+"
+      ],
+      "score": 8,
+      "creation_date": 1513799677,
+      "answer_id": 47913461
+    },
+    {
+      "tags": [
+        "html5",
+        "firefox",
+        "local-storage"
+      ],
+      "score": 7,
+      "creation_date": 1476511970,
+      "answer_id": 40055645
+    },
+    {
+      "tags": [
+        "jquery",
+        "firefox-addon",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 6,
+      "creation_date": 1438411797,
+      "answer_id": 31759160
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 6,
+      "creation_date": 1448349534,
+      "answer_id": 33887557
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "angularjs",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 6,
+      "creation_date": 1450497192,
+      "answer_id": 34367099
+    },
+    {
+      "tags": [
+        "javascript",
+        "ajax",
+        "tampermonkey"
+      ],
+      "score": 6,
+      "creation_date": 1480963655,
+      "answer_id": 40981220
+    },
+    {
+      "tags": [
+        "javascript",
+        "ajax",
+        "http",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 6,
+      "creation_date": 1488604207,
+      "answer_id": 42592356
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "google-chrome",
+        "tabs",
+        "tampermonkey"
+      ],
+      "score": 6,
+      "creation_date": 1533354472,
+      "answer_id": 51682246
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "css",
+        "ajax",
+        "greasemonkey"
+      ],
+      "score": 5,
+      "creation_date": 1440739335,
+      "answer_id": 32263816
+    },
+    {
+      "tags": [
+        "javascript",
+        "html",
+        "css",
+        "greasemonkey"
+      ],
+      "score": 5,
+      "creation_date": 1450245199,
+      "answer_id": 34304841
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 5,
+      "creation_date": 1456249259,
+      "answer_id": 35584467
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "angularjs",
+        "greasemonkey"
+      ],
+      "score": 5,
+      "creation_date": 1461610000,
+      "answer_id": 36848660
+    },
+    {
+      "tags": [
+        "css",
+        "firefox",
+        "stylish"
+      ],
+      "score": 5,
+      "creation_date": 1530302566,
+      "answer_id": 51108675
+    },
+    {
+      "tags": [
+        "javascript",
+        "tampermonkey"
+      ],
+      "score": 5,
+      "creation_date": 1535233876,
+      "answer_id": 52021508
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "tampermonkey",
+        "vtt"
+      ],
+      "score": 5,
+      "creation_date": 1540934081,
+      "answer_id": 53073026
+    },
+    {
+      "tags": [
+        "javascript",
+        "facebook",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 4,
+      "creation_date": 1479271897,
+      "answer_id": 40624294
+    },
+    {
+      "tags": [
+        "jquery",
+        "select",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 4,
+      "creation_date": 1483334892,
+      "answer_id": 41421759
+    },
+    {
+      "tags": [
+        "google-chrome-extension",
+        "cors",
+        "tampermonkey"
+      ],
+      "score": 4,
+      "creation_date": 1517807434,
+      "answer_id": 48616191
+    },
+    {
+      "tags": [
+        "javascript",
+        "html",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 4,
+      "creation_date": 1526500524,
+      "answer_id": 50378965
+    },
+    {
+      "tags": [
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 4,
+      "creation_date": 1536348959,
+      "answer_id": 52228659
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "tampermonkey",
+        "mashup"
+      ],
+      "score": 3,
+      "creation_date": 1441166498,
+      "answer_id": 32344450
+    },
+    {
+      "tags": [
+        "google-chrome",
+        "tampermonkey"
+      ],
+      "score": 3,
+      "creation_date": 1450885866,
+      "answer_id": 34439290
+    },
+    {
+      "tags": [
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 3,
+      "creation_date": 1477548911,
+      "answer_id": 40277415
+    },
+    {
+      "tags": [
+        "javascript",
+        "ajax",
+        "greasemonkey",
+        "pandora"
+      ],
+      "score": 3,
+      "creation_date": 1483942800,
+      "answer_id": 41542054
+    },
+    {
+      "tags": [
+        "javascript",
+        "firefox",
+        "greasemonkey",
+        "userscripts"
+      ],
+      "score": 3,
+      "creation_date": 1484298636,
+      "answer_id": 41630951
+    },
+    {
+      "tags": [
+        "stackexchange-api"
+      ],
+      "score": 3,
+      "creation_date": 1496130113,
+      "answer_id": 44256348
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 3,
+      "creation_date": 1497836098,
+      "answer_id": 44621147
+    },
+    {
+      "tags": [
+        "google-chrome",
+        "passwords",
+        "tampermonkey"
+      ],
+      "score": 3,
+      "creation_date": 1505797101,
+      "answer_id": 46292127
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 3,
+      "creation_date": 1510628492,
+      "answer_id": 47276981
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "html",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 3,
+      "creation_date": 1511227003,
+      "answer_id": 47403703
+    },
+    {
+      "tags": [
+        "sql",
+        "dataexplorer"
+      ],
+      "score": 3,
+      "creation_date": 1520382446,
+      "answer_id": 49142213
+    },
+    {
+      "tags": [
+        "stackexchange-api"
+      ],
+      "score": 3,
+      "creation_date": 1523919025,
+      "answer_id": 49867376
+    },
+    {
+      "tags": [
+        "javascript",
+        "object",
+        "overriding",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 3,
+      "creation_date": 1546213827,
+      "answer_id": 53982384
+    },
+    {
+      "tags": [
+        "stackexchange-api",
+        "stackexchange"
+      ],
+      "score": 3,
+      "creation_date": 1547105352,
+      "answer_id": 54123763
+    },
+    {
+      "tags": [
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 3,
+      "creation_date": 1552866466,
+      "answer_id": 55213075
+    },
+    {
+      "tags": [
+        "greasemonkey"
+      ],
+      "score": 2,
+      "creation_date": 1439955113,
+      "answer_id": 32086073
+    },
+    {
+      "tags": [
+        "html",
+        "css",
+        "alt",
+        "stylish",
+        "userstyles"
+      ],
+      "score": 2,
+      "creation_date": 1440101458,
+      "answer_id": 32127457
+    },
+    {
+      "tags": [
+        "javascript",
+        "html",
+        "greasemonkey"
+      ],
+      "score": 2,
+      "creation_date": 1440363461,
+      "answer_id": 32171464
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "dom",
+        "iframe",
+        "greasemonkey"
+      ],
+      "score": 2,
+      "creation_date": 1441067943,
+      "answer_id": 32321909
+    },
+    {
+      "tags": [
+        "javascript",
+        "arrays",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1441074575,
+      "answer_id": 32322634
+    },
+    {
+      "tags": [
+        "base64",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1445841501,
+      "answer_id": 33339794
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "tampermonkey",
+        "scriptish"
+      ],
+      "score": 2,
+      "creation_date": 1447393352,
+      "answer_id": 33686626
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1447568562,
+      "answer_id": 33717041
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "google-chrome",
+        "iframe",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1448674051,
+      "answer_id": 33966719
+    },
+    {
+      "tags": [
+        "css",
+        "svg",
+        "stylish"
+      ],
+      "score": 2,
+      "creation_date": 1454611098,
+      "answer_id": 35208984
+    },
+    {
+      "tags": [
+        "javascript",
+        "ajax",
+        "events",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1455578751,
+      "answer_id": 35420983
+    },
+    {
+      "tags": [
+        "firefox",
+        "youtube",
+        "stylish"
+      ],
+      "score": 2,
+      "creation_date": 1458262474,
+      "answer_id": 36074322
+    },
+    {
+      "tags": [
+        "firefox",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1471583050,
+      "answer_id": 39031438
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "click",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1474842286,
+      "answer_id": 39692398
+    },
+    {
+      "tags": [
+        "javascript",
+        "html",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1475714449,
+      "answer_id": 39885771
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey"
+      ],
+      "score": 2,
+      "creation_date": 1475945517,
+      "answer_id": 39934908
+    },
+    {
+      "tags": [
+        "javascript",
+        "redirect",
+        "greasemonkey"
+      ],
+      "score": 2,
+      "creation_date": 1476810253,
+      "answer_id": 40114127
+    },
+    {
+      "tags": [
+        "jquery",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1477025007,
+      "answer_id": 40168563
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "google-chrome",
+        "google-chrome-extension"
+      ],
+      "score": 2,
+      "creation_date": 1480310127,
+      "answer_id": 40837584
+    },
+    {
+      "tags": [
+        "javascript",
+        "google-chrome",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1480446052,
+      "answer_id": 40873739
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "web-scraping",
+        "greasemonkey"
+      ],
+      "score": 2,
+      "creation_date": 1481159072,
+      "answer_id": 41030081
+    },
+    {
+      "tags": [
+        "javascript",
+        "browser",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1487072814,
+      "answer_id": 42225348
+    },
+    {
+      "tags": [
+        "firefox",
+        "browser",
+        "user-preferences"
+      ],
+      "score": 2,
+      "creation_date": 1504209565,
+      "answer_id": 45989183
+    },
+    {
+      "tags": [
+        "greasemonkey"
+      ],
+      "score": 2,
+      "creation_date": 1505062757,
+      "answer_id": 46143261
+    },
+    {
+      "tags": [
+        "stackexchange-api",
+        "dataexplorer"
+      ],
+      "score": 2,
+      "creation_date": 1509137627,
+      "answer_id": 46983279
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "html",
+        "css",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1511901552,
+      "answer_id": 47540558
+    },
+    {
+      "tags": [
+        "css",
+        "greasemonkey"
+      ],
+      "score": 2,
+      "creation_date": 1512343801,
+      "answer_id": 47624505
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1513832716,
+      "answer_id": 47918247
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "userscripts"
+      ],
+      "score": 2,
+      "creation_date": 1514763115,
+      "answer_id": 48046284
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey",
+        "greasemonkey-4"
+      ],
+      "score": 2,
+      "creation_date": 1517595811,
+      "answer_id": 48588734
+    },
+    {
+      "tags": [
+        "r",
+        "stackexchange-api"
+      ],
+      "score": 2,
+      "creation_date": 1518899795,
+      "answer_id": 48845712
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1519701080,
+      "answer_id": 49000497
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "tampermonkey",
+        "browser-console"
+      ],
+      "score": 2,
+      "creation_date": 1522776581,
+      "answer_id": 49635973
+    },
+    {
+      "tags": [
+        "stackexchange",
+        "dataexplorer"
+      ],
+      "score": 2,
+      "creation_date": 1523295104,
+      "answer_id": 49738512
+    },
+    {
+      "tags": [
+        "r",
+        "stackexchange-api"
+      ],
+      "score": 2,
+      "creation_date": 1523754420,
+      "answer_id": 49837591
+    },
+    {
+      "tags": [
+        "javascript",
+        "firefox",
+        "greasemonkey",
+        "greasemonkey-4"
+      ],
+      "score": 2,
+      "creation_date": 1525897458,
+      "answer_id": 50261465
+    },
+    {
+      "tags": [
+        "javascript",
+        "console",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1527396463,
+      "answer_id": 50549086
+    },
+    {
+      "tags": [
+        "r",
+        "oauth-2.0",
+        "stackexchange-api"
+      ],
+      "score": 2,
+      "creation_date": 1529041311,
+      "answer_id": 50869686
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "css3",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1532931901,
+      "answer_id": 51588088
+    },
+    {
+      "tags": [
+        "javascript",
+        "google-chrome",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1533843116,
+      "answer_id": 51774547
+    },
+    {
+      "tags": [
+        "r",
+        "stackexchange-api"
+      ],
+      "score": 2,
+      "creation_date": 1537317342,
+      "answer_id": 52396348
+    },
+    {
+      "tags": [
+        "javascript",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1537405033,
+      "answer_id": 52416024
+    },
+    {
+      "tags": [
+        "url",
+        "match",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1537554801,
+      "answer_id": 52449380
+    },
+    {
+      "tags": [
+        "javascript",
+        "userscripts",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1538541656,
+      "answer_id": 52619801
+    },
+    {
+      "tags": [
+        "jquery",
+        "jquery-selectors",
+        "userscripts",
+        "tampermonkey",
+        "greasemonkey-4"
+      ],
+      "score": 2,
+      "creation_date": 1542046897,
+      "answer_id": 53267961
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1544341971,
+      "answer_id": 53690421
+    },
+    {
+      "tags": [
+        "javascript",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1545960483,
+      "answer_id": 53952707
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1551769305,
+      "answer_id": 54997105
+    },
+    {
+      "tags": [
+        "javascript",
+        "innerhtml",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1553641695,
+      "answer_id": 55367472
+    },
+    {
+      "tags": [
+        "javascript",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1554849469,
+      "answer_id": 55602276
+    },
+    {
+      "tags": [
+        "sql",
+        "sql-server-2017",
+        "dataexplorer"
+      ],
+      "score": 2,
+      "creation_date": 1554922645,
+      "answer_id": 55619568
+    },
+    {
+      "tags": [
+        "javascript",
+        "greasemonkey",
+        "userscripts",
+        "tampermonkey",
+        "greasemonkey-4"
+      ],
+      "score": 2,
+      "creation_date": 1555090519,
+      "answer_id": 55656973
+    },
+    {
+      "tags": [
+        "javascript",
+        "css-selectors",
+        "tampermonkey"
+      ],
+      "score": 2,
+      "creation_date": 1556251524,
+      "answer_id": 55860672
+    },
+    {
+      "tags": [
+        "sql",
+        "api",
+        "stackexchange-api"
+      ],
+      "score": 2,
+      "creation_date": 1560792619,
+      "answer_id": 56636234
+    },
+    {
+      "tags": [
+        "sql",
+        "performance",
+        "badge",
+        "dataexplorer"
+      ],
+      "score": 2,
+      "creation_date": 1561050935,
+      "answer_id": 56690931
+    },
+    {
+      "tags": [
+        "javascript",
+        "ecmascript-6",
+        "tampermonkey",
+        "userscripts",
+        "greasemonkey-4"
+      ],
+      "score": 2,
+      "creation_date": 1561261678,
+      "answer_id": 56720846
+    },
+    {
+      "tags": [
+        "javascript",
+        "google-chrome",
+        "sandbox",
+        "tampermonkey",
+        "userscripts"
+      ],
+      "score": 2,
+      "creation_date": 1563255695,
+      "answer_id": 57050699
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 1,
+      "creation_date": 1439865860,
+      "answer_id": 32062715
+    },
+    {
+      "tags": [
+        "javascript",
+        "firefox",
+        "greasemonkey",
+        "mutation-observers"
+      ],
+      "score": 1,
+      "creation_date": 1441131742,
+      "answer_id": 32338471
+    },
+    {
+      "tags": [
+        "javascript",
+        "jquery",
+        "html",
+        "css"
+      ],
+      "score": 1,
+      "creation_date": 1444373173,
+      "answer_id": 33031618
+    },
+    {
+      "tags": [
+        "javascript",
+        "ajax",
+        "cross-browser",
+        "greasemonkey",
+        "tampermonkey"
+      ],
+      "score": 1,
+      "creation_date": 1446190214,
+      "answer_id": 33430786
     }
   ],
   "has_more": true,
-  "quota_remaining": 9655,
+  "quota_remaining": 105,
   "total": 249
 }

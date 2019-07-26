@@ -33,11 +33,11 @@ export class PointsComponent implements OnInit {
 
         this.service.getPointsOfUser(331508).then(array => {
             let scores = array;
-            for (let entry of scores) {
+/*            for (let entry of scores) {
                 this.totalScore += entry;
-            }
+            }*/
             console.log(scores);
-            console.log(this.totalScore);
+            // console.log(this.totalScore);
         });
 
     }

@@ -55,13 +55,40 @@ The frontend is built with maven frontend plugin (link in wiki)
 
 The backend code is using JPA for OR mapping.
 It is using a @Stateless DAO to perform CRUD operations to our entity classes.
-When creating an endpoint, just take a sample from a existing one, and put it inside the ```ApplicationConfig.java``` class!
+When creating an endpoint, just take a sample from an existing one, and put it inside the ```ApplicationConfig.java``` class!
 
 The frontend is using Angular Material and consists of several components.
+With the HttpClientModule and HttpClient class we make HTTP calls to the backend (GET, PUT, POST, DELETE). 
 
+There are several endpoints such as challenges/all or participants/add, read trough them to understand what they are doing.
+The calls are implemented in a service and the subscribtion to the Observable<T> happens in the caller.
 
+# Things that are working (branch 8_XXX)
+1. Searching stackoverflow users by their id and adding them to our own database (global list) with profile ID,name,image and    profile URL.
+   deleting participants
+2. adding tags to a gobal list by their name.
+   deleting tags
+3. SnackBar user feedback --> material design
+4. showing a list of all challenges and delete them
 
-# Problems that we have
+We store StackOverflow data in our own database to be resource friendly with the limited amount of requests one can perform on the StackExchange API.
+
+# Things that are partly working
+1. Editing challenges works partly:
+   Adding/Deleting Tags and Users to/from a challenge is not implemented yet
+2. however updating fields like status, title, date, etc... works fine
+   
+# Things that are not implemented yet
+1. Adding Challenges
+2. Showing the progression graph of the participants of a challenge
+3. RBAC (admin vs. read-only)
+4. The data model/entity classes must be changed.
+   since the tracking begins by the date when a user joins a challenge
+   the n:n table challenge_participant needs a new column 'joining date'.
+   this has to be translated into JPA.
+   right now the join table has no attributes, so a simple @ManyToMany annotation with a Collection is enough,
+   however, this will have to change.
+5. the format of the datepickers must be changed to yyyy/MM/dd
 
 # Contribute
 Everybody is welcome and can contribute to this project, since it is free software.

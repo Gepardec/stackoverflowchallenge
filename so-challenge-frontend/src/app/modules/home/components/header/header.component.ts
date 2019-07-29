@@ -15,6 +15,10 @@ export class HeaderComponent {
             label: 'Teilnehmer',
             link: './participants',
             index: 1
+        }, {
+            label: 'Tags',
+            link: './tags',
+            index: 2
         }
     ];
 

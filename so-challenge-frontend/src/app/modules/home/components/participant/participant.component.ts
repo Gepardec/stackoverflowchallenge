@@ -22,6 +22,7 @@ export class ParticipantComponent implements OnInit {
                 this.participants = data;
             },
             error => {
+                this.participants = null;
                 this.snackBarService.open(`Es gibt noch keine Teilnehmer!`);
             }
         );

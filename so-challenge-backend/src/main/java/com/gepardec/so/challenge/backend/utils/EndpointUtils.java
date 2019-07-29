@@ -29,11 +29,6 @@ public class EndpointUtils {
     private static final String BASE_URL = "http://api.stackexchange.com/2.2/";
     
     /**
-     * Request parameters at the end of the URL
-     */
-    private static final String REQUEST_PARAMS = "?order=desc&sort=reputation&site=stackoverflow";
-
-    /**
      * Sends a request to the StackExchange API and retrieves data in .gzip format.
      * After unzipping the response, the method checks what type of response it gets.
      * It could either be a JSON object with the key "error_id" or a regular JSON object with an empty "items" array.
@@ -43,12 +38,12 @@ public class EndpointUtils {
      * @param requestMethod the HTTP method of the request (e.g GET, PUT, POST, ...)
      * @return null if any Exception occurs or at least one of the two error responses occur, else the response packed in a JsonObject
      */
-    public static final JsonObject sendRequestAndGetJson(String resourceURL, String requestMethod) {
+    public static final JsonObject sendRequestAndGetJson(String resourceURL, String requestParams, String requestMethod) {
         BufferedReader in = null;
         JsonObject o;
         JsonReader r;
         try {
-            in = createBufferedReader(resourceURL, requestMethod);
+            in = createBufferedReader(resourceURL, requestParams, requestMethod);
             r = Json.createReader(in);
             o = r.readObject();
             if (o.containsKey("error_id") || o.getJsonArray("items").isEmpty()) {
@@ -79,8 +74,8 @@ public class EndpointUtils {
      * @throws ProtocolException
      * @throws IOException 
      */
-    private static BufferedReader createBufferedReader(String resourceURL, String requestMethod) throws ProtocolException, IOException {
-        HttpURLConnection con = openHttpURLConnection(resourceURL);
+    private static BufferedReader createBufferedReader(String resourceURL, String requestParams, String requestMethod) throws ProtocolException, IOException {
+        HttpURLConnection con = openHttpURLConnection(resourceURL, requestParams);
         con.setRequestMethod(requestMethod);
         return new BufferedReader(new InputStreamReader(new GZIPInputStream(con.getInputStream())));
     }
@@ -93,8 +88,8 @@ public class EndpointUtils {
      * @throws MalformedURLException
      * @throws IOException 
      */
-    private static HttpURLConnection openHttpURLConnection(String resourceURL) throws MalformedURLException, IOException {
-        URL obj = new URL(BASE_URL + resourceURL + REQUEST_PARAMS);
+    private static HttpURLConnection openHttpURLConnection(String resourceURL, String requestParams) throws MalformedURLException, IOException {
+        URL obj = new URL(BASE_URL + resourceURL + requestParams);
         return (HttpURLConnection) obj.openConnection();
     }
     

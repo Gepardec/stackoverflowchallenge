@@ -4,7 +4,7 @@
         <mat-list-item>
             <form>
                 <mat-form-field>
-                    <input #profileId class="input" matInput name="profileId" placeholder="StackOverflow ID"/>
+                    <input #profileId class="input" matInput name="profileId" placeholder="StackOverflow ID eingeben"/>
                 </mat-form-field>
                 <button mat-raised-button (click)="addParticipant(profileId.value); profileId.value=''">Hinzufügen</button>
             </form>
@@ -15,7 +15,7 @@
 <mat-divider></mat-divider>
 
 <div *ngIf="participants">
-    <h4>Liste</h4>
+    <h4>Liste aller möglichen Teilnehmer</h4>
 
     <table mat-table [dataSource]="participants" class="mat-elevation-z8">
         <!-- image Column -->

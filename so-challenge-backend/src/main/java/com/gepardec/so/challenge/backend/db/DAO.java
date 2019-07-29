@@ -8,6 +8,7 @@ package com.gepardec.so.challenge.backend.db;
 import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
 import com.gepardec.so.challenge.backend.model.Status;
+import com.gepardec.so.challenge.backend.model.Tag;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -136,5 +137,46 @@ public class DAO implements DAOLocal {
     @Override
     public List<Status> getAllStatuses() {
         return em.createQuery("SELECT s FROM Status s ORDER BY s.id", Status.class).getResultList();
+    }
+
+    @Override
+    public List<Tag> getAllTags() {
+        return em.createQuery("SELECT t FROM Tag t ORDER BY t.name", Tag.class).getResultList();
+    }
+
+    @Override
+    public Tag deleteTag(Long profileId) {
+        Tag t = em.find(Tag.class, profileId);
+        if (t == null) {
+            return null;
+        } else {
+            for (Challenge c : readAllChallenges()) {
+                c = findChallenge(c.getId());
+                if (c != null && c.getParticipantSet().contains(t)) {
+                    c.getTagSet().remove(t);
+                    em.merge(c);
+                }
+            }
+            em.remove(t);
+            return t;
+        }
+    }
+
+    @Override
+    public boolean createTag(Tag t) {
+        if (t == null || t.getId() != null) {
+            return false;
+        } else {
+            em.persist(t);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean isTagNameAlreadyPresent(String name) {
+        return !em.createQuery("SELECT t FROM Tag t WHERE t.name = :name")
+                .setParameter("name", name)
+                .getResultList()
+                .isEmpty();
     }
 }

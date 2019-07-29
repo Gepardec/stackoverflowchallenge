@@ -23,13 +23,15 @@ import {
     MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TagComponent } from './components/tag/tag.component';
 
 @NgModule({
     declarations: [
         HeaderComponent,
         ParticipantComponent,
         ChallengeComponent,
-        ChallengeDetailComponent
+        ChallengeDetailComponent,
+        TagComponent
     ],
     imports: [
         MatTooltipModule,
@@ -42,6 +44,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
             [
                 {path: 'challenges', component: ChallengeComponent},
                 {path: 'participants', component: ParticipantComponent},
+                {path: 'tags', component: TagComponent},
                 {path: '', redirectTo: '/challenges', pathMatch: 'full'},
                 {path: '**', component: ChallengeComponent}
             ]

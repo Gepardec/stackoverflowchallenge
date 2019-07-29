@@ -14,7 +14,6 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
- *
  * @author praktikant_ankermann
  */
 @Local
@@ -101,7 +100,7 @@ public interface DAOLocal {
     /**
      * Adds a participant to a challenge
      *
-     * @param challengeId the id of the challenge
+     * @param challengeId   the id of the challenge
      * @param participantId the id of the participant
      * @return false if no challenge or participant with the given ids could be
      * found or the participant already is part of this challenge, true
@@ -112,7 +111,7 @@ public interface DAOLocal {
     /**
      * Removes a participant from a challenge
      *
-     * @param challengeId the id of the challenge
+     * @param challengeId   the id of the challenge
      * @param participantId the id of the participant
      * @return false if no challenge or participant with the given ids could be
      * found or the participant is not part of this challenge, true otherwise
@@ -120,4 +119,12 @@ public interface DAOLocal {
     boolean removeParticipantFromChallenge(Integer challengeId, Long participantId);
 
     List<Status> getAllStatuses();
+
+    List<Tag> getAllTags();
+
+    Tag deleteTag(Long profileId);
+
+    boolean createTag(Tag t);
+
+    boolean isTagNameAlreadyPresent(String name);
 }

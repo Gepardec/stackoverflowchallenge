@@ -5,6 +5,7 @@ import {Participant} from '../models/participant';
 import {Challenge} from '../models/challenge';
 import {map} from "rxjs/operators";
 import {Status} from "../models/status";
+import {Tag} from "../models/tag";
 
 @Injectable({
     providedIn: 'root'
@@ -62,4 +63,15 @@ export class EndpointService {
         return this.http.put(this.BASE_URL + 'challenge/update', c, this.APPLICATION_JSON_OPTIONS);
     }
 
+    getTags(): Observable<Tag[]> {
+        return this.http.get<Tag[]>(this.BASE_URL + 'tag/all');
+    }
+
+    deleteTag(id: number): Observable<Tag> {
+        return this.http.delete<Tag>(this.BASE_URL + `tag/delete/${id}`);
+    }
+
+    addTag(name: string) {
+        return this.http.post(this.BASE_URL + 'tag/add', name, this.TEXT_PLAIN_OPTIONS);
+    }
 }

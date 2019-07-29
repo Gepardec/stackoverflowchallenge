@@ -8,6 +8,7 @@ package com.gepardec.so.challenge.backend.service;
 import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.Participant;
 import com.gepardec.so.challenge.backend.utils.EndpointUtils;
+
 import java.util.List;
 import javax.ejb.EJB;
 import javax.json.JsonObject;
@@ -46,7 +47,7 @@ public class ParticipantEndpoint {
         Participant p = dao.findParticipant(id);
 
         if (p == null) {
-            JsonObject o = EndpointUtils.sendRequestAndGetJson("users/" + id, "GET");
+            JsonObject o = EndpointUtils.sendRequestAndGetJson("users/" + id, "?order=desc&sort=reputation&site=stackoverflow", "GET");
             if (o != null) {
                 return Response.ok(o).build();
             } else {
@@ -62,7 +63,7 @@ public class ParticipantEndpoint {
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createParticipant(Long profileId) {
-        JsonObject o = EndpointUtils.sendRequestAndGetJson("users/" + profileId, "GET");
+        JsonObject o = EndpointUtils.sendRequestAndGetJson("users/" + profileId, "?order=desc&sort=reputation&site=stackoverflow", "GET");
 
         if (o == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -79,7 +80,6 @@ public class ParticipantEndpoint {
         } else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
-
     }
 
     @GET

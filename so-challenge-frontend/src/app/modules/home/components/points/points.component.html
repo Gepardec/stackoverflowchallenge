@@ -10,3 +10,15 @@
 <div *ngIf="result">
     <p *ngFor="let p of result">{{p}}</p>
 </div>
+
+<div style="width: 40%;">
+    <canvas
+            (chartClick)="onChartClick($event)"
+            [chartType]="'line'"
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [legend]="true"
+            [options]="chartOptions"
+            baseChart>
+    </canvas>
+</div>

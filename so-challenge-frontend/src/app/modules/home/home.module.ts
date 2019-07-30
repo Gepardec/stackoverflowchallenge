@@ -8,6 +8,8 @@ import {ParticipantComponent} from './components/participant/participant.compone
 import {ChallengeComponent} from './components/challenge/challenge.component';
 import {PointsComponent} from './components/points/points.component';
 
+import {ChartsModule} from "ng2-charts";
+
 
 @NgModule({
     declarations: [
@@ -19,6 +21,7 @@ import {PointsComponent} from './components/points/points.component';
     imports: [
         BrowserModule,
         HttpClientModule,
+        ChartsModule,
         RouterModule.forRoot(
             [
                 {path: 'challenges', component: ChallengeComponent},

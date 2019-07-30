@@ -5,7 +5,7 @@
 <div *ngIf="!errorMessage">
     <p>Global list of all participants that can be added to a challenge:</p>
     <div>
-        <input #idInput (keydown)="onEnterPressed($event, idInput.value)" placeholder="Please type in profile id of the account to be added..." style="width: 70%;">
+        <input id="idInput" #idInput (keydown)="onEnterPressed($event, idInput.value);" placeholder="Please type in profile id of the account to be added..." style="width: 70%;">
         <button (click)="addParticipant(idInput.value); idInput.value=''" style="width: 25%;">Add to global list
         </button>
     </div>

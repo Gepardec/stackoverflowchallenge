@@ -60,6 +60,7 @@ export class ParticipantComponent implements OnInit {
   onEnterPressed(event, id: string) {
 
     if (event.key === "Enter") {
+      (<HTMLInputElement>document.getElementById("idInput")).value = "";
       this.addParticipant(id);
     }
   }

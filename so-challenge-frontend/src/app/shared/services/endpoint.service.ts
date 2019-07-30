@@ -66,7 +66,7 @@ export class EndpointService {
                 Object.assign(answer, score);
                 this.items.push(answer);
             }
-            // this.items.push(data['items']);
+                // this.items.push(data['items']);
             if (data['has_more'] === true) {
                 await this.getPointsOfUser(id);
             } else {

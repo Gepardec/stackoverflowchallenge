@@ -25,8 +25,8 @@
 
         <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select *ngIf="statuses" [(ngModel)]="tempIndex">
-                <mat-option *ngFor="let s of statuses" [value]="s.id">
+            <mat-select *ngIf="stati" [(ngModel)]="tempIndex">
+                <mat-option *ngFor="let s of stati" [value]="s.id">
                     {{s.name}}
                 </mat-option>
             </mat-select>

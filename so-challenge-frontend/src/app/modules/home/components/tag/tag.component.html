@@ -15,7 +15,7 @@
 <mat-divider></mat-divider>
 
 <div *ngIf="tags">
-    <h4>Liste aller möglichen Tags</h4>
+    <h4>Liste aller möglichen Tags ({{tags.length}})</h4>
 
     <table mat-table [dataSource]="tags" class="mat-elevation-z8">
         <!-- name Column -->

@@ -20,7 +20,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule
+    MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule, MatDialog, MatDialogModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TagComponent } from './components/tag/tag.component';
@@ -61,7 +61,8 @@ import { TagComponent } from './components/tag/tag.component';
         MatSnackBarModule,
         MatDividerModule,
         MatListModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatDialogModule
     ],
     providers: [MatDatepickerModule],
     bootstrap: [HeaderComponent]

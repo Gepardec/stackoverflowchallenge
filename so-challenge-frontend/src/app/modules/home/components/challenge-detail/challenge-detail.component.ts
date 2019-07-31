@@ -14,7 +14,7 @@ export class ChallengeDetailComponent implements OnInit {
     @Input() challenge: Challenge; // Challenge to be edited, copy from Parent component
     @Output() onSuccessfulEditing = new EventEmitter<boolean>();
 
-    statuses: Status[] = [];
+    stati: Status[] = [];
     participants: Participant[];
 
     tempIndex: number = -1;
@@ -25,7 +25,7 @@ export class ChallengeDetailComponent implements OnInit {
     ngOnInit() {
         this.endpointService.getStatuses().subscribe(
             data => {
-                this.statuses = data;
+                this.stati = data;
             }
         );
         this.endpointService.getParticipants().subscribe(
@@ -42,7 +42,7 @@ export class ChallengeDetailComponent implements OnInit {
 
     okClicked() {
         if (this.tempIndex != -1) {
-            this.challenge.status = this.statuses[this.statuses.map(el => el.id).indexOf(this.tempIndex)];
+            this.challenge.status = this.stati[this.stati.map(el => el.id).indexOf(this.tempIndex)];
         } else {
             this.challenge.status = null;
         }
@@ -53,13 +53,13 @@ export class ChallengeDetailComponent implements OnInit {
             data => {
                 console.log(this.challenge)
                 // the response was successful
-                this.snackBarService.open(`Challenge '${this.challenge.title}' wurde aktualisiert.`);
+                this.snackBarService.success(`Challenge '${this.challenge.title}' wurde aktualisiert.`);
                 this.challenge = null;
                 this.onSuccessfulEditing.emit(true);
             },
             error => {
                 // something went wrong
-                this.snackBarService.open('Fehler beim Bearbeiten... Versuchen Sie es später erneut!');
+                this.snackBarService.error('Fehler beim Bearbeiten... Versuchen Sie es später erneut!');
                 this.challenge = null;
             }
         );

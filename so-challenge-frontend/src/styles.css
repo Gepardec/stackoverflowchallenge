@@ -15,3 +15,24 @@ tr:hover td {
 tr img {
     width: 50px;
 }
+
+.mat-simple-snackbar {
+    color: white;
+}
+
+.mat-simple-snackbar button {
+    color: black;
+    font-weight: bold;
+}
+
+.error-snackbar {
+    background: red;
+}
+
+.success-snackbar {
+    background-color: #4CAF50;
+}
+
+.warning-snackbar {
+    background-color: orange;
+}

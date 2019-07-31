@@ -24,13 +24,16 @@ export class ChallengeComponent implements OnInit {
             },
             error => {
                 this.challenges = null;
-                this.snackBarService.open('Es gibt noch keine Challenges!');
+                this.snackBarService.warning('Es gibt noch keine Challenges!');
             }
         );
     }
 
     selectChallenge(c: Challenge) {
-        let copy: Challenge = JSON.parse(JSON.stringify(c));
+        let copy: Challenge;
+        if (c !== null) {
+            copy = JSON.parse(JSON.stringify(c));
+        }
 
         this.challengeToEdit = copy;
     }
@@ -41,10 +44,10 @@ export class ChallengeComponent implements OnInit {
             this.endpointService.deleteChallenge(c.id).subscribe(
                 data => {
                     this.refreshGUI();
-                    this.snackBarService.open('Gelöscht!');
+                    this.snackBarService.success(`Die Challenge '${data['title']}' wurde erfolgreich gelöscht!`);
                 },
                 error => {
-                    this.snackBarService.open(`Die Challenge '${c.title}' konnte nicht gelöscht werden.`)
+                    this.snackBarService.error(`Die Challenge '${c.title}' konnte nicht gelöscht werden.`)
                 }
             )
         }

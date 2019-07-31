@@ -11,9 +11,28 @@ export class SnackbarService {
     ) {
     }
 
-    public open(message, action = 'OK', duration = 5000) {
+    public open(message, action = 'OK', duration = 5000, type = 'error-snackbar') {
         this.zone.run(() => {
-            this.snackBar.open(message, action, {duration});
-        })
+            this.snackBar.open(message, action, { duration, panelClass: [type] });
+        });
     }
+
+    public warning(message, action = 'OK', duration = 5000) {
+        this.zone.run(() => {
+            this.snackBar.open(message, action, { duration, panelClass: ['warning-snackbar'] });
+        });
+    }
+
+    public success(message, action = 'OK', duration = 5000) {
+        this.zone.run(() => {
+            this.snackBar.open(message, action, { duration, panelClass: ['success-snackbar'] });
+        });
+    }
+
+    public error(message, action = 'OK', duration = 5000) {
+        this.zone.run(() => {
+            this.snackBar.open(message, action, { duration, panelClass: ['error-snackbar'] });
+        });
+    }
+
 }

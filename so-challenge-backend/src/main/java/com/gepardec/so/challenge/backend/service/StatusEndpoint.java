@@ -2,19 +2,13 @@ package com.gepardec.so.challenge.backend.service;
 
 import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.Status;
-import com.gepardec.so.challenge.backend.utils.EndpointUtils;
 
-import java.util.List;
 import javax.ejb.EJB;
-import javax.json.JsonObject;
-import javax.ws.rs.core.*;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.*;
+import java.util.List;
 
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 

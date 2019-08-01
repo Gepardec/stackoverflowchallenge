@@ -1,7 +1,12 @@
-table {
+button.add {
+    display: block;
     width: 100%;
-}
-
-::ng-deep .red {
-    background-color: #b71c1c;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 5px;
 }

@@ -8,25 +8,32 @@ import {ParticipantComponent} from './components/participant/participant.compone
 import {ChallengeComponent} from './components/challenge/challenge.component';
 import {ChallengeDetailComponent} from './components/challenge-detail/challenge-detail.component';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
     MatTableModule,
     MatTabsModule,
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule, MatDialog, MatDialogModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
-
+import { TagComponent } from './components/tag/tag.component';
+import {AddChallengeComponent} from "./components/add-challenge/add-challenge.component";
 
 @NgModule({
     declarations: [
         HeaderComponent,
         ParticipantComponent,
         ChallengeComponent,
-        ChallengeDetailComponent
+        ChallengeDetailComponent,
+        TagComponent,
+        AddChallengeComponent
     ],
     imports: [
         MatTooltipModule,
@@ -39,6 +46,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
             [
                 {path: 'challenges', component: ChallengeComponent},
                 {path: 'participants', component: ParticipantComponent},
+                {path: 'tags', component: TagComponent},
                 {path: '', redirectTo: '/challenges', pathMatch: 'full'},
                 {path: '**', component: ChallengeComponent}
             ]
@@ -50,10 +58,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatSelectModule
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatDividerModule,
+        MatListModule,
+        MatPaginatorModule,
+        MatDialogModule
     ],
     providers: [MatDatepickerModule],
     bootstrap: [HeaderComponent]
 })
 export class HomeModule {
 }
+
+

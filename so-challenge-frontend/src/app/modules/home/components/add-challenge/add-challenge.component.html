@@ -1,0 +1,64 @@
+<div *ngIf="challenge">
+    <div class="form-container">
+        <h3>Neue Challenge hinzufügen</h3>
+        <mat-form-field>
+            <input matInput name="title" placeholder="Titel" [(ngModel)]="challenge.title"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="description" placeholder="Beschreibung"
+                   [(ngModel)]="challenge.description"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #pickerFrom></mat-datepicker>
+            <input matInput [matDatepicker]="pickerFrom" placeholder="Von Datum" [(ngModel)]="challenge.fromDate">
+
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #pickerTo></mat-datepicker>
+            <input matInput [matDatepicker]="pickerTo" placeholder="Bis Datum" [(ngModel)]="challenge.toDate">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select *ngIf="stati" [(ngModel)]="tempIndex">
+                <mat-option *ngFor="let s of stati" [value]="s.id">
+                    {{s.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="award1" placeholder="Belohnung 1.Platz" [(ngModel)]="challenge.award1"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="award2" placeholder="Belohnung 2.Platz" [(ngModel)]="challenge.award2"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="award3" placeholder="Belohnung 3.Platz" [(ngModel)]="challenge.award3"/>
+        </mat-form-field>
+
+
+        <!-- TODO Tags -->
+        <mat-form-field>
+            <input matInput name="tags" placeholder="Tags"/>
+        </mat-form-field>
+
+    </div>
+
+    <div class="participants-container">
+        <!-- TODO PARTICIPANTS -->
+        <h3>Teilnehmer</h3>
+    </div>
+
+    <div class="submit">
+        <button mat-raised-button color="primary" (click)="addClicked()">Hinzufügen</button>
+        <button mat-raised-button color="warn" (click)="cancelClicked()">Abbrechen</button>
+    </div>
+</div>

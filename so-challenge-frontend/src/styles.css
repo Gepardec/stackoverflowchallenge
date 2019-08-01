@@ -1,4 +1,38 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 * {
     font-family: Arial;
+}
+
+table {
+    width: 100%;
+}
+
+tr:hover td {
+    background-color: #E8E8E8;
+}
+
+tr img {
+    width: 50px;
+}
+
+.mat-simple-snackbar {
+    color: white;
+}
+
+.mat-simple-snackbar button {
+    color: black;
+    font-weight: bold;
+}
+
+.error-snackbar {
+    background: red;
+}
+
+.success-snackbar {
+    background-color: #4CAF50;
+}
+
+.warning-snackbar {
+    background-color: orange;
 }

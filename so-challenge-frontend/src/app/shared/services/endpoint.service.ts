@@ -56,7 +56,7 @@ export class EndpointService {
     }
 
     addChallenge(c: Challenge) {
-        return this.http.post(this.BASE_URL + 'participant/add', c, this.APPLICATION_JSON_OPTIONS);
+        return this.http.post(this.BASE_URL + 'challenge/add', c, this.APPLICATION_JSON_OPTIONS);
     }
 
     updateChallenge(c:Challenge) {

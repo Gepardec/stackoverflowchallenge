@@ -24,6 +24,7 @@ import {
 } from "@angular/material";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TagComponent } from './components/tag/tag.component';
+import {AddChallengeComponent} from "./components/add-challenge/add-challenge.component";
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { TagComponent } from './components/tag/tag.component';
         ParticipantComponent,
         ChallengeComponent,
         ChallengeDetailComponent,
-        TagComponent
+        TagComponent,
+        AddChallengeComponent
     ],
     imports: [
         MatTooltipModule,

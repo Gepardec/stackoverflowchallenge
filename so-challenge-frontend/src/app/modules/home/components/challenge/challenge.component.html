@@ -44,8 +44,11 @@
 </table>
 <div>
 
-<!--    <button mat-raised-button class="add" (click)="addParticipant(profileId.value); profileId.value=''">Hinzufügen</button>-->
+    <button mat-raised-button class="add" (click)=openAddChallengeComponent()>Hinzufügen</button>
 
 </div>
 <app-challenge-detail (onSuccessfulEditing)="refreshGUI()" *ngIf="challengeToEdit" [challenge]="challengeToEdit">
 </app-challenge-detail>
+<app-add-challenge (onSuccessfulAdding)="refreshGUI()" *ngIf="showAddChallenge" [challenge]="challengePrototype">
+
+</app-add-challenge>

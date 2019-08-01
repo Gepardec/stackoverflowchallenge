@@ -77,18 +77,18 @@ We store StackOverflow data in our own database to be resource friendly with the
 1. Editing challenges works partly:
    Adding/Deleting Tags and Users to/from a challenge is not implemented yet
 2. however updating fields like status, title, date, etc... works fine
+3. Adding challenges works partly.
    
 # Things that are not implemented yet
-1. Adding Challenges
-2. Showing the progression graph of the participants of a challenge
-3. RBAC (admin vs. read-only)
-4. The data model/entity classes must be changed.
+1. Showing the progression graph of the participants of a challenge
+2. RBAC (admin vs. read-only)
+3. The data model/entity classes must be changed.
    since the tracking begins by the date when a user joins a challenge
    the n:n table challenge_participant needs a new column 'joining date'.
    this has to be translated into JPA.
    right now the join table has no attributes, so a simple @ManyToMany annotation with a Collection is enough,
    however, this will have to change.
-5. the format of the datepickers must be changed to yyyy/MM/dd
+4. the format of the datepickers must be changed to yyyy/MM/dd
 
 # Contribute
 Everybody is welcome and can contribute to this project, since it is free software.

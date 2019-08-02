@@ -64,7 +64,6 @@ public class TagEndpoint {
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createTag(String name) {
-        // check if it is already in the DB
         if (dao.isTagNameAlreadyPresent(name.toLowerCase())) {
             return notAcceptable();
         }

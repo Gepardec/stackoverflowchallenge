@@ -40,8 +40,12 @@ public class Challenge implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date toDate;
 
+    //TODO change to many to one to reduce complexity
     @ManyToOne(fetch = FetchType.EAGER)
     private Status status;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Status oldStatus;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Tag> tagSet = new LinkedHashSet<>();
@@ -107,6 +111,7 @@ public class Challenge implements Serializable {
     }
 
     public void setStatus(Status status) {
+        oldStatus = this.status;
         this.status = status;
     }
 

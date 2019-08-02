@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
 import {Challenge} from '../../../../shared/models/challenge';
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
-import {AddChallengeComponent} from "../add-challenge/add-challenge.component";
-import {Participant} from "../../../../shared/models/participant";
-import {Tag} from "../../../../shared/models/tag";
-import {Status} from "../../../../shared/models/status";
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {AddChallengeComponent} from '../add-challenge/add-challenge.component';
+import {Participant} from '../../../../shared/models/participant';
+import {Tag} from '../../../../shared/models/tag';
+import {Status} from '../../../../shared/models/status';
 
 @Component({
     selector: 'app-challenge',
@@ -54,9 +54,9 @@ export class ChallengeComponent implements OnInit {
                     this.snackBarService.success(`Die Challenge '${data['title']}' wurde erfolgreich gelöscht!`);
                 },
                 error => {
-                    this.snackBarService.error(`Die Challenge '${c.title}' konnte nicht gelöscht werden.`)
+                    this.snackBarService.error(`Die Challenge '${c.title}' konnte nicht gelöscht werden.`);
                 }
-            )
+            );
         }
     }
 
@@ -74,7 +74,7 @@ export class ChallengeComponent implements OnInit {
             tagSet: Tag[];
             title: string;
             toDate: Date;
-        }
+        };
     }
 
     refreshGUI() {

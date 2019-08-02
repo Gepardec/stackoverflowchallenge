@@ -12,8 +12,6 @@
     </mat-list>
 </div>
 
-<mat-divider></mat-divider>
-
 <div *ngIf="participants">
     <h4>Liste aller möglichen Teilnehmer</h4>
 
@@ -58,4 +56,3 @@
         <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
     </table>
 </div>
-

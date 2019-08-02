@@ -3,14 +3,11 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Participant} from '../models/participant';
 import {Challenge} from '../models/challenge';
-import {map} from "rxjs/operators";
-import {Status} from "../models/status";
-import {Tag} from "../models/tag";
-import {Observable} from 'rxjs';
-import {Participant} from '../models/participant';
-import {Challenge} from '../models/challenge';
+import {map} from 'rxjs/operators';
+import {Status} from '../models/status';
+import {Tag} from '../models/tag';
 import * as moment from 'moment';
-import {Answer} from "../models/answer";
+import {Answer} from '../models/answer';
 
 
 @Injectable({
@@ -67,16 +64,12 @@ export class EndpointService {
         return this.http.post(this.BASE_URL + 'challenge/add', c, this.APPLICATION_JSON_OPTIONS);
     }
 
-    updateChallenge(c:Challenge) {
+    updateChallenge(c: Challenge) {
         return this.http.put(this.BASE_URL + 'challenge/update', c, this.APPLICATION_JSON_OPTIONS);
     }
 
     getTags(): Observable<Tag[]> {
         return this.http.get<Tag[]>(this.BASE_URL + 'tag/all');
-    }
-
-    deleteChallenge(id: number) {
-        return this.http.delete(this.BASE_URL + `challenge/delete/${id}`);
     }
 
     async getPointsOfUser(id: number): Promise<Answer[]> {

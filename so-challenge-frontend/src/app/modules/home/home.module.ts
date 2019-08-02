@@ -7,9 +7,6 @@ import {HeaderComponent} from './components/header/header.component';
 import {ParticipantComponent} from './components/participant/participant.component';
 import {ChallengeComponent} from './components/challenge/challenge.component';
 import {ChallengeDetailComponent} from './components/challenge-detail/challenge-detail.component';
-import {HeaderComponent} from './components/header/header.component';
-import {ParticipantComponent} from './components/participant/participant.component';
-import {ChallengeComponent} from './components/challenge/challenge.component';
 import {PointsComponent} from './components/points/points.component';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -39,7 +36,8 @@ import {ChartsModule} from "ng2-charts";
         ChallengeComponent,
         ChallengeDetailComponent,
         TagComponent,
-        AddChallengeComponent
+        AddChallengeComponent,
+        PointsComponent
     ],
     imports: [
         MatTooltipModule,
@@ -48,11 +46,13 @@ import {ChartsModule} from "ng2-charts";
         FormsModule,
         BrowserModule,
         HttpClientModule,
+        ChartsModule,
         RouterModule.forRoot(
             [
                 {path: 'challenges', component: ChallengeComponent},
                 {path: 'participants', component: ParticipantComponent},
                 {path: 'tags', component: TagComponent},
+                {path: 'participantInfo', component: PointsComponent},
                 {path: '', redirectTo: '/challenges', pathMatch: 'full'},
                 {path: '**', component: ChallengeComponent}
             ]
@@ -73,28 +73,6 @@ import {ChartsModule} from "ng2-charts";
         MatDialogModule
     ],
     providers: [MatDatepickerModule],
-    bootstrap: [HeaderComponent]
-    declarations: [
-        HeaderComponent,
-        ParticipantComponent,
-        ChallengeComponent,
-        PointsComponent
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        ChartsModule,
-        RouterModule.forRoot(
-            [
-                {path: 'challenges', component: ChallengeComponent},
-                {path: 'participants', component: ParticipantComponent},
-                {path: 'participantInfo', component: PointsComponent},
-                {path: '', redirectTo: '/participants', pathMatch: 'full'},
-                {path: '**', component: ChallengeComponent}
-            ]
-        )
-    ],
-    providers: [],
-    bootstrap: [HeaderComponent]
+    bootstrap: [HeaderComponent],
 })
 export class HomeModule { }

@@ -22,11 +22,11 @@ import {
     MatNativeDateModule,
     MatSelectModule,
     MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule, MatDialog, MatDialogModule
-} from "@angular/material";
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TagComponent } from './components/tag/tag.component';
-import {AddChallengeComponent} from "./components/add-challenge/add-challenge.component";
-import {ChartsModule} from "ng2-charts";
+import {AddChallengeComponent} from './components/add-challenge/add-challenge.component';
+import {ChartsModule} from 'ng2-charts';
 
 
 @NgModule({

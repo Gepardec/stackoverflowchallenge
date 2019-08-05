@@ -75,26 +75,28 @@ export class EndpointService {
     async getPointsOfUser(id: number): Promise<Answer[]> {
 
         // Initializing
-        let SE_BASE_URL = `https://api.stackexchange.com/2.2/users/`;
+        // TODO all variables are former let
+        const SE_BASE_URL = `https://api.stackexchange.com/2.2/users/`;
         // let pageNr = 1;
-        let PAGES = `/answers?page=${this.pageNr}&pagesize=100`;
-        let DATE = `&fromdate=${moment('2015-07-25', 'YYYY-MM-DD').unix()}`; // TODO: get startdate from database (Beitrittsdatum)
-        let QUERY_PARAMS = `&order=desc&sort=votes&site=stackoverflow&filter=!.Fjr38AQkcvMg*eQSshw1WyCjkV9A`;
-        let URL = SE_BASE_URL + id + PAGES + DATE + QUERY_PARAMS;
-        let FILE_URL = `./assets/answers${this.pageNr++}.json`;
+        const PAGES = `/answers?page=${this.pageNr}&pagesize=100`;
+        const DATE = `&fromdate=${moment('2015-07-25', 'YYYY-MM-DD').unix()}`; // TODO: get startdate from database (Beitrittsdatum)
+        const QUERY_PARAMS = `&order=desc&sort=votes&site=stackoverflow&filter=!.Fjr38AQkcvMg*eQSshw1WyCjkV9A`;
+        const URL = SE_BASE_URL + id + PAGES + DATE + QUERY_PARAMS;
+        const FILE_URL = `./assets/answers${this.pageNr++}.json`;
 
         console.log(URL);
         // Processing
         console.log(FILE_URL);
         try {
-            let data = await this.http.get(FILE_URL).toPromise();
-            for (let score of data['items']) {
-                let answer = new Answer();
+            let data;
+            data = await this.http.get(FILE_URL).toPromise();
+            for (const score of data.items) {
+                const answer = new Answer();
                 Object.assign(answer, score);
                 this.items.push(answer);
             }
                 // this.items.push(data['items']);
-            if (data['has_more'] === true) {
+            if (data.has_more === true) {
                 await this.getPointsOfUser(id);
             } else {
                 this.pageNr = 1;

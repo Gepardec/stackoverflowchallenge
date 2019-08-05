@@ -12,6 +12,11 @@
         <module>so-challenge-backend</module>
         <module>so-challenge-frontend</module>
     </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <profiles>
         <profile>
         <!-- When built in OpenShift the 'openshift' profile will be used when
@@ -24,7 +29,4 @@
         <id>openshift</id>
         </profile>
     </profiles>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 </project>

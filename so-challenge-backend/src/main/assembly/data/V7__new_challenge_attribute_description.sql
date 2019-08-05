@@ -8,21 +8,28 @@ DROP TABLE IF EXISTS admin CASCADE;
 
 CREATE TABLE IF NOT EXISTS admin(
 	id serial,
+	username varchar(500),
+	password varchar(500),
+	salt varchar(500),
+	firstName varchar(500),
+	lastName varchar(500),
 	PRIMARY KEY ( id )
 );
 
 CREATE TABLE IF NOT EXISTS status (
-id serial, 
-name varchar(500), 
+	id serial, 
+	name varchar(500), 
 	PRIMARY KEY(id)
 ); 
 
 CREATE TABLE IF NOT EXISTS challenge (
-    	id serial,
+    	id serial NOT NULL,
     	title varchar(500),
 	description varchar(500),
-    	beginDate date,
-   	endDate date,
+    	fromDate date,
+   	toDate date,
+	status varchar(500),
+	oldStatus varchar(500),
 	award1 varchar(500),
 	award2 varchar(500),
 	award3 varchar(500),
@@ -31,7 +38,7 @@ CREATE TABLE IF NOT EXISTS challenge (
 
 CREATE TABLE IF NOT EXISTS participant (
   	profileId bigint,
- 	link varchar(500),
+ 	imageURL varchar(500),
   	username varchar(500),
    	PRIMARY KEY( profileId )
 );

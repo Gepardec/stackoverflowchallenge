@@ -67,8 +67,8 @@
                 <configuration>
                     <url>jdbc:postgresql://localhost:5432/so-challenge</url>
                     <!--USER & PW-->
-                    <user>postgres</user>
-                    <password>pgadminplaysdart31</password>
+                    <user>${POSTGRESQL_USER}</user>
+                    <password>${POSTGRESQL_PASSWORD}</password>
                         <locations>
                             <location>
                                 filesystem:./src/main/assembly/data/

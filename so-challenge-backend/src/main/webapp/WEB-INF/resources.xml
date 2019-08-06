@@ -2,8 +2,8 @@
 <resources>
   <Resource id="so-challenge-backend" type="javax.sql.DataSource">#Tue Jul 16 09:39:46 CEST 2019
 jdbcDriver=org.postgresql.Driver
-password=$DATABASE_PASSWORD
-userName=$DATABASE_USER
-jdbcUrl=jdbc\:postgresql\://http://postgresql-57-stackoverflowchallenge.cloud.itandtel.at\:5432/soChallenge
+password=${POSTGRESQL_PASSWORD}
+userName=${POSTGRESQL_USER}
+jdbcUrl=jdbc\:postgresql\://http://postgresql-57-stackoverflowchallenge.cloud.itandtel.at\:5432/${POSTGRESQL_DATABASE}
 </Resource>
 </resources>

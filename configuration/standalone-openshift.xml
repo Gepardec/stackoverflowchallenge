@@ -159,11 +159,11 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/so-challenge-backend" pool-name="so-challenge-backend" enabled="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/so-challenge</connection-url>
+                    <connection-url>jjdbc\:postgresql\://tcp://172.30.19.238:5432/${env.POSTGRESQL_DATABASE}</connection-url>
                     <driver>postgresql</driver>
                     <security>
-                        <user-name>postgres</user-name>
-                        <password>pgadminplaysdart31</password>
+                        <user-name>${env.POSTGRESQL_USER}</user-name>
+                        <password>${env.POSTGRESQL_PASSWORD}</password>
                     </security>
                 </datasource>
                 <drivers>

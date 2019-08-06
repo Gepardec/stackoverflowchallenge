@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Participant} from '../../../../shared/models/participant';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
-import {MatPaginator} from "@angular/material";
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {MatPaginator} from '@angular/material';
 
 @Component({
     selector: 'app-participant',

@@ -41,6 +41,7 @@ public class Challenge implements Serializable {
     private Date toDate;
 
     //TODO change to many to one to reduce complexity
+    //TODO add logic for state-flow
     @ManyToOne(fetch = FetchType.EAGER)
     private Status status;
 

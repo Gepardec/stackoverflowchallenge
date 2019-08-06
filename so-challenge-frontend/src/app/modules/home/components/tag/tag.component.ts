@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Participant} from "../../../../shared/models/participant";
-import {EndpointService} from "../../../../shared/services/endpoint.service";
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
-import {Tag} from "../../../../shared/models/tag";
-import {Observable} from "rxjs";
+import {Participant} from '../../../../shared/models/participant';
+import {EndpointService} from '../../../../shared/services/endpoint.service';
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {Tag} from '../../../../shared/models/tag';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-tag',

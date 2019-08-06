@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Challenge} from "../../../../shared/models/challenge";
-import {Status} from "../../../../shared/models/status";
-import {EndpointService} from "../../../../shared/services/endpoint.service";
-import {Participant} from "../../../../shared/models/participant";
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
+import {Challenge} from '../../../../shared/models/challenge';
+import {Status} from '../../../../shared/models/status';
+import {EndpointService} from '../../../../shared/services/endpoint.service';
+import {Participant} from '../../../../shared/models/participant';
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
 
 @Component({
     selector: 'app-challenge-detail',

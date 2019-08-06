@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {EndpointService} from "../../../../shared/services/endpoint.service";
+import {EndpointService} from '../../../../shared/services/endpoint.service';
 
 @Component({
     selector: 'app-points',

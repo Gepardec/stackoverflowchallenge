@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MatListModule} from '@angular/material/list';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
 import {Challenge} from '../../../../shared/models/challenge';
 import {SnackbarService} from '../../../../shared/services/snackbar.service';
@@ -6,6 +7,7 @@ import {AddChallengeComponent} from '../add-challenge/add-challenge.component';
 import {Participant} from '../../../../shared/models/participant';
 import {Tag} from '../../../../shared/models/tag';
 import {Status} from '../../../../shared/models/status';
+
 
 @Component({
     selector: 'app-challenge',

@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Participant} from '../../../../shared/models/participant';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
-import {MatPaginator} from "@angular/material";
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {MatPaginator} from '@angular/material';
 
 @Component({
     selector: 'app-participant',
@@ -47,7 +47,7 @@ export class ParticipantComponent implements OnInit {
         this.endpointService.addParticipant((+id)).subscribe(
             data => {
                 this.ngOnInit();
-                this.snackBarService.success(`Der Benutzer '${data['username']}' wurde erfolgreich als Teilnehmer registriert!`);
+                this.snackBarService.success(`Der Benutzer '${data}' wurde erfolgreich als Teilnehmer registriert!`);
             },
             error => {
                 this.snackBarService.error('Fehler beim Hinzufügen: Dieser Teilnehmer existiert nicht oder ist bereits hinzugefügt!');

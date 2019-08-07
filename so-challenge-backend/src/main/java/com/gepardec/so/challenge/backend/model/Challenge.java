@@ -44,9 +44,6 @@ public class Challenge implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Status status;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Status oldStatus;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Tag> tagSet = new LinkedHashSet<>();
 
@@ -111,7 +108,7 @@ public class Challenge implements Serializable {
     }
 
     public void setStatus(Status status) {
-        oldStatus = this.status;
+        //oldStatus = this.status;
         this.status = status;
     }
 

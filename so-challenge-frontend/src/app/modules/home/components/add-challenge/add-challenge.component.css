@@ -7,8 +7,9 @@
 
 .participants-container {
     width: 50%;
-    float: left;
+    float: top;
     display: flex;
+    flex-direction: column;
 }
 
 input, textarea, select, .submit, ::ng-deep button {

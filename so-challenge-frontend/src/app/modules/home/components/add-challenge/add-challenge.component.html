@@ -25,7 +25,7 @@
 
         <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select *ngIf="stati" [(ngModel)]="tempIndex">
+            <mat-select *ngIf="stati" [(ngModel)]="challenge.status">
                 <mat-option *ngFor="let s of stati" [value]="s.id">
                     {{s.name}}
                 </mat-option>
@@ -52,9 +52,13 @@
 
     </div>
 
+
     <div class="participants-container">
-        <!-- TODO PARTICIPANTS -->
         <h3>Teilnehmer</h3>
+        <!-- TODO PARTICIPANTS -->
+        <mat-selection-list *ngFor="let participant of participants">
+            <mat-list-option class = badge [(ngModel)]="challenge.participantSet"> {{participant.username}} </mat-list-option>
+        </mat-selection-list>
     </div>
 
     <div class="submit">

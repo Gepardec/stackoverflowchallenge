@@ -12,21 +12,21 @@ CREATE TABLE IF NOT EXISTS admin(
 );
 
 CREATE TABLE IF NOT EXISTS status (
-id serial, 
-name varchar(500), 
+    id serial, 
+    name varchar(500), 
 	PRIMARY KEY(id)
 ); 
 
 CREATE TABLE IF NOT EXISTS challenge (
     	id serial,
     	title varchar(500),
-	description varchar(500),
+	    description varchar(500),
     	beginDate date,
-   	endDate date,
-	award1 varchar(500),
-	award2 varchar(500),
-	award3 varchar(500),
-   	PRIMARY KEY( id )
+   	    endDate date,
+	    award1 varchar(500),
+	    award2 varchar(500),
+	    award3 varchar(500),
+   	    PRIMARY KEY( id )
 );
 
 CREATE TABLE IF NOT EXISTS participant (

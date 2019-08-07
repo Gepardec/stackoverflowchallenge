@@ -53,8 +53,10 @@
     </div>
 
     <div class="participants-container">
-        <!-- TODO PARTICIPANTS -->
         <h3>Teilnehmer</h3>
+        <mat-selection-list>
+            <mat-list-option name = "participants" *ngFor = "let part of participants">{{part}}</mat-list-option>
+        </mat-selection-list>
     </div>
 
     <div class="submit">

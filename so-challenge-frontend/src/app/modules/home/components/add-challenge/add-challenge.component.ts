@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Challenge} from "../../../../shared/models/challenge";
-import {EndpointService} from "../../../../shared/services/endpoint.service";
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
-import {Status} from "../../../../shared/models/status";
-import {Participant} from "../../../../shared/models/participant";
+import {Challenge} from '../../../../shared/models/challenge';
+import {EndpointService} from '../../../../shared/services/endpoint.service';
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {Status} from '../../../../shared/models/status';
+import {Participant} from '../../../../shared/models/participant';
 
 @Component({
     selector: 'app-add-challenge',
@@ -44,7 +44,7 @@ export class AddChallengeComponent implements OnInit {
             this.challenge.status = null;
         }
 
-        console.log(this.challenge)
+        console.log(this.challenge);
 
         this.endpointService.addChallenge(this.challenge).subscribe(
             data => {
@@ -58,6 +58,8 @@ export class AddChallengeComponent implements OnInit {
                 this.challenge = null;
             }
         );
+        // TODO if participants not empty
+        // TODO call addparticipants to challenge function + concat participants id into ;-separeted strings
     }
 
     cancelClicked() {

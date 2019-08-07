@@ -60,6 +60,8 @@ export class EndpointService {
         return this.http.get<Status[]>(this.BASE_URL + 'status/all');
     }
 
+
+
     addChallenge(c: Challenge) {
         return this.http.post(this.BASE_URL + 'challenge/add', c, this.APPLICATION_JSON_OPTIONS);
     }
@@ -70,6 +72,12 @@ export class EndpointService {
 
     getTags(): Observable<Tag[]> {
         return this.http.get<Tag[]>(this.BASE_URL + 'tag/all');
+    }
+
+
+    // TODO participants id should be a ; separated string
+    async addParticipantsToChallenge(id: number, p: string) {
+        return this.http.put(this.BASE_URL + `challenge/addParticipants/${id}`, p, this.APPLICATION_JSON_OPTIONS);
     }
 
     async getPointsOfUser(id: number): Promise<Answer[]> {

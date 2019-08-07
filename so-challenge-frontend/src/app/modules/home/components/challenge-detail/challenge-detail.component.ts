@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Challenge} from "../../../../shared/models/challenge";
-import {Status} from "../../../../shared/models/status";
-import {EndpointService} from "../../../../shared/services/endpoint.service";
-import {Participant} from "../../../../shared/models/participant";
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
+import {Challenge} from '../../../../shared/models/challenge';
+import {Status} from '../../../../shared/models/status';
+import {EndpointService} from '../../../../shared/services/endpoint.service';
+import {Participant} from '../../../../shared/models/participant';
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
 
 @Component({
     selector: 'app-challenge-detail',
@@ -17,7 +17,7 @@ export class ChallengeDetailComponent implements OnInit {
     stati: Status[] = [];
     participants: Participant[];
 
-    tempIndex: number = -1;
+    tempIndex = -1;
 
     constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
     }
@@ -47,11 +47,11 @@ export class ChallengeDetailComponent implements OnInit {
             this.challenge.status = null;
         }
 
-        console.log(this.challenge)
+        console.log(this.challenge);
 
         this.endpointService.updateChallenge(this.challenge).subscribe(
             data => {
-                console.log(this.challenge)
+                console.log(this.challenge);
                 // the response was successful
                 this.snackBarService.success(`Challenge '${this.challenge.title}' wurde aktualisiert.`);
                 this.challenge = null;

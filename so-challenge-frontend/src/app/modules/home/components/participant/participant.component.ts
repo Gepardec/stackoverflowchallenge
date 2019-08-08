@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Participant} from '../../../../shared/models/participant';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
-import {MatPaginator} from "@angular/material";
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {MatPaginator} from '@angular/material';
 
 @Component({
     selector: 'app-participant',
@@ -23,7 +23,7 @@ export class ParticipantComponent implements OnInit {
             },
             error => {
                 this.participants = null;
-                this.snackBarService.open(`Es gibt noch keine Teilnehmer!`);
+                this.snackBarService.warning(`Es gibt noch keine Teilnehmer!`);
             }
         );
     }
@@ -34,10 +34,10 @@ export class ParticipantComponent implements OnInit {
             this.endpointService.deleteParticipant(p.profileId).subscribe(
                 data => {
                     this.ngOnInit();
-                    this.snackBarService.open(`Teilnehmer '${p.username}' wurde aus der Teilnehmerliste gelöscht!`);
+                    this.snackBarService.success(`Teilnehmer '${p.username}' wurde aus der Teilnehmerliste gelöscht!`);
                 },
                 error => {
-                    this.snackBarService.open(`Fehler beim Löschen des Teilnehmers '${p.username}'!`);
+                    this.snackBarService.error(`Fehler beim Löschen des Teilnehmers '${p.username}'!`);
                 }
             );
         }
@@ -47,9 +47,10 @@ export class ParticipantComponent implements OnInit {
         this.endpointService.addParticipant((+id)).subscribe(
             data => {
                 this.ngOnInit();
+                this.snackBarService.success(`Der Benutzer '${data['username']}' wurde erfolgreich als Teilnehmer registriert!`);
             },
             error => {
-                this.snackBarService.open('Fehler beim Hinzufügen: Dieser Teilnehmer existiert nicht oder ist bereits hinzugefügt!');
+                this.snackBarService.error('Fehler beim Hinzufügen: Dieser Teilnehmer existiert nicht oder ist bereits hinzugefügt!');
             }
         );
     }

@@ -1,8 +1,6 @@
 package com.gepardec.so.challenge.backend.service;
 
 import com.gepardec.so.challenge.backend.db.DAOLocal;
-import com.gepardec.so.challenge.backend.model.Challenge;
-import com.gepardec.so.challenge.backend.model.Participant;
 import com.gepardec.so.challenge.backend.model.Tag;
 import com.gepardec.so.challenge.backend.utils.EndpointUtils;
 
@@ -10,9 +8,6 @@ import javax.ejb.EJB;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notAcceptable;
@@ -69,7 +64,6 @@ public class TagEndpoint {
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createTag(String name) {
-        // check if it is already in the DB
         if (dao.isTagNameAlreadyPresent(name.toLowerCase())) {
             return notAcceptable();
         }

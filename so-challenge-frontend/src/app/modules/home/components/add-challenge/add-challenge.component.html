@@ -1,6 +1,6 @@
 <div *ngIf="challenge">
     <div class="form-container">
-        <h3>Challenge '{{challenge.title}}' bearbeiten</h3>
+        <h3>Neue Challenge hinzufügen</h3>
         <mat-form-field>
             <input matInput name="title" placeholder="Titel" [(ngModel)]="challenge.title"/>
         </mat-form-field>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="submit">
-        <button mat-raised-button color="primary" (click)="okClicked()">OK</button>
+        <button mat-raised-button color="primary" (click)="addClicked()">Hinzufügen</button>
         <button mat-raised-button color="warn" (click)="cancelClicked()">Abbrechen</button>
     </div>
 </div>

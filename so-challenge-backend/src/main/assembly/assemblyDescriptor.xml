@@ -1,0 +1,20 @@
+<assembly>
+    <id>so-zip-sql</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <fileSets>
+    <fileSet>
+        <directory>
+            ${project.basedir}/src/main/assembly/data/
+        </directory>
+        <includes>
+            <include>*.sql</include>
+        </includes>
+        <outputDirectory>
+            <!--set output dir -> current dir is target/so-sql-zip.zip-->
+           ./data/
+        </outputDirectory>
+    </fileSet>
+    </fileSets>
+</assembly>

@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Participant} from "../../../../shared/models/participant";
-import {EndpointService} from "../../../../shared/services/endpoint.service";
-import {SnackbarService} from "../../../../shared/services/snackbar.service";
-import {Tag} from "../../../../shared/models/tag";
+import {Participant} from '../../../../shared/models/participant';
+import {EndpointService} from '../../../../shared/services/endpoint.service';
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {Tag} from '../../../../shared/models/tag';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-tag',
@@ -27,7 +28,7 @@ export class TagComponent implements OnInit {
             },
             error => {
                 this.tags = null;
-                this.snackBarService.open(`Es gibt noch keine Tags!`);
+                this.snackBarService.warning(`Es gibt noch keine Tags!`);
             }
         );
     }
@@ -37,10 +38,10 @@ export class TagComponent implements OnInit {
             this.endpointService.deleteTag(t.id).subscribe(
                 data => {
                     this.ngOnInit();
-                    this.snackBarService.open(`Tag '${t.name}' wurde aus der Tagliste gelöscht!`);
+                    this.snackBarService.success(`Tag '${t.name}' wurde erfolgreich aus der Tagliste gelöscht!`);
                 },
                 error => {
-                    this.snackBarService.open(`Fehler beim Löschen des Tags '${t.name}'!`);
+                    this.snackBarService.error(`Fehler beim Löschen des Tags '${t.name}'!`);
                 }
             );
         }
@@ -49,10 +50,11 @@ export class TagComponent implements OnInit {
     addTag(name: string) {
         this.endpointService.addTag(name).subscribe(
             data => {
+                this.snackBarService.success(`Tag '${data['name']}' wurde erfolgreich zur Liste hinzugefügt!`);
                 this.ngOnInit();
             },
             error => {
-                this.snackBarService.open('Fehler beim Hinzufügen: Dieser Tag existiert nicht oder ist bereits hinzugefügt!');
+                this.snackBarService.error('Fehler beim Hinzufügen: Dieser Tag existiert nicht oder ist bereits hinzugefügt!');
             }
         );
     }

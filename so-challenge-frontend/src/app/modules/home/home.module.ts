@@ -1,12 +1,13 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import {HeaderComponent} from './components/header/header.component';
 import {ParticipantComponent} from './components/participant/participant.component';
 import {ChallengeComponent} from './components/challenge/challenge.component';
 import {ChallengeDetailComponent} from './components/challenge-detail/challenge-detail.component';
+import {PointsComponent} from './components/points/points.component';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
@@ -20,10 +21,13 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule
-} from "@angular/material";
+    MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule, MatDialog, MatDialogModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TagComponent } from './components/tag/tag.component';
+import {AddChallengeComponent} from './components/add-challenge/add-challenge.component';
+import {ChartsModule} from 'ng2-charts';
+
 
 @NgModule({
     declarations: [
@@ -31,7 +35,9 @@ import { TagComponent } from './components/tag/tag.component';
         ParticipantComponent,
         ChallengeComponent,
         ChallengeDetailComponent,
-        TagComponent
+        TagComponent,
+        AddChallengeComponent,
+        PointsComponent
     ],
     imports: [
         MatTooltipModule,
@@ -40,11 +46,13 @@ import { TagComponent } from './components/tag/tag.component';
         FormsModule,
         BrowserModule,
         HttpClientModule,
+        ChartsModule,
         RouterModule.forRoot(
             [
                 {path: 'challenges', component: ChallengeComponent},
                 {path: 'participants', component: ParticipantComponent},
                 {path: 'tags', component: TagComponent},
+                {path: 'participantInfo', component: PointsComponent},
                 {path: '', redirectTo: '/challenges', pathMatch: 'full'},
                 {path: '**', component: ChallengeComponent}
             ]
@@ -61,12 +69,10 @@ import { TagComponent } from './components/tag/tag.component';
         MatSnackBarModule,
         MatDividerModule,
         MatListModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatDialogModule
     ],
     providers: [MatDatepickerModule],
-    bootstrap: [HeaderComponent]
+    bootstrap: [HeaderComponent],
 })
-export class HomeModule {
-}
-
-
+export class HomeModule { }

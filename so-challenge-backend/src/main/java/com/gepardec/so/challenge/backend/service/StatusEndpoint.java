@@ -21,11 +21,11 @@ public class StatusEndpoint {
 
     @EJB
     private DAOLocal dao;
-
+    //TODO former response -> getParticipantById
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getParticipantById() {
+    public Response getStatusById() {
         List<Status> statuses = dao.getAllStatuses();
         if (statuses.isEmpty()) {
             return notFound();

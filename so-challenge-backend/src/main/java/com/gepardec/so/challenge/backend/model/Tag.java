@@ -7,10 +7,6 @@ import java.util.Objects;
 @SequenceGenerator(sequenceName = "tag_id_seq", name = "tag_id_seq", allocationSize = 1)
 public class Tag {
 
-    public Tag() {
-
-    }
-
     @Id
     @GeneratedValue(generator = "tag_id_seq")
     private Long id;

@@ -1,18 +1,19 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Challenge} from '../../../../shared/models/challenge';
-import {Status} from '../../../../shared/models/status';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
-import {Participant} from '../../../../shared/models/participant';
 import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {Status} from '../../../../shared/models/status';
+import {Participant} from '../../../../shared/models/participant';
 
 @Component({
-    selector: 'app-challenge-detail',
-    templateUrl: './challenge-detail.component.html',
-    styleUrls: ['./challenge-detail.component.css']
+    selector: 'app-add-challenge',
+    templateUrl: './add-challenge.component.html',
+    styleUrls: ['./add-challenge.component.css']
 })
-export class ChallengeDetailComponent implements OnInit {
-    @Input() challenge: Challenge; // Challenge to be edited, copy from Parent component
-    @Output() onSuccessfulEditing = new EventEmitter<boolean>();
+export class AddChallengeComponent implements OnInit {
+
+    @Input() challenge: Challenge;
+    @Output() onSuccessfulAdding = new EventEmitter<boolean>();
 
     stati: Status[] = [];
     participants: Participant[];
@@ -28,6 +29,7 @@ export class ChallengeDetailComponent implements OnInit {
                 this.stati = data;
             }
         );
+
         this.endpointService.getParticipants().subscribe(
             data => {
                 this.participants = data;
@@ -35,12 +37,7 @@ export class ChallengeDetailComponent implements OnInit {
         );
     }
 
-    ngOnChanges() {
-        this.tempIndex = -1;
-        this.tempIndex = this.challenge.status == null ? -1 : this.challenge.status.id;
-    }
-
-    okClicked() {
+    addClicked() {
         if (this.tempIndex != -1) {
             this.challenge.status = this.stati[this.stati.map(el => el.id).indexOf(this.tempIndex)];
         } else {
@@ -49,17 +46,15 @@ export class ChallengeDetailComponent implements OnInit {
 
         console.log(this.challenge)
 
-        this.endpointService.updateChallenge(this.challenge).subscribe(
+        this.endpointService.addChallenge(this.challenge).subscribe(
             data => {
-                console.log(this.challenge)
-                // the response was successful
-                this.snackBarService.success(`Challenge '${this.challenge.title}' wurde aktualisiert.`);
+                console.log(data);
+                this.snackBarService.success(`Die Challenge '${data['title']}' wurde erfolgreich hinzugefügt!`);
+                this.onSuccessfulAdding.emit(true);
                 this.challenge = null;
-                this.onSuccessfulEditing.emit(true);
-            },
-            error => {
-                // something went wrong
-                this.snackBarService.error('Fehler beim Bearbeiten... Versuchen Sie es später erneut!');
+            }, error => {
+                console.log(error);
+                this.snackBarService.error(`Fehler beim hinzufügen der Challenge! Bitte Eingaben überprüfen!`);
                 this.challenge = null;
             }
         );
@@ -68,4 +63,5 @@ export class ChallengeDetailComponent implements OnInit {
     cancelClicked() {
         this.challenge = null;
     }
+
 }

@@ -25,8 +25,8 @@
 
         <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select *ngIf="stati" [(ngModel)]="tempIndex">
-                <mat-option *ngFor="let s of stati" [value]="s.id">
+            <mat-select name = "state"  *ngIf="states" [(ngModel)]="states">
+                <mat-option *ngFor="let s of states" [value]="s.id">
                     {{s.name}}
                 </mat-option>
             </mat-select>
@@ -55,7 +55,9 @@
     <div class="participants-container">
         <h3>Teilnehmer</h3>
         <mat-selection-list>
-            <mat-list-option name = "participants" *ngFor = "let part of participants">{{part}}</mat-list-option>
+            <mat-list-option name = "participants" *ngFor = "let participant of participants">
+                {{participant}}
+            </mat-list-option>
         </mat-selection-list>
     </div>
 

@@ -56,10 +56,13 @@ export class EndpointService {
         return this.http.delete<Challenge>(this.BASE_URL + `challenge/delete/${id}`);
     }
 
-    getStatuses(): Observable<Status[]> {
+    getStates(): Observable<Status[]> {
         return this.http.get<Status[]>(this.BASE_URL + 'status/all');
     }
 
+    getCreateStates(): Observable<Status[]> {
+        return this.http.get<Status[]>(this.BASE_URL + 'status/startStates');
+    }
 
 
     addChallenge(c: Challenge) {
@@ -76,7 +79,7 @@ export class EndpointService {
 
 
     // TODO participants id should be a ; separated string
-    async addParticipantsToChallenge(id: number, p: string) {
+    addParticipantsToChallenge(id: number, p: string) {
         return this.http.put(this.BASE_URL + `challenge/addParticipants/${id}`, p, this.APPLICATION_JSON_OPTIONS);
     }
 

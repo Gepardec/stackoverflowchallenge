@@ -21,16 +21,28 @@ public class StatusEndpoint {
 
     @EJB
     private DAOLocal dao;
-    //TODO former response -> getParticipantById
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getStatusById() {
-        List<Status> statuses = dao.getAllStatuses();
-        if (statuses.isEmpty()) {
+    public Response getState() {
+        List<Status> states = dao.getAllStates();
+        if (states.isEmpty()) {
             return notFound();
         } else {
-            return Response.ok(new GenericEntity<List<Status>>(statuses) {
+            return Response.ok(new GenericEntity<List<Status>>(states) {
+            }).build();
+        }
+    }
+
+    @GET
+    @Path("startStates")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStatesForAddChallenge() {
+        List<Status> states = dao.getCreateStates();
+        if(states.isEmpty()) {
+            return notFound();
+        } else {
+            return Response.ok(new GenericEntity<List<Status>>(states) {
             }).build();
         }
     }

@@ -4,6 +4,7 @@ import {EndpointService} from '../../../../shared/services/endpoint.service';
 import {SnackbarService} from '../../../../shared/services/snackbar.service';
 import {Status} from '../../../../shared/models/status';
 import {Participant} from '../../../../shared/models/participant';
+import {MatFormField} from '@angular/material';
 
 @Component({
     selector: 'app-add-challenge',
@@ -15,7 +16,7 @@ export class AddChallengeComponent implements OnInit {
     @Input() challenge: Challenge;
     @Output() onSuccessfulAdding = new EventEmitter<boolean>();
 
-    stati: Status[] = [];
+    states: Status[];
     participants: Participant[];
 
     tempIndex: number = -1;
@@ -24,9 +25,9 @@ export class AddChallengeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.endpointService.getStatuses().subscribe(
+        this.endpointService.getCreateStates().subscribe(
             data => {
-                this.stati = data;
+                this.states = data;
             }
         );
 
@@ -39,7 +40,7 @@ export class AddChallengeComponent implements OnInit {
 
     addClicked() {
         if (this.tempIndex != -1) {
-            this.challenge.status = this.stati[this.stati.map(el => el.id).indexOf(this.tempIndex)];
+            this.challenge.status = this.states[this.states.map(el => el.id).indexOf(this.tempIndex)];
         } else {
             this.challenge.status = null;
         }

@@ -25,8 +25,8 @@
 
         <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select *ngIf="stati" [(ngModel)]="challenge.status">
-                <mat-option *ngFor="let s of stati" [value]="s.id">
+            <mat-select *ngIf="states" [(ngModel)]="challenge.status">
+                <mat-option *ngFor="let s of states" [value]="s.id">
                     {{s.name}}
                 </mat-option>
             </mat-select>

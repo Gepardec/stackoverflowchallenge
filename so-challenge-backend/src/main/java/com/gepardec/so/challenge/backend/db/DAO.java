@@ -135,8 +135,13 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public List<Status> getAllStatuses() {
+    public List<Status> getAllStates() {
         return em.createQuery("SELECT s FROM Status s ORDER BY s.id", Status.class).getResultList();
+    }
+
+    @Override
+    public List<Status> getCreateStates() {
+        return em.createQuery("SELECT s FROM Status s WHERE s.id = 1 OR s.id = 4").getResultList();
     }
 
     @Override

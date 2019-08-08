@@ -72,7 +72,7 @@ public class ChallengeEndpoint {
         c.setFromDate(new Date());
         c.setToDate(Date.from(c.getFromDate().toInstant().plus(70, ChronoUnit.DAYS)));
 
-        if (c.getFromDate().after(c.getToDate()) || c.getToDate().after(new Date())
+        if (c.getFromDate().after(c.getToDate()) || c.getFromDate().after(new Date())
                 || c.getFromDate().equals(c.getToDate())
                 || !dao.createChallenge(c)) {
             return notAcceptable();

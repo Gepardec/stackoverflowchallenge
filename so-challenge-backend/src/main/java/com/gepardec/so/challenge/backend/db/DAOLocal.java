@@ -118,7 +118,9 @@ public interface DAOLocal {
      */
     boolean removeParticipantFromChallenge(Integer challengeId, Long participantId);
 
-    List<Status> getAllStatuses();
+    List<Status> getAllStates();
+
+    List<Status> getCreateStates();
 
     List<Tag> getAllTags();
 

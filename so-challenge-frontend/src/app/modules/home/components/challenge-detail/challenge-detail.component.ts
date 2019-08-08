@@ -14,7 +14,7 @@ export class ChallengeDetailComponent implements OnInit {
     @Input() challenge: Challenge; // Challenge to be edited, copy from Parent component
     @Output() onSuccessfulEditing = new EventEmitter<boolean>();
 
-    stati: Status[] = [];
+    states: Status[];
     participants: Participant[];
 
     tempIndex = -1;
@@ -23,9 +23,9 @@ export class ChallengeDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.endpointService.getStatuses().subscribe(
+        this.endpointService.getStates().subscribe(
             data => {
-                this.stati = data;
+                this.states = data;
             }
         );
         this.endpointService.getParticipants().subscribe(
@@ -42,7 +42,7 @@ export class ChallengeDetailComponent implements OnInit {
 
     okClicked() {
         if (this.tempIndex != -1) {
-            this.challenge.status = this.stati[this.stati.map(el => el.id).indexOf(this.tempIndex)];
+            this.challenge.status = this.states[this.states.map(el => el.id).indexOf(this.tempIndex)];
         } else {
             this.challenge.status = null;
         }

@@ -140,11 +140,11 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/so-challenge-backend" pool-name="so-challenge-backend" enabled="true">
-                    <connection-url>jdbc:postgresql://postgresql:5432/soChallenge</connection-url>
+                    <connection-url>jdbc:postgresql://postgresql:5432/sochallenge</connection-url>
                     <driver>postgresql</driver>
                     <security>
-                        <user-name>postgres</user-name>
-                        <password>pgadminplaysdart31</password>
+                        <user-name>sochallenge</user-name>
+                        <password>sochallenge</password>
                     </security>
                 </datasource>
                 <drivers>

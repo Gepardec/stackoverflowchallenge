@@ -5,18 +5,18 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@SequenceGenerator(sequenceName = "status_id_seq", name = "status_id_seq", allocationSize = 1)
-public class Status implements Serializable {
+@SequenceGenerator(sequenceName = "state_id_seq", name = "state_id_seq", allocationSize = 1)
+public class State implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "status_seq_id")
+    @GeneratedValue(generator = "state_seq_id")
     private Long id;
 
     private String name;
 
-    public Status() {
+    public State() {
     }
 
     public Long getId() {
@@ -39,8 +39,8 @@ public class Status implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Status status = (Status) o;
-        return Objects.equals(id, status.id);
+        State state= (State) o;
+        return Objects.equals(id, state.id);
     }
 
     @Override

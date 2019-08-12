@@ -1,5 +1,5 @@
 import {Participant} from './participant';
-import {Status} from './status';
+import {State} from './state';
 import {Tag} from './tag';
 
 export interface Challenge {
@@ -8,7 +8,7 @@ export interface Challenge {
     description: string;
     fromDate: Date;
     toDate: Date;
-    status: Status;
+    state: State;
     tagSet: Tag[];
     award1: string;
     award2: string;

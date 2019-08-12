@@ -7,7 +7,7 @@ package com.gepardec.so.challenge.backend.db;
 
 import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
-import com.gepardec.so.challenge.backend.model.Status;
+import com.gepardec.so.challenge.backend.model.State;
 import com.gepardec.so.challenge.backend.model.Tag;
 
 import java.util.List;
@@ -118,9 +118,9 @@ public interface DAOLocal {
      */
     boolean removeParticipantFromChallenge(Integer challengeId, Long participantId);
 
-    List<Status> getAllStates();
+    List<State> getAllStates();
 
-    List<Status> getCreateStates();
+    List<State> getCreateStates();
 
     List<Tag> getAllTags();
 

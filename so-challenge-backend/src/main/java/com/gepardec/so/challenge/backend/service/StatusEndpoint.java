@@ -1,7 +1,7 @@
 package com.gepardec.so.challenge.backend.service;
 
 import com.gepardec.so.challenge.backend.db.DAOLocal;
-import com.gepardec.so.challenge.backend.model.Status;
+import com.gepardec.so.challenge.backend.model.State;
 
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
@@ -13,7 +13,7 @@ import java.util.List;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 
 // The Java class will be hosted at the URI path "/helloworld"
-@Path("/status")
+@Path("/state")
 public class StatusEndpoint {
 
     @Context
@@ -25,11 +25,11 @@ public class StatusEndpoint {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getState() {
-        List<Status> states = dao.getAllStates();
+        List<State> states = dao.getAllStates();
         if (states.isEmpty()) {
             return notFound();
         } else {
-            return Response.ok(new GenericEntity<List<Status>>(states) {
+            return Response.ok(new GenericEntity<List<State>>(states) {
             }).build();
         }
     }
@@ -38,11 +38,11 @@ public class StatusEndpoint {
     @Path("startStates")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStatesForAddChallenge() {
-        List<Status> states = dao.getCreateStates();
+        List<State> states = dao.getCreateStates();
         if(states.isEmpty()) {
             return notFound();
         } else {
-            return Response.ok(new GenericEntity<List<Status>>(states) {
+            return Response.ok(new GenericEntity<List<State>>(states) {
             }).build();
         }
     }

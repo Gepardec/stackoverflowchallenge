@@ -1,26 +1,26 @@
 <table *ngIf="challenges" [dataSource]="challenges" class="mat-elevation-z8" mat-table>
     <!-- title Column -->
     <ng-container matColumnDef="title">
-        <th *matHeaderCellDef mat-header-cell> Titel</th>
+        <th *matHeaderCellDef mat-header-cell>title</th>
         <td *matCellDef="let c" mat-cell> {{c.title}} </td>
     </ng-container>
 
     <!-- fromDate Column -->
     <ng-container matColumnDef="fromDate">
-        <th *matHeaderCellDef mat-header-cell> Von (yyyy/mm/dd)</th>
+        <th *matHeaderCellDef mat-header-cell> from yyyy/mm/dd</th>
         <td *matCellDef="let c" mat-cell> {{c.fromDate | date:'yyyy/MM/dd'}} </td>
     </ng-container>
 
     <!-- toDate Column -->
     <ng-container matColumnDef="toDate">
-        <th *matHeaderCellDef mat-header-cell> Bis (yyyy/mm/dd)</th>
+        <th *matHeaderCellDef mat-header-cell> to yyyy/mm/dd</th>
         <td *matCellDef="let c" mat-cell> {{c.toDate | date:'yyyy/MM/dd'}} </td>
     </ng-container>
 
     <!-- status Column -->
-    <ng-container matColumnDef="status">
-        <th *matHeaderCellDef mat-header-cell>Status</th>
-        <td *matCellDef="let c" mat-cell> {{c.status == null ? '----' : c.status.name }} </td>
+    <ng-container matColumnDef="state">
+        <th *matHeaderCellDef mat-header-cell>State</th>
+        <td *matCellDef="let c" mat-cell> {{c.state}} </td>
     </ng-container>
 
     <!-- Action column -->
@@ -28,11 +28,11 @@
         <th *matHeaderCellDef mat-header-cell>Aktionen</th>
         <td *matCellDef="let c" mat-cell>
             <button (click)="selectChallenge(c)" mat-icon-button
-                    matTooltip="Challenge '{{c.title}}' bearbeiten">
+                    matTooltip="Challenge '{{c.title}}' edit">
                 <mat-icon>edit</mat-icon>
             </button>
             <button (click)="deleteChallenge(c)" mat-icon-button
-                    matTooltip="Challenge '{{c.title}}' löschen">
+                    matTooltip="Challenge '{{c.title}}' delete">
                 <mat-icon>delete</mat-icon>
             </button>
 
@@ -44,7 +44,7 @@
 </table>
 <div>
 
-    <button mat-raised-button class="add" (click)=openAddChallengeComponent()>Hinzufügen</button>
+    <button mat-raised-button class="add" (click)=openAddChallengeComponent()>create new challenge</button>
 
 </div>
 <app-challenge-detail (onSuccessfulEditing)="refreshGUI()" *ngIf="challengeToEdit" [challenge]="challengeToEdit">

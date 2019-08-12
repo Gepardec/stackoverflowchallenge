@@ -33,15 +33,15 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput name="award1" placeholder="Belohnung 1.Platz" [(ngModel)]="challenge.award1"/>
+            <input matInput name="award1" placeholder="award first place" [(ngModel)]="challenge.award1"/>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput name="award2" placeholder="Belohnung 2.Platz" [(ngModel)]="challenge.award2"/>
+            <input matInput name="award2" placeholder="award second place" [(ngModel)]="challenge.award2"/>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput name="award3" placeholder="Belohnung 3.Platz" [(ngModel)]="challenge.award3"/>
+            <input matInput name="award3" placeholder="award third place" [(ngModel)]="challenge.award3"/>
         </mat-form-field>
 
 
@@ -53,7 +53,8 @@
     </div>
 
     <div class="participants-container">
-        <h3>Teilnehmer</h3>
+        <h3>participating cheethas</h3>
+        <!-- TODO show participants -->
         <mat-selection-list>
             <mat-list-option name = "participants" *ngFor = "let participant of participants">
                 {{participant}}
@@ -62,7 +63,7 @@
     </div>
 
     <div class="submit">
-        <button mat-raised-button color="primary" (click)="okClicked()">OK</button>
-        <button mat-raised-button color="warn" (click)="cancelClicked()">Abbrechen</button>
+        <button mat-raised-button color="primary" (click)="okClicked()">ok</button>
+        <button mat-raised-button color="warn" (click)="cancelClicked()">cancel</button>
     </div>
 </div>

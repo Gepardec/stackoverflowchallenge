@@ -7,7 +7,7 @@ package com.gepardec.so.challenge.backend.db;
 
 import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
-import com.gepardec.so.challenge.backend.model.Status;
+import com.gepardec.so.challenge.backend.model.State;
 import com.gepardec.so.challenge.backend.model.Tag;
 
 import java.util.List;
@@ -135,13 +135,13 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public List<Status> getAllStates() {
-        return em.createQuery("SELECT s FROM Status s ORDER BY s.id", Status.class).getResultList();
+    public List<State> getAllStates() {
+        return em.createQuery("SELECT s FROM State s ORDER BY s.id", State.class).getResultList();
     }
 
     @Override
-    public List<Status> getCreateStates() {
-        return em.createQuery("SELECT s FROM Status s WHERE s.id = 1 OR s.id = 4").getResultList();
+    public List<State> getCreateStates() {
+        return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 4").getResultList();
     }
 
     @Override

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {Participant} from '../models/participant';
 import {Challenge} from '../models/challenge';
 import {map} from 'rxjs/operators';
-import {Status} from '../models/status';
+import {State} from '../models/state';
 import {Tag} from '../models/tag';
 import * as moment from 'moment';
 import {Answer} from '../models/answer';
@@ -56,12 +56,12 @@ export class EndpointService {
         return this.http.delete<Challenge>(this.BASE_URL + `challenge/delete/${id}`);
     }
 
-    getStates(): Observable<Status[]> {
-        return this.http.get<Status[]>(this.BASE_URL + 'status/all');
+    getStates(): Observable<State[]> {
+        return this.http.get<State[]>(this.BASE_URL + 'state/all');
     }
 
-    getCreateStates(): Observable<Status[]> {
-        return this.http.get<Status[]>(this.BASE_URL + 'status/startStates');
+    getCreateStates(): Observable<State[]> {
+        return this.http.get<State[]>(this.BASE_URL + 'state/startStates');
     }
 
 
@@ -78,7 +78,7 @@ export class EndpointService {
     }
 
 
-    // TODO participants id should be a ; separated string
+    // TODO participants id should be a ;-separated string
     addParticipantsToChallenge(id: number, p: string) {
         return this.http.put(this.BASE_URL + `challenge/addParticipants/${id}`, p, this.APPLICATION_JSON_OPTIONS);
     }

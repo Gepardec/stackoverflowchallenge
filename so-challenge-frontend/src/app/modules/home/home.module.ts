@@ -15,13 +15,14 @@ import {
     MatTabsModule,
     MatButtonModule,
     MatIconModule,
+    MatChipList,
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule, MatDialog, MatDialogModule
+    MatSnackBarModule, MatDividerModule, MatListModule, MatPaginatorModule, MatDialog, MatDialogModule, MatChipsModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TagComponent } from './components/tag/tag.component';
@@ -42,6 +43,7 @@ import {ChartsModule} from 'ng2-charts';
     imports: [
         MatTooltipModule,
         MatButtonModule,
+        MatInputModule,
         BrowserAnimationsModule,
         FormsModule,
         BrowserModule,
@@ -70,7 +72,8 @@ import {ChartsModule} from 'ng2-charts';
         MatDividerModule,
         MatListModule,
         MatPaginatorModule,
-        MatDialogModule
+        MatDialogModule,
+        MatChipsModule
     ],
     providers: [MatDatepickerModule],
     bootstrap: [HeaderComponent],

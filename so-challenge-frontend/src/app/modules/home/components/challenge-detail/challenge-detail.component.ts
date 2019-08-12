@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Challenge} from '../../../../shared/models/challenge';
-import {Status} from '../../../../shared/models/status';
+import {State} from '../../../../shared/models/state';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
 import {Participant} from '../../../../shared/models/participant';
 import {SnackbarService} from '../../../../shared/services/snackbar.service';
@@ -14,7 +14,7 @@ export class ChallengeDetailComponent implements OnInit {
     @Input() challenge: Challenge; // Challenge to be edited, copy from Parent component
     @Output() onSuccessfulEditing = new EventEmitter<boolean>();
 
-    states: Status[];
+    states: State[];
     participants: Participant[];
 
     tempIndex = -1;
@@ -37,14 +37,14 @@ export class ChallengeDetailComponent implements OnInit {
 
     ngOnChanges() {
         this.tempIndex = -1;
-        this.tempIndex = this.challenge.status == null ? -1 : this.challenge.status.id;
+        this.tempIndex = this.challenge.state == null ? -1 : this.challenge.state.id;
     }
 
     okClicked() {
         if (this.tempIndex != -1) {
-            this.challenge.status = this.states[this.states.map(el => el.id).indexOf(this.tempIndex)];
+            this.challenge.state = this.states[this.states.map(el => el.id).indexOf(this.tempIndex)];
         } else {
-            this.challenge.status = null;
+            this.challenge.state = null;
         }
 
         console.log(this.challenge);
@@ -53,13 +53,13 @@ export class ChallengeDetailComponent implements OnInit {
             data => {
                 console.log(this.challenge);
                 // the response was successful
-                this.snackBarService.success(`Challenge '${this.challenge.title}' wurde aktualisiert.`);
+                this.snackBarService.success(`challenge '${this.challenge.title}' was successfully edited`);
                 this.challenge = null;
                 this.onSuccessfulEditing.emit(true);
             },
             error => {
                 // something went wrong
-                this.snackBarService.error('Fehler beim Bearbeiten... Versuchen Sie es später erneut!');
+                this.snackBarService.error('editing went wrong');
                 this.challenge = null;
             }
         );

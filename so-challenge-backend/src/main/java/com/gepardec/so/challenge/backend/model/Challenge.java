@@ -6,10 +6,8 @@
 package com.gepardec.so.challenge.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -42,7 +40,7 @@ public class Challenge implements Serializable {
 
     //TODO change to many to one to reduce complexity
     @ManyToOne(fetch = FetchType.EAGER)
-    private Status status;
+    private State state;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Tag> tagSet = new LinkedHashSet<>();
@@ -103,13 +101,12 @@ public class Challenge implements Serializable {
         this.toDate = toDate;
     }
 
-    public Status getStatus() {
-        return status;
+    public State getState() {
+        return state;
     }
 
-    public void setStatus(Status status) {
-        //oldStatus = this.status;
-        this.status = status;
+    public void setState(State status) {
+        this.state = status;
     }
 
     public Set<Tag> getTagSet() {

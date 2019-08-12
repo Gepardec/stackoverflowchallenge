@@ -6,7 +6,7 @@ import {SnackbarService} from '../../../../shared/services/snackbar.service';
 import {AddChallengeComponent} from '../add-challenge/add-challenge.component';
 import {Participant} from '../../../../shared/models/participant';
 import {Tag} from '../../../../shared/models/tag';
-import {Status} from '../../../../shared/models/status';
+import {State} from '../../../../shared/models/state';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class ChallengeComponent implements OnInit {
 
     public showAddChallenge = false;
 
-    columnsToDisplay = ['title', 'fromDate', 'toDate', 'status', 'action'];
+    columnsToDisplay = ['title', 'fromDate', 'toDate', 'state.ts', 'action'];
 
     constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
     }
@@ -33,7 +33,7 @@ export class ChallengeComponent implements OnInit {
             },
             error => {
                 this.challenges = null;
-                this.snackBarService.warning('Es gibt noch keine Challenges!');
+                this.snackBarService.warning('there are no challenges so far!');
             }
         );
     }
@@ -72,7 +72,7 @@ export class ChallengeComponent implements OnInit {
             fromDate: Date;
             id: number;
             participantSet: Participant[];
-            status: Status;
+            state: State;
             tagSet: Tag[];
             title: string;
             toDate: Date;

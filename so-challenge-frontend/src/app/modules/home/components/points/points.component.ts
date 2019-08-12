@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {EndpointService} from "../../../../shared/services/endpoint.service";
+import {EndpointService} from '../../../../shared/services/endpoint.service';
 
 @Component({
     selector: 'app-points',
@@ -18,7 +18,7 @@ export class PointsComponent implements OnInit {
         { data: [45, 67, 800, 500], label: 'Account C' }
     ];
 
-    chartLabels = ['January', "February", "March", "April"]
+    chartLabels = ['January', 'February', 'March', 'April']
 
     onChartClick(event) {
         console.log(event);

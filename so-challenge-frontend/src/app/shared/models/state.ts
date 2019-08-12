@@ -1,4 +1,4 @@
-export interface Status {
+export interface State {
     id: number;
     name: string;
 }

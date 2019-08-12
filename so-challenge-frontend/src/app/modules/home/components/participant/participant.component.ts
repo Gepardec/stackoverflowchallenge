@@ -23,21 +23,21 @@ export class ParticipantComponent implements OnInit {
             },
             error => {
                 this.participants = null;
-                this.snackBarService.warning(`Es gibt noch keine Teilnehmer!`);
+                this.snackBarService.warning(`no users registered so far`);
             }
         );
     }
 
     deleteParticipant(p: Participant) {
-        if (confirm(`Wollen Sie den Teilnehmer '${p.username}' aus der Teilnehmerliste entfernen?`)) {
+        if (confirm(`do you want to remove user '${p.username}'?`)) {
 
             this.endpointService.deleteParticipant(p.profileId).subscribe(
                 data => {
                     this.ngOnInit();
-                    this.snackBarService.success(`Teilnehmer '${p.username}' wurde aus der Teilnehmerliste gelöscht!`);
+                    this.snackBarService.success(`user '${p.username}' was successfully deleted`);
                 },
                 error => {
-                    this.snackBarService.error(`Fehler beim Löschen des Teilnehmers '${p.username}'!`);
+                    this.snackBarService.error(`error while deleting user '${p.username}'!`);
                 }
             );
         }
@@ -47,10 +47,10 @@ export class ParticipantComponent implements OnInit {
         this.endpointService.addParticipant((+id)).subscribe(
             data => {
                 this.ngOnInit();
-                this.snackBarService.success(`Der Benutzer '${data}' wurde erfolgreich als Teilnehmer registriert!`);
+                this.snackBarService.success(`the user'${data}' was successfully registered`);
             },
             error => {
-                this.snackBarService.error('Fehler beim Hinzufügen: Dieser Teilnehmer existiert nicht oder ist bereits hinzugefügt!');
+                this.snackBarService.error('something went wrong - user was not registered');
             }
         );
     }

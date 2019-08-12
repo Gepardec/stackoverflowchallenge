@@ -8,15 +8,15 @@ import {Component} from '@angular/core';
 export class HeaderComponent {
     navLinks = [
         {
-            label: 'Challenges',
+            label: 'challenges',
             link: './challenges',
             index: 0
         }, {
-            label: 'Teilnehmer',
+            label: 'participants',
             link: './participants',
             index: 1
         }, {
-            label: 'Tags',
+            label: 'tags',
             link: './tags',
             index: 2
         }

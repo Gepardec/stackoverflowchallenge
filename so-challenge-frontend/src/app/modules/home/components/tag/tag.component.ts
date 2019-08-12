@@ -28,20 +28,20 @@ export class TagComponent implements OnInit {
             },
             error => {
                 this.tags = null;
-                this.snackBarService.warning(`Es gibt noch keine Tags!`);
+                this.snackBarService.warning(`there are no tags so far`);
             }
         );
     }
 
     deleteTag(t: Tag) {
-        if (confirm(`Wollen Sie den Tag '${t.name}' aus der Tagliste entfernen?`)) {
+        if (confirm(`do you want to delete the tag'${t.name}'?`)) {
             this.endpointService.deleteTag(t.id).subscribe(
                 data => {
                     this.ngOnInit();
-                    this.snackBarService.success(`Tag '${t.name}' wurde erfolgreich aus der Tagliste gelöscht!`);
+                    this.snackBarService.success(`Tag '${t.name}' successfully deleted`);
                 },
                 error => {
-                    this.snackBarService.error(`Fehler beim Löschen des Tags '${t.name}'!`);
+                    this.snackBarService.error(`something went wrong while deleting '${t.name}'!`);
                 }
             );
         }
@@ -50,11 +50,11 @@ export class TagComponent implements OnInit {
     addTag(name: string) {
         this.endpointService.addTag(name).subscribe(
             data => {
-                this.snackBarService.success(`Tag '${data['name']}' wurde erfolgreich zur Liste hinzugefügt!`);
+                this.snackBarService.success(`the tag '${data['name']}' was successfully added`);
                 this.ngOnInit();
             },
             error => {
-                this.snackBarService.error('Fehler beim Hinzufügen: Dieser Tag existiert nicht oder ist bereits hinzugefügt!');
+                this.snackBarService.error('something went wrong - tag was not added');
             }
         );
     }

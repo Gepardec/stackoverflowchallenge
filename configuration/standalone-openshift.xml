@@ -158,10 +158,6 @@
                 <datasource jndi-name="java:jboss/datasources/so-challenge-backend" pool-name="so-challenge-backend" enabled="true">
                     <connection-url>jdbc:postgresql://localhost:5432/so-challenge</connection-url>
                     <driver>org.postgresql</driver>
-                    <security>
-                        <user-name>postgres</user-name>
-                        <password>pgadminplaysdart31</password>
-                    </security>
                 </datasource>
             </datasources>
         </subsystem>

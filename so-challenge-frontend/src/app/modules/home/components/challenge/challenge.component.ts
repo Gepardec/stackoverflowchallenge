@@ -21,7 +21,7 @@ export class ChallengeComponent implements OnInit {
 
     public showAddChallenge = false;
 
-    columnsToDisplay = ['title', 'fromDate', 'toDate', 'state.ts', 'action'];
+    columnsToDisplay = ['title', 'fromDate', 'toDate', 'state', 'action'];
 
     constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
     }
@@ -49,14 +49,14 @@ export class ChallengeComponent implements OnInit {
 
     deleteChallenge(c: Challenge) {
         console.log(c)
-        if (confirm(`Wollen Sie die Challenge '${c.title}' wirklich löschen?`)) {
+        if (confirm(`do you want to delete the challenge '${c.title}'?`)) {
             this.endpointService.deleteChallenge(c.id).subscribe(
                 data => {
                     this.refreshGUI();
-                    this.snackBarService.success(`Die Challenge '${data['title']}' wurde erfolgreich gelöscht!`);
+                    this.snackBarService.success(`the challenge '${data['title']}' was successfully added`);
                 },
                 error => {
-                    this.snackBarService.error(`Die Challenge '${c.title}' konnte nicht gelöscht werden.`);
+                    this.snackBarService.error(`something went wrong - the challenge '${c.title}' was not deleted`);
                 }
             );
         }

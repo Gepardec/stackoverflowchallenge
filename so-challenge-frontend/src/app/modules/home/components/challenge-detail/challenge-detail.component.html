@@ -25,7 +25,7 @@
 
         <mat-form-field>
             <mat-label>Status</mat-label>
-            <mat-select name = "state"  *ngIf="states" [(ngModel)]="states">
+            <mat-select name = "state"  *ngIf="states" [(ngModel)]="challenge.state">
                 <mat-option *ngFor="let s of states" [value]="s.id">
                     {{s.name}}
                 </mat-option>
@@ -55,11 +55,6 @@
     <div class="participants-container">
         <h3>participating cheethas</h3>
         <!-- TODO show participants -->
-        <mat-selection-list>
-            <mat-list-option name = "participants" *ngFor = "let participant of participants">
-                {{participant}}
-            </mat-list-option>
-        </mat-selection-list>
     </div>
 
     <div class="submit">

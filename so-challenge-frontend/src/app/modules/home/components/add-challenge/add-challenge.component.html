@@ -46,7 +46,7 @@
 
 
         <!-- TODO Tags -->
-        <mat-form-field>
+        <mat-form-field *ngIf="tags">
             <h4>tags</h4>
             <mat-chip-list *ngFor="let tag of tags">
                 <mat-chip matInput ngDefaultControl name="addTags" class = badge [(ngModel)]="selectedTags" [removable]="removable" (removed)="removeTag(tag)">

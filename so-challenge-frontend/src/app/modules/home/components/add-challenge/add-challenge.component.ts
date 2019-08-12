@@ -59,12 +59,6 @@ export class AddChallengeComponent implements OnInit {
     }
 
     addClicked() {
-        if (this.tempIndex != -1) {
-            this.challenge.state = this.states[this.states.map(el => el.id).indexOf(this.tempIndex)];
-        } else {
-            this.challenge.state = null;
-        }
-
         console.log(this.challenge);
 
         this.endpointService.addChallenge(this.challenge).subscribe(
@@ -76,18 +70,29 @@ export class AddChallengeComponent implements OnInit {
                 this.challenge = null;
             }, error => {
                 console.log(error);
-                this.snackBarService.error(`something went wrong`);
+                this.snackBarService.error(`something went wrong while creating the challenge`);
                 this.challenge = null;
             }
         );
         // TODO call addparticipants to challenge function + concat participants id into ;-separeted strings
-        // for (const p in this.selectedParticipants) {
-        //     if (this.selectedParticipants.hasOwnProperty(p)) {
-        //         //  this.participantsString = ''.concat(, ';');
-        //     }
-        // }
-        // this.endpointService.addParticipantsToChallenge(this.challenge.id, this.participantsString);
-        // TODO add selected tags to challenge
+        // throws exception: cannot convert undefined or null to object...
+        for (const profileId of Object.keys(this.selectedParticipants)) {
+            this.participantsString += profileId.toString() + ';';
+        }
+        this.endpointService.addParticipantsToChallenge(this.challenge.id, this.participantsString).subscribe(
+            data => {
+                this.snackBarService.success(`the participants '${data}' where added`);
+                this.onSuccessfulAdding.emit(true);
+                this.participantsString = null;
+                this.selectedParticipants = null;
+                this.participants = null;
+            }, error => {
+                console.log(error);
+                this.snackBarService.error(`something went wrong while adding participants to challenge`);
+                this.selectedParticipants = null;
+            }
+        );
+         // TODO add selected tags to challenge
     }
 
     cancelClicked() {

@@ -77,8 +77,6 @@ export class EndpointService {
         return this.http.get<Tag[]>(this.BASE_URL + 'tag/all');
     }
 
-
-    // TODO participants id should be a ;-separated string
     addParticipantsToChallenge(id: number, p: string) {
         return this.http.put(this.BASE_URL + `challenge/addParticipants/${id}`, p, this.APPLICATION_JSON_OPTIONS);
     }

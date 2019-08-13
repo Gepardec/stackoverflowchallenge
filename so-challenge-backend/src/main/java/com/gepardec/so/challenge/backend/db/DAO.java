@@ -5,10 +5,7 @@
  */
 package com.gepardec.so.challenge.backend.db;
 
-import com.gepardec.so.challenge.backend.model.Challenge;
-import com.gepardec.so.challenge.backend.model.Participant;
-import com.gepardec.so.challenge.backend.model.State;
-import com.gepardec.so.challenge.backend.model.Tag;
+import com.gepardec.so.challenge.backend.model.*;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -117,6 +114,8 @@ public class DAO implements DAOLocal {
             return false;
         } else {
             c.addParticipant(p);
+            ChallengeParticipant cp = new ChallengeParticipant(challengeId, participantId);
+            em.persist(cp);
             return true;
         }
     }
@@ -130,6 +129,8 @@ public class DAO implements DAOLocal {
             return false;
         } else {
             c.addTag(t);
+            ChallengeTag ct = new ChallengeTag(challengeId, tagId);
+            em.persist(ct);
             return true;
         }
     }
@@ -163,6 +164,7 @@ public class DAO implements DAOLocal {
 
     @Override
     public boolean removeParticipantFromChallenge(Long challengeId, Long participantId) {
+        // TODO also remove participants from the challenge_participants table 
         Challenge c = findChallenge(challengeId);
         Participant p = findParticipant(participantId);
 

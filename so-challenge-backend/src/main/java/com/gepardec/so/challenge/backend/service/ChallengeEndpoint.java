@@ -42,7 +42,7 @@ public class ChallengeEndpoint {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getChallengeById(@PathParam("id") int id) {
+    public Response getChallengeById(@PathParam("id") long id) {
         Challenge challenge;
         if ((challenge = dao.findChallenge(id)) == null) {
             return notFound();
@@ -114,7 +114,7 @@ public class ChallengeEndpoint {
     @PUT
     @Path("addParticipants/{chId}")
     @Consumes("text/plain")
-    public Response addParticipantsToChallenge(@PathParam("chId") Integer challengeId, String profileIds) {
+    public Response addParticipantsToChallenge(@PathParam("chId") Long challengeId, String profileIds) {
         String[] profileIdsArray = profileIds.split(";");
         if (profileIdsArray.length == 0) {
             return notAcceptable();
@@ -139,7 +139,7 @@ public class ChallengeEndpoint {
     @DELETE
     @Path("removeParticipants/{chId}")
     @Consumes("text/plain")
-    public Response removeParticipantsFromChallenge(@PathParam("chId") Integer challengeId, String profileIdsCSVString) {
+    public Response removeParticipantsFromChallenge(@PathParam("chId") Long challengeId, String profileIdsCSVString) {
         String[] profileIdsArray = profileIdsCSVString.split(";");
         if (profileIdsArray.length == 0) {
             return notAcceptable();

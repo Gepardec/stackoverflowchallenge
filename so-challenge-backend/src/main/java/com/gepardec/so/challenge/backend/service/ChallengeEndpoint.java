@@ -13,12 +13,13 @@ import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
@@ -27,8 +28,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -50,13 +49,6 @@ public class ChallengeEndpoint {
     public ChallengeEndpoint() {
     }
 
-    /**
-     * Retrieves representation of an instance of
-     * com.gepardec.stackoverflow.service.ChallengeEndpoint
-     *
-     * @param id
-     * @return an instance of java.lang.String
-     */
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -77,7 +69,8 @@ public class ChallengeEndpoint {
         if (c.isEmpty()) {
             return notFound();
         } else {
-            return Response.ok(c).build();
+            return Response.ok(new GenericEntity<List<Challenge>>(c) {
+            }).build();
         }
     }
 
@@ -86,11 +79,11 @@ public class ChallengeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createChallenge(Challenge c) {
-        c.setEnddate(LocalDateTime.now());
-        c.setBegindate(c.getEnddate().minusDays(1));
+        c.setFromDate(new Date());
+        c.setToDate(Date.from(c.getFromDate().toInstant().plus(70, ChronoUnit.DAYS)));
 
-        if (c.getBegindate().isAfter(c.getEnddate())
-                || c.getBegindate().equals(c.getEnddate())
+        if (c.getFromDate().after(c.getToDate())
+                || c.getFromDate().equals(c.getToDate())
                 || !dao.createChallenge(c)) {
             return notAcceptable();
         } else {

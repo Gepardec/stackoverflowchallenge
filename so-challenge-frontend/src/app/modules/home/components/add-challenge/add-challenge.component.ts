@@ -25,7 +25,7 @@ export class AddChallengeComponent implements OnInit {
     selectedParticipants: Participant[];
     tags: Tag[];
     selectedTags = this.tags;
-    participantsString: string;
+    participantsString = '7858336';
     removable = true;
 
     tempIndex = -1;
@@ -64,8 +64,7 @@ export class AddChallengeComponent implements OnInit {
         this.endpointService.addChallenge(this.challenge).subscribe(
             data => {
                 console.log(data);
-                // ${data.title} throws an error but compiles and works
-                this.snackBarService.success(`the challenge '${data}' was successfully added`);
+                this.snackBarService.success(`the challenge '${this.challenge.title}' was successfully added`);
                 this.onSuccessfulAdding.emit(true);
                 this.challenge = null;
             }, error => {
@@ -76,12 +75,15 @@ export class AddChallengeComponent implements OnInit {
         );
         // TODO call addparticipants to challenge function + concat participants id into ;-separeted strings
         // throws exception: cannot convert undefined or null to object...
-        for (const profileId of Object.keys(this.selectedParticipants)) {
-            this.participantsString += profileId.toString() + ';';
-        }
+
+
+        // for (const p of this.selectedParticipants.values()) {
+        //     this.participantsString.concat(p.profileId.toString(), ';');
+        // }
         this.endpointService.addParticipantsToChallenge(this.challenge.id, this.participantsString).subscribe(
             data => {
-                this.snackBarService.success(`the participants '${data}' where added`);
+                console.log(data.toString());
+                this.snackBarService.success(`the participants '${this.selectedParticipants.values()}' were added`);
                 this.onSuccessfulAdding.emit(true);
                 this.participantsString = null;
                 this.selectedParticipants = null;
@@ -92,7 +94,8 @@ export class AddChallengeComponent implements OnInit {
                 this.selectedParticipants = null;
             }
         );
-         // TODO add selected tags to challenge
+         // TODO add selected tags to challenge the same way as participants
+        // this.endpointService.addTagToChallenge(this.challenge.id, )
     }
 
     cancelClicked() {

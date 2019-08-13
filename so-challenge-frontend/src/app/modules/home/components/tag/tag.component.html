@@ -6,7 +6,7 @@
                 <mat-form-field>
                     <input #tagInput class="input" matInput name="tagInput" placeholder="Tag-Namen eingeben"/>
                 </mat-form-field>
-                <button mat-raised-button (click)="addTag(tagInput.value); tagInput.value=''">Hinzufügen</button>
+                <button mat-raised-button color="primary" (click)="addTag(tagInput.value); tagInput.value=''">add</button>
             </form>
         </mat-list-item>
     </mat-list>
@@ -40,4 +40,6 @@
         <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
     </table>
 </div>
+<div class="submit">
 
+</div>

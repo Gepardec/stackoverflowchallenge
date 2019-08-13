@@ -77,8 +77,13 @@ export class EndpointService {
         return this.http.get<Tag[]>(this.BASE_URL + 'tag/all');
     }
 
-    addParticipantsToChallenge(id: number, p: string) {
-        return this.http.put(this.BASE_URL + `challenge/addParticipants/${id}`, p, this.APPLICATION_JSON_OPTIONS);
+    addParticipantsToChallenge(chId: number, p: string) {
+        return this.http.put(this.BASE_URL + `challenge/addParticipants/${chId}`, p);
+    }
+
+    // TODO
+    addTagsToChallenge(id: number, t: string) {
+        return null;
     }
 
     async getPointsOfUser(id: number): Promise<Answer[]> {

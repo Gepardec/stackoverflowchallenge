@@ -114,7 +114,7 @@ public class ChallengeEndpoint {
     @PUT
     @Path("addParticipants/{chId}")
     @Consumes("text/plain")
-    public Response addParticipantsToChallenge(@PathParam("chId") Long challengeId, String profileIds) {
+    public Response addParticipantsToChallenge(@PathParam("chId") Long chId, String profileIds) {
         String[] profileIdsArray = profileIds.split(";");
         if (profileIdsArray.length == 0) {
             return notAcceptable();
@@ -130,7 +130,7 @@ public class ChallengeEndpoint {
         }
 
         for (Long profileId : profileIdsList) {
-            dao.addParticipantToChallenge(challengeId, profileId);
+            dao.addParticipantToChallenge(chId, profileId);
         }
 
         return Response.ok().build();

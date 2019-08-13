@@ -73,7 +73,7 @@ public class TagEndpoint {
             return notFound();
         }
 
-        Tag t = new Tag();
+        Tag t = new Tag(name);
         t.setName(o.getJsonArray("items").getJsonObject(0).getString("name"));
 
         boolean success = dao.createTag(t);

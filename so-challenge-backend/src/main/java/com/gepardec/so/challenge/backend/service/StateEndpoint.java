@@ -14,7 +14,7 @@ import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 
 // The Java class will be hosted at the URI path "/helloworld"
 @Path("/state")
-public class StatusEndpoint {
+public class StateEndpoint {
 
     @Context
     private UriInfo context;

@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS tag (
 CREATE ABLE IF NOT EXISTS challenge_tag (
 	challenge_id bigint REFERENCES challenge (id) ON UPDATE ON DELETE CASCADE,
 	tag_id bigint REFERENCES tag (id) ON UPDATE ON DELETE CASCADE,
-	CONSTRAINT challenge_participant_pkey PRIMARY KEY (challenge_id, participant_id)
+	CONSTRAINT challenge_participant_pkey PRIMARY KEY (challenge_id, participant)
 );
 
 CREATE TABLE IF NOT EXISTS challenge_participant (

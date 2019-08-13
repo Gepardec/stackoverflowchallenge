@@ -23,7 +23,7 @@
             <input matInput [matDatepicker]="pickerTo" placeholder="Bis Datum" [(ngModel)]="challenge.toDate">
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <mat-label>Status</mat-label>
             <mat-select name = "state"  *ngIf="states" [(ngModel)]="challenge.state">
                 <mat-option *ngFor="let s of states" [value]="s.id">

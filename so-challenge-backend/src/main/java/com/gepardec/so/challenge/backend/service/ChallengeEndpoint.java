@@ -102,7 +102,7 @@ public class ChallengeEndpoint {
     @DELETE
     @Path("delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteChallenge(@PathParam("id") Integer id) {
+    public Response deleteChallenge(@PathParam("id") Long id) {
         Challenge challenge = dao.deleteChallenge(id);
         if (challenge != null) {
             return Response.ok(challenge).build();

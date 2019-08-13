@@ -77,7 +77,7 @@ public interface DAOLocal {
      * @param id the id of the challenge
      * @return null if no challenge with this id could be found, c otherwise.
      */
-    Challenge deleteChallenge(Integer id);
+    Challenge deleteChallenge(Long id);
 
     /**
      * Tries to find a participant with the given id.
@@ -95,7 +95,7 @@ public interface DAOLocal {
      * @return null if no challenge with this id could be found, otherwise the
      * challenge.
      */
-    Challenge findChallenge(Integer challengeId);
+    Challenge findChallenge(Long challengeId);
 
     /**
      * Adds a participant to a challenge
@@ -106,7 +106,15 @@ public interface DAOLocal {
      * found or the participant already is part of this challenge, true
      * otherwise.
      */
-    boolean addParticipantToChallenge(Integer challengeId, Long participantId);
+    boolean addParticipantToChallenge(Long challengeId, Long participantId);
+
+    boolean addTagsToChallenge(Long challengeId, Long tagId);
+
+    Tag findTag(Long tagId);
+
+    Tag deleteTag(long tagId);
+
+    boolean removeTagFromChallenge(Long challengeId, Long tagId);
 
     /**
      * Removes a participant from a challenge
@@ -116,7 +124,7 @@ public interface DAOLocal {
      * @return false if no challenge or participant with the given ids could be
      * found or the participant is not part of this challenge, true otherwise
      */
-    boolean removeParticipantFromChallenge(Integer challengeId, Long participantId);
+    boolean removeParticipantFromChallenge(Long challengeId, Long participantId);
 
     List<State> getAllStates();
 

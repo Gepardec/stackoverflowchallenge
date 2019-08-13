@@ -37,7 +37,7 @@ public class StatusEndpoint {
     @GET
     @Path("startStates")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getStatesForAddChallenge() {
+    public Response getCreateStates() {
         List<State> states = dao.getCreateStates();
         if(states.isEmpty()) {
             return notFound();

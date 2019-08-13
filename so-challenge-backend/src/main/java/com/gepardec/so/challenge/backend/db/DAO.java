@@ -88,7 +88,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public Challenge deleteChallenge(Integer id) {
+    public Challenge deleteChallenge(Long id) {
         Challenge c = findChallenge(id);
         if (c == null) {
             return null;
@@ -104,12 +104,12 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public Challenge findChallenge(Integer challengeId) {
+    public Challenge findChallenge(Long challengeId) {
         return em.find(Challenge.class, challengeId);
     }
 
     @Override
-    public boolean addParticipantToChallenge(Integer challengeId, Long participantId) {
+    public boolean addParticipantToChallenge(Long challengeId, Long participantId) {
         Challenge c = findChallenge(challengeId);
         Participant p = findParticipant(participantId);
 
@@ -122,7 +122,47 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public boolean removeParticipantFromChallenge(Integer challengeId, Long participantId) {
+    public boolean addTagsToChallenge(Long challengeId, Long tagId) {
+        Challenge c = findChallenge(challengeId);
+        Tag t = findTag(tagId);
+
+        if(t == null || c == null || c.getTagSet().contains(t)) {
+            return false;
+        } else {
+            c.addTag(t);
+            return true;
+        }
+    }
+
+    public Tag findTag(Long tagId) {
+        return em.find(Tag.class, tagId);
+    }
+
+    @Override
+    public Tag deleteTag(long tagId) {
+        Tag t = findTag(tagId);
+        if(t == null) {
+            return null;
+        } else {
+            em.remove(t);
+            return t;
+        }
+    }
+
+    @Override
+    public boolean removeTagFromChallenge(Long challengeId, Long tagId) {
+        Challenge c = findChallenge(challengeId);
+        if (c.getTagSet().contains(findTag(tagId))) {
+            c.getTagSet().remove(findTag(tagId));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    @Override
+    public boolean removeParticipantFromChallenge(Long challengeId, Long participantId) {
         Challenge c = findChallenge(challengeId);
         Participant p = findParticipant(participantId);
 

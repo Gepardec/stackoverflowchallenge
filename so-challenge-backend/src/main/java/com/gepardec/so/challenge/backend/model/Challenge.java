@@ -24,7 +24,7 @@ public class Challenge implements Serializable {
     @Id
     @GeneratedValue(generator = "ch_id_seq")
     @Basic(optional = false)
-    private Integer id;
+    private Long id;
 
     @Size(max = 500)
     private String title;
@@ -61,11 +61,11 @@ public class Challenge implements Serializable {
         this.tagSet = tagSet;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -162,5 +162,9 @@ public class Challenge implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void addTag(Tag t) {
+        this.getTagSet().add(t);
     }
 }

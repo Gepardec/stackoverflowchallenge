@@ -5,13 +5,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@SequenceGenerator(sequenceName = "state_id_seq", name = "state_id_seq", allocationSize = 1)
 public class State implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(generator = "state_seq_id")
     private Long id;
 
     private String name;

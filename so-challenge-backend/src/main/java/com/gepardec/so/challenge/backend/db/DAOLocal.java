@@ -128,7 +128,9 @@ public interface DAOLocal {
 
     List<State> getAllStates();
 
-    List<State> getCreateStates();
+    List<State> getAvailableStates();
+
+    List<State> getAvailableStates(State state);
 
     List<Tag> getAllTags();
 

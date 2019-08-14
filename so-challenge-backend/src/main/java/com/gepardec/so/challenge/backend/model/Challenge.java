@@ -24,6 +24,7 @@ public class Challenge implements Serializable {
     @Id
     @GeneratedValue(generator = "ch_id_seq")
     @Basic(optional = false)
+    @Column(name = "id")
     private Long id;
 
     @Size(max = 500)
@@ -38,11 +39,25 @@ public class Challenge implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date toDate;
 
-    //TODO change to many to one to reduce complexity
+    // TODO implement state flow
     @ManyToOne(fetch = FetchType.EAGER)
     private State state;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "challenge_participant",
+            joinColumns = @JoinColumn(name = "challengeid", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "participantid", referencedColumnName = "profileId")
+
+    )
+    private Set<Participant> participantSet = new LinkedHashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "challenge_tag",
+            joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tagset_id", referencedColumnName = "id")
+    )
     private Set<Tag> tagSet = new LinkedHashSet<>();
 
     private String award1;
@@ -50,9 +65,6 @@ public class Challenge implements Serializable {
     private String award2;
 
     private String award3;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Participant> participantSet = new LinkedHashSet<>();
 
     public Challenge() {
     }

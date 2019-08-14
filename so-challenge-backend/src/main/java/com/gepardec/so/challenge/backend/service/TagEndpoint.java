@@ -67,13 +67,13 @@ public class TagEndpoint {
         if (dao.isTagNameAlreadyPresent(name.toLowerCase())) {
             return notAcceptable();
         }
-
+        // TODO
         JsonObject o = EndpointUtils.sendRequestAndGetJson("tags/" + name + "/info", "?site=stackoverflow", "GET");
         if (o == null) {
             return notFound();
         }
 
-        Tag t = new Tag(name);
+        Tag t = new Tag();
         t.setName(o.getJsonArray("items").getJsonObject(0).getString("name"));
 
         boolean success = dao.createTag(t);

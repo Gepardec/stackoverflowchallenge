@@ -38,7 +38,7 @@ public class StateEndpoint {
     @Path("startStates")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCreateStates() {
-        List<State> states = dao.getCreateStates();
+        List<State> states = dao.getAvailableStates();
         if(states.isEmpty()) {
             return notFound();
         } else {

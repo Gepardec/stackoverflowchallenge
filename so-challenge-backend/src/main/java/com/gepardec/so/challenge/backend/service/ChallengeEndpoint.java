@@ -112,13 +112,13 @@ public class ChallengeEndpoint {
     }
 
     @PUT
-    @Path("addParticipants/{chId}")
-    @Consumes("text/plain")
-    public Response addParticipantsToChallenge(@PathParam("chId") Long chId, String profileIds) {
-        String[] profileIdsArray = profileIds.split(";");
-        if (profileIdsArray.length == 0) {
+    @Path("participants/add/{chId}/{profileIds}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addParticipantsToChallenge(@PathParam("chId") Long chId,@PathParam("profileIds") String profileIds) {
+        if( profileIds == null || profileIds.isEmpty()) {
             return notAcceptable();
         }
+        String[] profileIdsArray = profileIds.split(":");
 
         List<Long> profileIdsList = new ArrayList<>();
         for (String profileId : profileIdsArray) {
@@ -130,14 +130,15 @@ public class ChallengeEndpoint {
         }
 
         for (Long profileId : profileIdsList) {
-            dao.addParticipantToChallenge(chId, profileId);
+            System.err.println("profileIds: " + profileId + " |chid:" + chId);
+           dao.addParticipantToChallenge(chId, profileId);
         }
-
         return Response.ok().build();
+
     }
 
     @DELETE
-    @Path("removeParticipants/{chId}")
+    @Path("participants/remove/{chId}")
     @Consumes("text/plain")
     public Response removeParticipantsFromChallenge(@PathParam("chId") Long challengeId, String profileIdsCSVString) {
         String[] profileIdsArray = profileIdsCSVString.split(";");

@@ -34,17 +34,17 @@ export class EndpointService {
     constructor(private http: HttpClient) {
     }
 
-  getParticipants(): Observable<Participant[]> {
-    return this.http.get<Participant[]>(this.BASE_URL + 'participant/all');
-  }
+    getParticipants(): Observable<Participant[]> {
+        return this.http.get<Participant[]>(this.BASE_URL + 'participant/all');
+    }
 
     addParticipant(profileId: number) {
         return this.http.post(this.BASE_URL + 'participant/add', profileId, this.TEXT_PLAIN_OPTIONS);
     }
 
-  deleteParticipant(profileId: number) {
-    return this.http.delete(this.BASE_URL + `participant/delete/${profileId}`);
-  }
+    deleteParticipant(profileId: number) {
+        return this.http.delete(this.BASE_URL + `participant/delete/${profileId}`);
+    }
 
     getChallenges() {
         return this.http.get<Challenge[]>(this.BASE_URL + 'challenge/all').pipe(
@@ -78,7 +78,12 @@ export class EndpointService {
     }
 
     addParticipantsToChallenge(chId: number, p: string) {
-        return this.http.put(this.BASE_URL + `challenge/addParticipants/${chId}`, p);
+        console.error(p);
+        return this.http.put(this.BASE_URL + `challenge/participants/add/${chId}/`, p, this.TEXT_PLAIN_OPTIONS);
+    }
+
+    removeParticipantsFromChallenge(chId: number, p: string) {
+        // TODO remove participants
     }
 
     // TODO

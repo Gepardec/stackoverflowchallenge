@@ -77,9 +77,9 @@ export class AddChallengeComponent implements OnInit {
         // throws exception: cannot convert undefined or null to object...
 
 
-        // for (const p of this.selectedParticipants.values()) {
-        //     this.participantsString.concat(p.profileId.toString(), ';');
-        // }
+        for (const p of this.selectedParticipants.values()) {
+            this.participantsString = this.participantsString.concat(p.profileId.toString(), ';');
+        }
         this.endpointService.addParticipantsToChallenge(this.challenge.id, this.participantsString).subscribe(
             data => {
                 console.log(data.toString());

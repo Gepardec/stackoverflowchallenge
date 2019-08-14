@@ -2,6 +2,7 @@ package com.gepardec.so.challenge.backend.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @SequenceGenerator(sequenceName = "tag_id_seq", name = "tag_id_seq", allocationSize = 1)
@@ -12,6 +13,9 @@ public class Tag {
     private Long id;
 
     private String name;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tagSet")
+    Set<Challenge> challengeSet;
 
     public Long getId() {
         return id;
@@ -27,6 +31,14 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Challenge> getChallengeSet() {
+        return challengeSet;
+    }
+
+    public void setChallengeSet(Set<Challenge> challengeSet) {
+        this.challengeSet = challengeSet;
     }
 
     @Override

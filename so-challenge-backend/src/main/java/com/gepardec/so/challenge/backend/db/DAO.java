@@ -114,8 +114,8 @@ public class DAO implements DAOLocal {
             return false;
         } else {
             c.addParticipant(p);
-            ChallengeParticipant cp = new ChallengeParticipant(challengeId, participantId);
-            em.persist(cp);
+            p.getChallengeSet().add(c);
+            em.merge(c);
             return true;
         }
     }
@@ -129,8 +129,8 @@ public class DAO implements DAOLocal {
             return false;
         } else {
             c.addTag(t);
-            ChallengeTag ct = new ChallengeTag(challengeId, tagId);
-            em.persist(ct);
+            t.getChallengeSet().add(c);
+            em.merge(c);
             return true;
         }
     }
@@ -182,8 +182,24 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public List<State> getCreateStates() {
+    public List<State> getAvailableStates() {
         return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 4").getResultList();
+    }
+
+    @Override
+    public List<State> getAvailableStates(State state) {
+        List<State> availableStates;
+        switch (state.getName()) {
+            case "planned":
+                return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 3 OR s.id = 4").getResultList();
+            case "active":
+                return em.createQuery("SELECT s FROM State s WHERE s.id = 2 OR s.id = 3 OR s.id = 1").getResultList();
+            case "canceled":
+                return em.createQuery("SELECT s FROM State s WHERE s.id = 3").getResultList();
+            case "completed":
+                return em.createQuery("SELECT s FROM State s WHERE s.id = 2").getResultList();
+        }
+        return null;
     }
 
     @Override

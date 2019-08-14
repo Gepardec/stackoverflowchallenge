@@ -36,4 +36,4 @@ public class ApplicationConfig extends Application {
         resources.add(com.gepardec.so.challenge.backend.service.TagEndpoint.class);
     }
     
-}
+}// localhost:8080/so-challenge-backend/api/state/all

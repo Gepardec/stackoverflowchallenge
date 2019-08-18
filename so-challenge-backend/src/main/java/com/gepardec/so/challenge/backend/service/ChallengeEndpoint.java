@@ -11,14 +11,11 @@ import com.gepardec.so.challenge.backend.model.Challenge;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notAcceptable;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.ws.rs.core.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -40,7 +37,7 @@ public class ChallengeEndpoint {
     @Context
     private UriInfo context;
 
-    @EJB
+    @Inject
     private DAOLocal dao;
 
     /**

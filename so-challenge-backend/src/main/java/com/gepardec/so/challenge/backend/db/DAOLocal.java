@@ -11,13 +11,11 @@ import com.gepardec.so.challenge.backend.model.Status;
 import com.gepardec.so.challenge.backend.model.Tag;
 
 import java.util.List;
-import javax.ejb.Local;
 
 /**
  *
  * @author praktikant_ankermann
  */
-@Local
 public interface DAOLocal {
 
     /**

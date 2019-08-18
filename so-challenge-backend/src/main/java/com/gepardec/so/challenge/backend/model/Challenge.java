@@ -5,11 +5,10 @@
  */
 package com.gepardec.so.challenge.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.*;
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -33,10 +32,10 @@ public class Challenge implements Serializable {
     @Size(max = 500)
     private String description;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private Date fromDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private Date toDate;
 
     @ManyToOne(fetch = FetchType.EAGER)

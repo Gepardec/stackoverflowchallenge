@@ -9,7 +9,7 @@ import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.Participant;
 import com.gepardec.so.challenge.backend.utils.EndpointUtils;
 import java.util.List;
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -34,7 +34,7 @@ public class ParticipantEndpoint {
     @Context
     private UriInfo context;
 
-    @EJB
+    @Inject
     private DAOLocal dao;
 
     @GET

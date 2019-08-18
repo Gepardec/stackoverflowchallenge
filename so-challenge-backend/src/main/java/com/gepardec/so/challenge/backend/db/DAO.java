@@ -9,17 +9,17 @@ import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
 
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  * @author praktikant_ankermann
  */
-@Stateless
+@RequestScoped
 public class DAO implements DAOLocal {
 
-    @PersistenceContext
+    @Inject
     private EntityManager em;
 
     @Override

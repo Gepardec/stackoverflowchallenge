@@ -1,6 +1,7 @@
 package com.gepardec.so.challenge.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.json.bind.annotation.JsonbTransient;
+import javax.json.bind.annotation.JsonbVisibility;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,8 +22,7 @@ public class Admin implements Serializable {
     private String username;
 
     private String password;
-
-    @JsonIgnore
+    @JsonbTransient
     private String salt;
 
     private String firstName;

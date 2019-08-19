@@ -2,7 +2,37 @@
 This README.rd contains only technical and licencing related issues and will not describe the application itself and its features! For an indepth description of the app itself, please read our wiki entry.  
 Thank you!  
 
-# Installation
+# Development
+
+## Postgres in Container
+If you are on a SELinux you need to give Permissions to the <path_to_mount_folder>
+chcon -Rt svirt_sandbox_file_t <path_to_mount_folder>
+podman run -d --name so-challenge-postgres -e POSTGRES_USER=so-challenge -e POSTGRES_PASSWORD=so-challenge -e POSTGRES_DB=so-challenge -p 5432:5432 -v <path_to_mount_folder>:/var/lib/postgresql/data docker.io/postgres:11.3
+
+## Development
+Initial build with "mvn clean compile -Pbuild-angular-app" at parent folder
+
+To start development start the following, both commands are blocking:
+1. In so-challenge-frontend: mvn quarkus:dev
+2. In so-challenge-frontend: mvn validate -P ng-watch 
+
+Happy Coding :-)
+
+## Native build
+
+To create a native executable run the following at parent folder:
+
+mvn clean package -Pbuild-angular-app,native
+
+## Multistage Image Build Build
+
+To create a container image with the native run the following command at parent folder
+
+mvn -N exec:exec -Pbuild-image
+
+grab a coffee it takes a while -> about 6 minutes
+
+# Installation Old
 To installand run this application on your computer, check if you fulfill following prerequisites:
 1. Install JavaSE 11 and JavaEE 8, IntelliJ Ultimate Edition, Angular, node.js and NPM.
 2. Make sure that you have a PostgreSQL database running on localhost:5432 with the name 'so-challenge'.

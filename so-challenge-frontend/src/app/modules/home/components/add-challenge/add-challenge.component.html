@@ -43,9 +43,6 @@
         <mat-form-field>
             <input matInput name="award3" placeholder="award third place" [(ngModel)]="challenge.award3"/>
         </mat-form-field>
-
-
-        <!-- TODO Tags -->
         <mat-form-field *ngIf="tags">
             <h4>tags</h4>
             <mat-chip-list *ngFor="let tag of tags">

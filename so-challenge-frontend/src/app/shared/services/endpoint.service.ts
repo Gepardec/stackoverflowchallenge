@@ -47,9 +47,7 @@ export class EndpointService {
     }
 
     getChallenges() {
-        return this.http.get<Challenge[]>(this.BASE_URL + 'challenge/all').pipe(
-            map(res => res as Challenge[])
-        );
+        return this.http.get<Challenge[]>(this.BASE_URL + 'challenge/all'); // .pipe(map(res => res as Challenge[]));
     }
 
     deleteChallenge(id: number): Observable<Challenge> {

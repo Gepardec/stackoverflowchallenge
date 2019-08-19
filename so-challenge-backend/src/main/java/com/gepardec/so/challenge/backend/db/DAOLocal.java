@@ -132,6 +132,8 @@ public interface DAOLocal {
 
     List<State> getAvailableStates(State state);
 
+    List<Participant> getParticipantsOfChallenge(Long challengeId);
+
     List<Tag> getAllTags();
 
     Tag deleteTag(Long profileId);

@@ -60,7 +60,7 @@ public class ChallengeEndpoint {
         if (c.isEmpty()) {
             return notFound();
         } else {
-            return Response.ok(new GenericEntity<List<Challenge>>(c) {
+            return Response.ok(new GenericEntity<>(c) {
             }).build();
         }
     }
@@ -112,6 +112,13 @@ public class ChallengeEndpoint {
         }
     }
 
+    @GET
+    @Path("{chId}/participants/get")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getParticipantsOfChallenge(@PathParam("chId") Long chId) {
+      return null;
+    }
+
     @PUT
     @Path("participants/add/{chId}/{profileIds}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -132,7 +139,7 @@ public class ChallengeEndpoint {
 
         for (Long profileId : profileIdsList) {
             System.err.println("profileIds: " + profileId + " |chid:" + chId);
-           dao.addParticipantToChallenge(chId, profileId);
+            dao.addParticipantToChallenge(chId, profileId);
         }
         return Response.ok().build();
 

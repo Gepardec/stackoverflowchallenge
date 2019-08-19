@@ -19,13 +19,13 @@
 
     <!-- status Column -->
     <ng-container matColumnDef="state">
-        <th *matHeaderCellDef mat-header-cell>State</th>
+        <th *matHeaderCellDef mat-header-cell>state</th>
         <td *matCellDef="let c" mat-cell> {{c.state.name}} </td>
     </ng-container>
 
     <!-- Action column -->
     <ng-container matColumnDef="action">
-        <th *matHeaderCellDef mat-header-cell>Aktionen</th>
+        <th *matHeaderCellDef mat-header-cell>action</th>
         <td *matCellDef="let c" mat-cell>
             <button (click)="selectChallenge(c)" mat-icon-button
                     matTooltip="Challenge '{{c.title}}' edit">
@@ -50,5 +50,4 @@
 <app-challenge-detail (onSuccessfulEditing)="refreshGUI()" *ngIf="challengeToEdit" [challenge]="challengeToEdit">
 </app-challenge-detail>
 <app-add-challenge (onSuccessfulAdding)="refreshGUI()" *ngIf="showAddChallenge" [challenge]="challengePrototype">
-
 </app-add-challenge>

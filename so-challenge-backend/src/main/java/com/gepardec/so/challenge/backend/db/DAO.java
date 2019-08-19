@@ -7,7 +7,7 @@ package com.gepardec.so.challenge.backend.db;
 
 import com.gepardec.so.challenge.backend.model.*;
 
-import java.util.List;
+import java.util.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -183,22 +183,31 @@ public class DAO implements DAOLocal {
 
     @Override
     public List<State> getAvailableStates() {
-        return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 4").getResultList();
+        return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 4", State.class).getResultList();
     }
 
     @Override
     public List<State> getAvailableStates(State state) {
         switch (state.getName()) {
             case "planned" :
-                return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 3 OR s.id = 4").getResultList();
+                return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 3 OR s.id = 4", State.class).getResultList();
             case "active":
-                return em.createQuery("SELECT s FROM State s WHERE s.id = 2 OR s.id = 3 OR s.id = 1").getResultList();
+                return em.createQuery("SELECT s FROM State s WHERE s.id = 2 OR s.id = 3 OR s.id = 1", State.class).getResultList();
             case "canceled":
-                return em.createQuery("SELECT s FROM State s WHERE s.id = 3").getResultList();
+                return em.createQuery("SELECT s FROM State s WHERE s.id = 3", State.class).getResultList();
             case "completed":
-                return em.createQuery("SELECT s FROM State s WHERE s.id = 2").getResultList();
+                return em.createQuery("SELECT s FROM State s WHERE s.id = 2", State.class).getResultList();
         }
         return null;
+    }
+    // TODO REVIEW QUERY
+    // figure out how to query bridge table -> Select profileid, imageurl, link, username from participant as p
+    //INNER JOIN challenge_participant as cp On p.profileid = cp.participantid
+    //INNER JOIN challenge c on cp.challengeid = c.id -> does not work, because "challenge_participants" does not get recognized as table/entity
+    @Override
+    public List<Participant> getParticipantsOfChallenge(Long challengeId) {
+        if(em.find(Challenge.class, challengeId) == null) return null;
+        return  em.createQuery("SELECT DISTINCT p FROM Participant p, Challenge c JOIN Challenge.participantSet part where part.profileId = :challengeId", Participant.class).getResultList();
     }
 
     @Override

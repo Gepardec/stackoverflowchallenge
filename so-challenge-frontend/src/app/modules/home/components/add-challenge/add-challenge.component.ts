@@ -74,10 +74,10 @@ export class AddChallengeComponent implements OnInit {
             }
         );
         // TODO call addparticipants to challenge function + concat participants id into ;-separeted strings
-
-        for (const p of this.selectedParticipants.values()) {
+        for (const p of this.selectedParticipants) {
             this.participantsString = this.participantsString.concat(p.profileId.toString(), ';');
         }
+
         this.endpointService.addParticipantsToChallenge(this.challenge.id, this.participantsString).subscribe(
             data => {
                 console.log(data.toString());
@@ -93,7 +93,7 @@ export class AddChallengeComponent implements OnInit {
             }
         );
          // TODO add selected tags to challenge the same way as participants
-        this.endpointService.addTagsToChallenge()
+        this.endpointService.addTagsToChallenge(this.challenge.id, this.selectedTags);
     }
 
     cancelClicked() {

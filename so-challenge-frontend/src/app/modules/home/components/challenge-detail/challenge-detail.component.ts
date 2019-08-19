@@ -59,7 +59,7 @@ export class ChallengeDetailComponent implements OnInit {
             },
             error => {
                 // something went wrong
-                this.snackBarService.error('editing went wrong');
+                this.snackBarService.error('something went wrong while editing');
                 this.challenge = null;
             }
         );

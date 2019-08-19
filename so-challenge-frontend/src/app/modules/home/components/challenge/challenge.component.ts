@@ -30,9 +30,10 @@ export class ChallengeComponent implements OnInit {
         this.endpointService.getChallenges().subscribe(
             data => {
                 this.challenges = data;
+                console.log('show challenges');
             },
             error => {
-                this.challenges = null;
+                console.log(error);
                 this.snackBarService.warning('there are no challenges so far!');
             }
         );
@@ -43,12 +44,11 @@ export class ChallengeComponent implements OnInit {
         if (c !== null) {
             copy = JSON.parse(JSON.stringify(c));
         }
-
         this.challengeToEdit = copy;
     }
 
     deleteChallenge(c: Challenge) {
-        console.log(c)
+        console.log(c);
         if (confirm(`do you want to delete the challenge '${c.title}'?`)) {
             this.endpointService.deleteChallenge(c.id).subscribe(
                 data => {

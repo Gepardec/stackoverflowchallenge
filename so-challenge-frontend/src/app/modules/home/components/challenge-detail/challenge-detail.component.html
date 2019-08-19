@@ -1,29 +1,29 @@
 <div *ngIf="challenge">
     <div class="form-container">
-        <h3>Challenge '{{challenge.title}}' bearbeiten</h3>
+        <h3>edit challenge '{{challenge.title}}'</h3>
         <mat-form-field>
-            <input matInput name="title" placeholder="Titel" [(ngModel)]="challenge.title"/>
+            <input matInput name="title" placeholder="title" [(ngModel)]="challenge.title"/>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput name="description" placeholder="Beschreibung"
+            <input matInput name="description" placeholder="description"
                    [(ngModel)]="challenge.description"/>
         </mat-form-field>
 
         <mat-form-field>
             <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
             <mat-datepicker touchUi #pickerFrom></mat-datepicker>
-            <input matInput [matDatepicker]="pickerFrom" placeholder="Von Datum" [(ngModel)]="challenge.fromDate">
+            <input matInput [matDatepicker]="pickerFrom" placeholder="start date" [(ngModel)]="challenge.fromDate">
 
         </mat-form-field>
 
         <mat-form-field>
             <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
             <mat-datepicker touchUi #pickerTo></mat-datepicker>
-            <input matInput [matDatepicker]="pickerTo" placeholder="Bis Datum" [(ngModel)]="challenge.toDate">
+            <input matInput [matDatepicker]="pickerTo" placeholder="end date" [(ngModel)]="challenge.toDate">
         </mat-form-field>
 
-        <mat-form-field ngDefaultControl>
+        <mat-form-field appearance="standard">
             <mat-label>Status</mat-label>
             <mat-select name = "state"  *ngIf="states" [(ngModel)]="challenge.state">
                 <mat-option *ngFor="let s of states" [value]="s.id">
@@ -53,10 +53,9 @@
     </div>
 
     <div class="participants-container">
-        <h3>participating cheethas</h3>
-        <mat-selection-list *ngFor="let participant of participants" >
-            <mat-list-option ngDefaultControl name="addParticipants" class = badge [(ngModel)]="selectedParticipants"> {{participant.username}} </mat-list-option>
-        </mat-selection-list>
+        <mat-list *ngFor="let participant of this.participants" title="participating cheethas">
+            <mat-list-item ngDefaultControl name="addParticipants" class = badge> {{participant.username}} </mat-list-item>
+        </mat-list>
     </div>
 
     <div class="submit">

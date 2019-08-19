@@ -23,7 +23,7 @@
     <profiles>
         <profile>
             <!-- Build image with: -N exec:exec -Pbuild-container -->
-            <id>build-container</id>
+            <id>build-image</id>
             <build>
                 <plugins>
                     <plugin>

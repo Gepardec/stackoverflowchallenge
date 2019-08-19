@@ -4,6 +4,7 @@ import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.State;
 
 import javax.ejb.EJB;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -40,6 +41,19 @@ public class StateEndpoint {
     public Response getCreateStates() {
         List<State> states = dao.getAvailableStates();
         if(states.isEmpty()) {
+            return notFound();
+        } else {
+            return Response.ok(new GenericEntity<List<State>>(states) {
+            }).build();
+        }
+    }
+
+    @GET
+    @Path("available")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAvailableStates(State s) {
+        List<State> states = dao.getAvailableStates();
+        if(states == null || states.isEmpty()) {
             return notFound();
         } else {
             return Response.ok(new GenericEntity<List<State>>(states) {

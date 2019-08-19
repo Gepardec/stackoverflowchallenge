@@ -67,7 +67,6 @@ public class TagEndpoint {
         if (dao.isTagNameAlreadyPresent(name.toLowerCase())) {
             return notAcceptable();
         }
-        // TODO
         JsonObject o = EndpointUtils.sendRequestAndGetJson("tags/" + name + "/info", "?site=stackoverflow", "GET");
         if (o == null) {
             return notFound();

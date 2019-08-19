@@ -58,7 +58,7 @@ public class DAO implements DAOLocal {
 
     @Override
     public Challenge updateChallenge(Challenge c) {
-        if (c == null || findChallenge(c.getId()) == null) {
+        if (c == null || getChallengeById(c.getId()) == null) {
             return null;
         } else {
             em.merge(c);
@@ -73,7 +73,7 @@ public class DAO implements DAOLocal {
             return null;
         } else {
             for (Challenge c : readAllChallenges()) {
-                c = findChallenge(c.getId());
+                c = getChallengeById(c.getId());
                 if (c != null && c.getParticipantSet().contains(p)) {
                     c.getParticipantSet().remove(p);
                     em.merge(c);
@@ -86,7 +86,7 @@ public class DAO implements DAOLocal {
 
     @Override
     public Challenge deleteChallenge(Long id) {
-        Challenge c = findChallenge(id);
+        Challenge c = getChallengeById(id);
         if (c == null) {
             return null;
         } else {
@@ -101,13 +101,13 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public Challenge findChallenge(Long challengeId) {
+    public Challenge getChallengeById(Long challengeId) {
         return em.find(Challenge.class, challengeId);
     }
 
     @Override
     public boolean addParticipantToChallenge(Long challengeId, Long participantId) {
-        Challenge c = findChallenge(challengeId);
+        Challenge c = getChallengeById(challengeId);
         Participant p = findParticipant(participantId);
 
         if (c == null || p == null || c.getParticipantSet().contains(p)) {
@@ -122,7 +122,7 @@ public class DAO implements DAOLocal {
 
     @Override
     public boolean addTagsToChallenge(Long challengeId, Long tagId) {
-        Challenge c = findChallenge(challengeId);
+        Challenge c = getChallengeById(challengeId);
         Tag t = findTag(tagId);
 
         if(t == null || c == null || c.getTagSet().contains(t)) {
@@ -152,7 +152,7 @@ public class DAO implements DAOLocal {
 
     @Override
     public boolean removeTagFromChallenge(Long challengeId, Long tagId) {
-        Challenge c = findChallenge(challengeId);
+        Challenge c = getChallengeById(challengeId);
         if (c.getTagSet().contains(findTag(tagId))) {
             c.getTagSet().remove(findTag(tagId));
             return true;
@@ -165,7 +165,7 @@ public class DAO implements DAOLocal {
     @Override
     public boolean removeParticipantFromChallenge(Long challengeId, Long participantId) {
         // TODO also remove participants from the challenge_participants table 
-        Challenge c = findChallenge(challengeId);
+        Challenge c = getChallengeById(challengeId);
         Participant p = findParticipant(participantId);
 
         if (c == null || p == null || !c.getParticipantSet().contains(p)) {
@@ -188,9 +188,8 @@ public class DAO implements DAOLocal {
 
     @Override
     public List<State> getAvailableStates(State state) {
-        List<State> availableStates;
         switch (state.getName()) {
-            case "planned":
+            case "planned" :
                 return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 3 OR s.id = 4").getResultList();
             case "active":
                 return em.createQuery("SELECT s FROM State s WHERE s.id = 2 OR s.id = 3 OR s.id = 1").getResultList();
@@ -214,7 +213,7 @@ public class DAO implements DAOLocal {
             return null;
         } else {
             for (Challenge c : readAllChallenges()) {
-                c = findChallenge(c.getId());
+                c = getChallengeById(c.getId());
                 if (c != null && c.getParticipantSet().contains(t)) {
                     c.getTagSet().remove(t);
                     em.merge(c);

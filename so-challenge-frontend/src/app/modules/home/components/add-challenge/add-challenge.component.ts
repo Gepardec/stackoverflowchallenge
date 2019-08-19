@@ -74,8 +74,6 @@ export class AddChallengeComponent implements OnInit {
             }
         );
         // TODO call addparticipants to challenge function + concat participants id into ;-separeted strings
-        // throws exception: cannot convert undefined or null to object...
-
 
         for (const p of this.selectedParticipants.values()) {
             this.participantsString = this.participantsString.concat(p.profileId.toString(), ';');
@@ -95,7 +93,7 @@ export class AddChallengeComponent implements OnInit {
             }
         );
          // TODO add selected tags to challenge the same way as participants
-        // this.endpointService.addTagToChallenge(this.challenge.id, )
+        this.endpointService.addTagsToChallenge()
     }
 
     cancelClicked() {

@@ -7,6 +7,7 @@ package com.gepardec.so.challenge.backend.service;
 
 import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.Challenge;
+import com.gepardec.so.challenge.backend.model.Tag;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -44,7 +45,7 @@ public class ChallengeEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getChallengeById(@PathParam("id") long id) {
         Challenge challenge;
-        if ((challenge = dao.findChallenge(id)) == null) {
+        if ((challenge = dao.getChallengeById(id)) == null) {
             return notFound();
         } else {
             return Response.ok(challenge).build();
@@ -135,6 +136,20 @@ public class ChallengeEndpoint {
         }
         return Response.ok().build();
 
+    }
+
+    @PUT
+    @Path("{chId}/tags/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addTagsToChallenge(@PathParam("chId") Long chId,List<Tag> tags) {
+        if (tags == null || tags.isEmpty()) {
+            return notAcceptable();
+        }
+        Challenge c = dao.getChallengeById(chId);
+        for(Tag tag:tags) {
+            dao.addTagsToChallenge(c.getId(), tag.getId());
+        }
+        return Response.ok().build();
     }
 
     @DELETE

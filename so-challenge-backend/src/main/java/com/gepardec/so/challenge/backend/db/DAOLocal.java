@@ -95,7 +95,7 @@ public interface DAOLocal {
      * @return null if no challenge with this id could be found, otherwise the
      * challenge.
      */
-    Challenge findChallenge(Long challengeId);
+    Challenge getChallengeById(Long challengeId);
 
     /**
      * Adds a participant to a challenge

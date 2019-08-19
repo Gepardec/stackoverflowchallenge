@@ -54,7 +54,9 @@
 
     <div class="participants-container">
         <h3>participating cheethas</h3>
-        <!-- TODO show participants -->
+        <mat-selection-list *ngFor="let participant of participants" >
+            <mat-list-option ngDefaultControl name="addParticipants" class = badge [(ngModel)]="selectedParticipants"> {{participant.username}} </mat-list-option>
+        </mat-selection-list>
     </div>
 
     <div class="submit">

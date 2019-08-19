@@ -87,14 +87,13 @@ export class EndpointService {
     }
 
     // TODO
-    addTagsToChallenge(id: number, t: string) {
-        return null;
+    addTagsToChallenge(chId: number, t: Tag[]) {
+        return this.http.put(this.BASE_URL + `${chId}/tags/add`, t, this.APPLICATION_JSON_OPTIONS);
     }
 
     async getPointsOfUser(id: number): Promise<Answer[]> {
 
         // Initializing
-        // TODO all variables are former let
         const SE_BASE_URL = `https://api.stackexchange.com/2.2/users/`;
         // let pageNr = 1;
         const PAGES = `/answers?page=${this.pageNr}&pagesize=100`;

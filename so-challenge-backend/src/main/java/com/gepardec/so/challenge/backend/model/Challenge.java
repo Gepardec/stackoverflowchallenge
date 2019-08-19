@@ -39,7 +39,6 @@ public class Challenge implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date toDate;
 
-    // TODO implement state flow
     @ManyToOne(fetch = FetchType.EAGER)
     private State state;
 

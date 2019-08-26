@@ -1,3 +1,7 @@
+Drop table challenge_participant;
+Drop table challenge;
+Drop table participant;
+
 CREATE TABLE IF NOT EXISTS challenge (
 	id serial,
 	title varchar(500),

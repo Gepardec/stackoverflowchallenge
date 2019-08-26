@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS admin(
 	PRIMARY KEY ( id )
 );
 
-CREATE TABLE IF NOT EXISTS status (
+CREATE TABLE IF NOT EXISTS state (
 	id int,
 	name varchar(500), 
 	PRIMARY KEY(id)
@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS challenge (
 	description varchar(500),
     	fromDate date,
    	toDate date,
-	status int REFERENCES status(id) ON DELETE CASCADE ON UPDATE CASCADE, 
-	oldStatus int REFERENCES status (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	status int REFERENCES state(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	oldStatus int REFERENCES state (id) ON DELETE CASCADE ON UPDATE CASCADE,
 	award1 varchar(500),
 	award2 varchar(500),
 	award3 varchar(500),

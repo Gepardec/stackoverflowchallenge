@@ -21,7 +21,7 @@ public class Admin implements Serializable {
 
     private String username;
 
-    @JsonIgnore
+    @JsonbTransient
     private String password;
     @JsonbTransient
     private String salt;

@@ -1,0 +1,1 @@
+<!-- added empty beans.xml so that quarkus:dev is able to run. -->

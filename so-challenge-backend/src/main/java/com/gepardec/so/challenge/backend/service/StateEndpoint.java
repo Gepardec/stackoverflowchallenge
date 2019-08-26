@@ -3,8 +3,7 @@ package com.gepardec.so.challenge.backend.service;
 import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.State;
 
-import javax.ejb.EJB;
-import javax.print.attribute.standard.Media;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -20,8 +19,9 @@ public class StateEndpoint {
     @Context
     private UriInfo context;
 
-    @EJB
+    @Inject
     private DAOLocal dao;
+
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)

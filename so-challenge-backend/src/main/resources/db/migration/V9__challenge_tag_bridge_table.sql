@@ -6,22 +6,31 @@ DROP TABLE IF EXISTS status CASCADE;
 DROP TABLE IF EXISTS tag CASCADE;
 DROP TABLE IF EXISTS admin CASCADE;
 
+
 CREATE TABLE IF NOT EXISTS admin(
-	id serial,
+	id bigint,
+	username varchar(500),
+	password varchar(500),
+	salt varchar(500),
+	firstName varchar(500),
+	lastName varchar(500),
 	PRIMARY KEY ( id )
 );
 
-CREATE TABLE IF NOT EXISTS status (
-id serial, 
-name varchar(500), 
+CREATE TABLE IF NOT EXISTS state (
+	id int,
+	name varchar(500), 
 	PRIMARY KEY(id)
 ); 
 
 CREATE TABLE IF NOT EXISTS challenge (
-    	ch_id_seq serial,
-    	title varchar(500),
-    	beginDate date,
-   	endDate date,
+    id bigint NOT NULL,
+    title varchar(500),
+	description varchar(500),
+    fromDate date,
+   	toDate date,
+	status int REFERENCES state(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	oldStatus int REFERENCES state (id) ON DELETE CASCADE ON UPDATE CASCADE,
 	award1 varchar(500),
 	award2 varchar(500),
 	award3 varchar(500),
@@ -29,18 +38,24 @@ CREATE TABLE IF NOT EXISTS challenge (
 );
 
 CREATE TABLE IF NOT EXISTS participant (
-  	profileId bigint,
- 	link varchar(500),
+  	profileId bigint, -- id from Stackoverflow
+ 	imageURL varchar(500),
   	username varchar(500),
    	PRIMARY KEY( profileId )
 );
 
 
 CREATE TABLE IF NOT EXISTS tag (
-	id serial,
+	id bigint,
 	name varchar(500),
 	challenge_id int REFERENCES challenge (id) ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY( id )
+);
+
+CREATE TABLE IF NOT EXISTS challenge_tag (
+	challenge_id bigint REFERENCES challenge (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	tag_id bigint REFERENCES tag (id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT challenge_tag_pkey PRIMARY KEY (challenge_id, tag_id)
 );
 
 CREATE TABLE IF NOT EXISTS challenge_participant (
@@ -49,11 +64,8 @@ CREATE TABLE IF NOT EXISTS challenge_participant (
     	CONSTRAINT challenge_participant_pkey PRIMARY KEY ( challenge_id, participant_id ) -- explicit pk
 );
 
-CREATE TABLE IF NOT EXISTS challenge_status (
-	status_id int REFERENCES status (id) ON UPDATE CASCADE On DELETE CASCADE,
-	challenge_id int REFERENCES challenge (id) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT challenge_status_pkey PRIMARY KEY ( challenge_id, status_id )
-);
-
-
+INSERT INTO state VALUES (1, 'active') ON CONFLICT DO NOTHING;
+INSERT INTO state VALUES (2, 'completed') ON CONFLICT DO NOTHING;
+INSERT INTO state VALUES (3, 'canceld') ON CONFLICT DO NOTHING;
+INSERT INTO state VALUES (4, 'planned') ON CONFLICT DO NOTHING;       
 

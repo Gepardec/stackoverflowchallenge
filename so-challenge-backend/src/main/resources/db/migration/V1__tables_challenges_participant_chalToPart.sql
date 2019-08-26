@@ -18,4 +18,3 @@ CREATE TABLE IF NOT EXISTS challenge_participant (
     participant_id int REFERENCES participant (profileId) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT challenge_participant_pkey PRIMARY KEY (challenge_id, participant_id) -- explicit pk
 );
-

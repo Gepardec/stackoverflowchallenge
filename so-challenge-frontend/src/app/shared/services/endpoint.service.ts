@@ -15,7 +15,7 @@ import {Answer} from '../models/answer';
 })
 export class EndpointService {
 
-    private BASE_URL = 'http://localhost:8080/so-challenge-backend/api/';
+    private BASE_URL = 'http://localhost:8080/api/';
     public pageNr = 1;
     private items: Answer[] = [];
 

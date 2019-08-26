@@ -33,10 +33,10 @@ public class Challenge implements Serializable {
     @Size(max = 500)
     private String description;
 
-    @JsonbDateFormat(value = "yyyy-MM-dd")
+    @JsonbDateFormat(value = "yyyy-mm-dd'T'hh:mm:ss.SSSZ")
     private Date fromDate;
 
-    @JsonbDateFormat(value = "yyyy-MM-dd")
+    @JsonbDateFormat(value = "yyyy-mm-dd'T'hh:mm:ss.SSSZ")
     private Date toDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -45,9 +45,8 @@ public class Challenge implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "challenge_participant",
-            joinColumns = @JoinColumn(name = "challengeid", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "participantid", referencedColumnName = "profileId")
-
+            joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "participant_id", referencedColumnName = "profileId")
     )
     private Set<Participant> participantSet = new LinkedHashSet<>();
 
@@ -55,7 +54,7 @@ public class Challenge implements Serializable {
     @JoinTable(
             name = "challenge_tag",
             joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "tagset_id", referencedColumnName = "id")
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
     )
     private Set<Tag> tagSet = new LinkedHashSet<>();
 

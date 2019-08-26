@@ -68,7 +68,7 @@ public class ChallengeEndpoint {
         if (c.isEmpty()) {
             return notFound();
         } else {
-            return Response.ok(new GenericEntity<>(c) {
+            return Response.ok(new GenericEntity<List<Challenge>>(c) {
             }).build();
         }
     }

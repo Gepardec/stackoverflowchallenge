@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS challenge_participant CASCADE;
 DROP TABLE IF EXISTS challenge_status CASCADE;
 DROP TABLE IF EXISTS participant CASCADE;
 DROP TABLE IF EXISTS challenge CASCADE;
+DROP TABLE IF EXISTS state CASCADE;
 DROP TABLE IF EXISTS status CASCADE;
 DROP TABLE IF EXISTS tag CASCADE;
 DROP TABLE IF EXISTS admin CASCADE;
@@ -29,8 +30,7 @@ CREATE TABLE IF NOT EXISTS challenge (
 	description varchar(500),
     fromDate date,
    	toDate date,
-	status int REFERENCES state(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	oldStatus int REFERENCES state (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	state_id int REFERENCES state(id) ON DELETE CASCADE ON UPDATE CASCADE,
 	award1 varchar(500),
 	award2 varchar(500),
 	award3 varchar(500),
@@ -40,16 +40,15 @@ CREATE TABLE IF NOT EXISTS challenge (
 CREATE TABLE IF NOT EXISTS participant (
   	profileId bigint, -- id from Stackoverflow
  	imageURL varchar(500),
+ 	link varchar(500),
   	username varchar(500),
    	PRIMARY KEY( profileId )
 );
 
-
 CREATE TABLE IF NOT EXISTS tag (
 	id bigint,
 	name varchar(500),
-	challenge_id int REFERENCES challenge (id) ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY( id )
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS challenge_tag (
@@ -61,11 +60,11 @@ CREATE TABLE IF NOT EXISTS challenge_tag (
 CREATE TABLE IF NOT EXISTS challenge_participant (
    	challenge_id int REFERENCES challenge (id) ON UPDATE CASCADE ON DELETE CASCADE ,
    	participant_id int REFERENCES participant (profileId) ON UPDATE CASCADE ON DELETE CASCADE,
-    	CONSTRAINT challenge_participant_pkey PRIMARY KEY ( challenge_id, participant_id ) -- explicit pk
+    CONSTRAINT challenge_participant_pkey PRIMARY KEY ( challenge_id, participant_id ) -- explicit pk
 );
 
 INSERT INTO state VALUES (1, 'active') ON CONFLICT DO NOTHING;
 INSERT INTO state VALUES (2, 'completed') ON CONFLICT DO NOTHING;
-INSERT INTO state VALUES (3, 'canceld') ON CONFLICT DO NOTHING;
+INSERT INTO state VALUES (3, 'cancelled') ON CONFLICT DO NOTHING;
 INSERT INTO state VALUES (4, 'planned') ON CONFLICT DO NOTHING;       
 

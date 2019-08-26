@@ -11,6 +11,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 /**
  * @author praktikant_ankermann
@@ -22,6 +23,7 @@ public class DAO implements DAOLocal {
     private EntityManager em;
 
     @Override
+    @Transactional
     public boolean createParticipant(Participant p) {
         if (p == null || p.getProfileId() == null || findParticipant(p.getProfileId()) != null) {
             return false;
@@ -32,6 +34,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public boolean createChallenge(Challenge c) {
         if (c == null || c.getId() != null) {
             return false;
@@ -57,6 +60,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public Challenge updateChallenge(Challenge c) {
         if (c == null || getChallengeById(c.getId()) == null) {
             return null;
@@ -67,6 +71,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public Participant deleteParticipant(Long profileId) {
         Participant p = findParticipant(profileId);
         if (p == null) {
@@ -85,6 +90,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public Challenge deleteChallenge(Long id) {
         Challenge c = getChallengeById(id);
         if (c == null) {
@@ -106,6 +112,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public boolean addParticipantToChallenge(Long challengeId, Long participantId) {
         Challenge c = getChallengeById(challengeId);
         Participant p = findParticipant(participantId);
@@ -121,6 +128,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public boolean addTagsToChallenge(Long challengeId, Long tagId) {
         Challenge c = getChallengeById(challengeId);
         Tag t = findTag(tagId);
@@ -140,6 +148,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public Tag deleteTag(long tagId) {
         Tag t = findTag(tagId);
         if(t == null) {
@@ -151,6 +160,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public boolean removeTagFromChallenge(Long challengeId, Long tagId) {
         Challenge c = getChallengeById(challengeId);
         if (c.getTagSet().contains(findTag(tagId))) {
@@ -163,6 +173,7 @@ public class DAO implements DAOLocal {
 
 
     @Override
+    @Transactional
     public boolean removeParticipantFromChallenge(Long challengeId, Long participantId) {
         // TODO also remove participants from the challenge_participants table
         Challenge c = getChallengeById(challengeId);
@@ -216,6 +227,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public Tag deleteTag(Long profileId) {
         Tag t = em.find(Tag.class, profileId);
         if (t == null) {
@@ -234,6 +246,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
+    @Transactional
     public boolean createTag(Tag t) {
         if (t == null || t.getId() != null) {
             return false;

@@ -97,7 +97,7 @@ public class Participant implements Serializable {
             return false;
         }
         Participant other = (Participant) object;
-        if ((this.profileId == null && other.profileId != null) || (this.profileId != null && !this.profileId.equals(other.profileId))) {
+        if (((this.profileId == null) && (other.profileId != null)) || ((this.profileId != null) && !this.profileId.equals(other.profileId))) {
             return false;
         }
         return true;

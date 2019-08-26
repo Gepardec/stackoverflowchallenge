@@ -24,7 +24,8 @@ public class Challenge implements Serializable {
     @Id
     @GeneratedValue(generator = "ch_id_seq")
     @Basic(optional = false)
-    private Integer id;
+    @Column(name = "id")
+    private Long id;
 
     @Size(max = 500)
     private String title;
@@ -39,9 +40,23 @@ public class Challenge implements Serializable {
     private Date toDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Status status;
+    private State state;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "challenge_participant",
+            joinColumns = @JoinColumn(name = "challengeid", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "participantid", referencedColumnName = "profileId")
+
+    )
+    private Set<Participant> participantSet = new LinkedHashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "challenge_tag",
+            joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tagset_id", referencedColumnName = "id")
+    )
     private Set<Tag> tagSet = new LinkedHashSet<>();
 
     private String award1;
@@ -50,32 +65,18 @@ public class Challenge implements Serializable {
 
     private String award3;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Admin creator;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Participant> participantSet = new LinkedHashSet<>();
-
     public Challenge() {
-    }
-
-    public Admin getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Admin creator) {
-        this.creator = creator;
     }
 
     public void setTagSet(Set<Tag> tagSet) {
         this.tagSet = tagSet;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -111,12 +112,12 @@ public class Challenge implements Serializable {
         this.toDate = toDate;
     }
 
-    public Status getStatus() {
-        return status;
+    public State getState() {
+        return state;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setState(State status) {
+        this.state = status;
     }
 
     public Set<Tag> getTagSet() {
@@ -172,5 +173,9 @@ public class Challenge implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void addTag(Tag t) {
+        this.getTagSet().add(t);
     }
 }

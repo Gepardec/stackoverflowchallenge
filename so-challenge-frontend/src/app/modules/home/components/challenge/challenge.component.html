@@ -1,28 +1,53 @@
-<p>My name is jeff and yours is Detlef</p>
+<table *ngIf="challenges" [dataSource]="challenges" class="mat-elevation-z8" mat-table>
+    <!-- title Column -->
+    <ng-container matColumnDef="title">
+        <th *matHeaderCellDef mat-header-cell>title</th>
+        <td *matCellDef="let c" mat-cell> {{c.title}} </td>
+    </ng-container>
 
-<!--<div *ngIf="errorMessage">
-    <p>Could not connect to server.<br>Please try again later...</p>
+    <!-- fromDate Column -->
+    <ng-container matColumnDef="fromDate">
+        <th *matHeaderCellDef mat-header-cell> from yyyy/mm/dd</th>
+        <td *matCellDef="let c" mat-cell> {{c.fromDate | date:'yyyy/MM/dd'}} </td>
+    </ng-container>
+
+    <!-- toDate Column -->
+    <ng-container matColumnDef="toDate">
+        <th *matHeaderCellDef mat-header-cell> to yyyy/mm/dd</th>
+        <td *matCellDef="let c" mat-cell> {{c.toDate | date:'yyyy/MM/dd'}} </td>
+    </ng-container>
+
+    <!-- status Column -->
+    <ng-container matColumnDef="state">
+        <th *matHeaderCellDef mat-header-cell>state</th>
+        <td *matCellDef="let c" mat-cell> {{c.state.name}} </td>
+    </ng-container>
+
+    <!-- Action column -->
+    <ng-container matColumnDef="action">
+        <th *matHeaderCellDef mat-header-cell>action</th>
+        <td *matCellDef="let c" mat-cell>
+            <button (click)="selectChallenge(c)" mat-icon-button
+                    matTooltip="Challenge '{{c.title}}' edit">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="deleteChallenge(c)" mat-icon-button
+                    matTooltip="Challenge '{{c.title}}' delete">
+                <mat-icon>delete</mat-icon>
+            </button>
+
+        </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+    <tr *matRowDef="let myRowData; columns: columnsToDisplay" mat-row></tr>
+</table>
+<div>
+
+    <button mat-raised-button class="add" (click)=openAddChallengeComponent()>create new challenge</button>
+
 </div>
-
-<div *ngIf="!errorMessage">
-    <p>Add, edit and delete challenges here...</p>
-    <div>
-        TODO// adding comes here
-    </div>
-</div>
-
-<div *ngIf="challenges">
-
-
-    <div *ngFor="let c of challenges">
-        {{c.id}}  {{c.enddate}}   {{c.begindate}}
-
-        <div *ngFor="let p of c.participantList">
-            {{p}}
-        </div>
-
-    </div>
-
-
-</div>-->
-
+<app-challenge-detail (onSuccessfulEditing)="refreshGUI()" *ngIf="challengeToEdit" [challenge]="challengeToEdit">
+</app-challenge-detail>
+<app-add-challenge (onSuccessfulAdding)="refreshGUI()" *ngIf="showAddChallenge" [challenge]="challengePrototype">
+</app-add-challenge>

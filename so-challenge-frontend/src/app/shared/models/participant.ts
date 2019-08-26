@@ -1,4 +1,4 @@
-export class Participant {
+export interface Participant {
     profileId: number;
     link: string;
     username: string;

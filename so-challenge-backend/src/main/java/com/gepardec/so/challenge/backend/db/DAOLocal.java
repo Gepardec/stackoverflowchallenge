@@ -7,13 +7,12 @@ package com.gepardec.so.challenge.backend.db;
 
 import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
-import com.gepardec.so.challenge.backend.model.Status;
+import com.gepardec.so.challenge.backend.model.State;
 import com.gepardec.so.challenge.backend.model.Tag;
 
 import java.util.List;
 
 /**
- *
  * @author praktikant_ankermann
  */
 public interface DAOLocal {
@@ -76,7 +75,7 @@ public interface DAOLocal {
      * @param id the id of the challenge
      * @return null if no challenge with this id could be found, c otherwise.
      */
-    Challenge deleteChallenge(Integer id);
+    Challenge deleteChallenge(Long id);
 
     /**
      * Tries to find a participant with the given id.
@@ -94,26 +93,50 @@ public interface DAOLocal {
      * @return null if no challenge with this id could be found, otherwise the
      * challenge.
      */
-    Challenge findChallenge(Integer challengeId);
+    Challenge getChallengeById(Long challengeId);
 
     /**
      * Adds a participant to a challenge
      *
-     * @param challengeId the id of the challenge
+     * @param challengeId   the id of the challenge
      * @param participantId the id of the participant
      * @return false if no challenge or participant with the given ids could be
      * found or the participant already is part of this challenge, true
      * otherwise.
      */
-    boolean addParticipantToChallenge(Integer challengeId, Long participantId);
+    boolean addParticipantToChallenge(Long challengeId, Long participantId);
+
+    boolean addTagsToChallenge(Long challengeId, Long tagId);
+
+    Tag findTag(Long tagId);
+
+    Tag deleteTag(long tagId);
+
+    boolean removeTagFromChallenge(Long challengeId, Long tagId);
 
     /**
      * Removes a participant from a challenge
      *
-     * @param challengeId the id of the challenge
+     * @param challengeId   the id of the challenge
      * @param participantId the id of the participant
      * @return false if no challenge or participant with the given ids could be
      * found or the participant is not part of this challenge, true otherwise
      */
-    boolean removeParticipantFromChallenge(Integer challengeId, Long participantId);
+    boolean removeParticipantFromChallenge(Long challengeId, Long participantId);
+
+    List<State> getAllStates();
+
+    List<State> getAvailableStates();
+
+    List<State> getAvailableStates(State state);
+
+    List<Participant> getParticipantsOfChallenge(Long challengeId);
+
+    List<Tag> getAllTags();
+
+    Tag deleteTag(Long profileId);
+
+    boolean createTag(Tag t);
+
+    boolean isTagNameAlreadyPresent(String name);
 }

@@ -1,35 +1,58 @@
-<div *ngIf="errorMessage">
-    <p>Could not connect to server.<br>Please try again later...</p>
-</div>
-
-<div *ngIf="!errorMessage">
-    <p>Global list of all participants that can be added to a challenge:</p>
-    <div>
-        <input #idInput placeholder="Please type in profile id of the account to be added..." style="width: 70%;">
-        <button (click)="addParticipant(idInput.value); idInput.value=''" style="width: 25%;">Add to global list
-        </button>
-    </div>
+<div>
+    <mat-list>
+        <mat-list-item><h4>add</h4></mat-list-item>
+        <mat-list-item>
+            <form>
+                <mat-form-field>
+                    <input #profileId class="input" matInput name="profileId" placeholder="enter stackoverflow user ID"/>
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="addParticipant(profileId.value); profileId.value=''">add</button>
+            </form>
+        </mat-list-item>
+    </mat-list>
 </div>
 
 <div *ngIf="participants">
-    <table>
-        <tbody>
-        <tr>
-            <th>Image</th>
-            <th>StackOverflow Profile ID</th>
-            <th>Display Name</th>
-            <th>Link to profile</th>
-            <th>Action</th>
-        </tr>
-        <tr *ngFor="let p of participants">
-            <td><img src="{{p.imageURL}}" alt="profile_image"></td>
-            <td><span>{{p.profileId}}</span></td>
-            <td><span>{{p.username}}</span></td>
-            <td><a href="{{p.link}}" target="_blank">view profile</a></td>
-            <td>
-                <button (click)="deleteParticipant(p)">Delete</button>
+    <h4>available participants</h4>
+
+    <table mat-table [dataSource]="participants" class="mat-elevation-z8">
+        <!-- image Column -->
+        <ng-container matColumnDef="imageURL">
+            <th mat-header-cell *matHeaderCellDef>image</th>
+            <td mat-cell *matCellDef="let p"><img src="{{p.imageURL}}"></td>
+        </ng-container>
+
+        <!-- profileId Column -->
+        <ng-container matColumnDef="profileId">
+            <th mat-header-cell *matHeaderCellDef>user-ID</th>
+            <td mat-cell *matCellDef="let p">{{p.profileId}} </td>
+        </ng-container>
+
+        <!-- username Column -->
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef>username</th>
+            <td mat-cell *matCellDef="let p">{{p.username}}</td>
+        </ng-container>
+
+        <!-- status Column -->
+        <ng-container matColumnDef="link">
+            <th mat-header-cell *matHeaderCellDef>link to profile</th>
+            <td mat-cell *matCellDef="let p"><a target="_blank" href="{{p.link}}">show</a></td>
+        </ng-container>
+
+        <!-- Action column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>action</th>
+            <td mat-cell *matCellDef="let p">
+                <button mat-icon-button (click)="deleteParticipant(p)"
+                        matTooltip="delete user '{{p.username}}' ?">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
             </td>
-        </tr>
-        </tbody>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
     </table>
 </div>

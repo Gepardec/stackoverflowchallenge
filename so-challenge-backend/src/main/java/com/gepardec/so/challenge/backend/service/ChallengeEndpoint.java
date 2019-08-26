@@ -7,6 +7,7 @@ package com.gepardec.so.challenge.backend.service;
 
 import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.Challenge;
+import com.gepardec.so.challenge.backend.model.Tag;
 
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notAcceptable;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
@@ -14,6 +15,7 @@ import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.core.*;
@@ -49,9 +51,9 @@ public class ChallengeEndpoint {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getChallengeById(@PathParam("id") int id) {
+    public Response getChallengeById(@PathParam("id") long id) {
         Challenge challenge;
-        if ((challenge = dao.findChallenge(id)) == null) {
+        if ((challenge = dao.getChallengeById(id)) == null) {
             return notFound();
         } else {
             return Response.ok(challenge).build();
@@ -66,7 +68,7 @@ public class ChallengeEndpoint {
         if (c.isEmpty()) {
             return notFound();
         } else {
-            return Response.ok(new GenericEntity<List<Challenge>>(c) {
+            return Response.ok(new GenericEntity<>(c) {
             }).build();
         }
     }
@@ -79,7 +81,7 @@ public class ChallengeEndpoint {
         c.setFromDate(new Date());
         c.setToDate(Date.from(c.getFromDate().toInstant().plus(70, ChronoUnit.DAYS)));
 
-        if (c.getFromDate().after(c.getToDate())
+        if (c.getFromDate().after(c.getToDate()) || c.getFromDate().after(new Date())
                 || c.getFromDate().equals(c.getToDate())
                 || !dao.createChallenge(c)) {
             return notAcceptable();
@@ -93,6 +95,11 @@ public class ChallengeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateChallenge(Challenge challenge) {
+        if (challenge.getFromDate().after(challenge.getToDate())
+                || challenge.getFromDate().equals(challenge.getToDate())) {
+            return notAcceptable();
+        }
+
         challenge = dao.updateChallenge(challenge);
         if (challenge != null) {
             return Response.ok(challenge).build();
@@ -104,7 +111,7 @@ public class ChallengeEndpoint {
     @DELETE
     @Path("delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteChallenge(@PathParam("id") Integer id) {
+    public Response deleteChallenge(@PathParam("id") Long id) {
         Challenge challenge = dao.deleteChallenge(id);
         if (challenge != null) {
             return Response.ok(challenge).build();
@@ -113,14 +120,21 @@ public class ChallengeEndpoint {
         }
     }
 
+    @GET
+    @Path("{chId}/participants/get")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getParticipantsOfChallenge(@PathParam("chId") Long chId) {
+      return null;
+    }
+
     @PUT
-    @Path("addParticipants/{chId}")
-    @Consumes("text/plain")
-    public Response addParticipantsToChallenge(@PathParam("chId") Integer challengeId, String profileIds) {
-        String[] profileIdsArray = profileIds.split(";");
-        if (profileIdsArray.length == 0) {
+    @Path("participants/add/{chId}/{profileIds}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addParticipantsToChallenge(@PathParam("chId") Long chId,@PathParam("profileIds") String profileIds) {
+        if( profileIds == null || profileIds.isEmpty()) {
             return notAcceptable();
         }
+        String[] profileIdsArray = profileIds.split(":");
 
         List<Long> profileIdsList = new ArrayList<>();
         for (String profileId : profileIdsArray) {
@@ -132,16 +146,31 @@ public class ChallengeEndpoint {
         }
 
         for (Long profileId : profileIdsList) {
-            dao.addParticipantToChallenge(challengeId, profileId);
+            System.err.println("profileIds: " + profileId + " |chid:" + chId);
+            dao.addParticipantToChallenge(chId, profileId);
         }
+        return Response.ok().build();
 
+    }
+
+    @PUT
+    @Path("{chId}/tags/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addTagsToChallenge(@PathParam("chId") Long chId,List<Tag> tags) {
+        if (tags == null || tags.isEmpty()) {
+            return notAcceptable();
+        }
+        Challenge c = dao.getChallengeById(chId);
+        for(Tag tag:tags) {
+            dao.addTagsToChallenge(c.getId(), tag.getId());
+        }
         return Response.ok().build();
     }
 
     @DELETE
-    @Path("removeParticipants/{chId}")
+    @Path("participants/remove/{chId}")
     @Consumes("text/plain")
-    public Response removeParticipantsFromChallenge(@PathParam("chId") Integer challengeId, String profileIdsCSVString) {
+    public Response removeParticipantsFromChallenge(@PathParam("chId") Long challengeId, String profileIdsCSVString) {
         String[] profileIdsArray = profileIdsCSVString.split(";");
         if (profileIdsArray.length == 0) {
             return notAcceptable();

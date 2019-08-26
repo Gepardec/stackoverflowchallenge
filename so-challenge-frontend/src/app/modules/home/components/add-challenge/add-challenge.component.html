@@ -1,0 +1,71 @@
+<div *ngIf="challenge">
+    <div class="form-container">
+        <h3>add new challenge</h3>
+        <mat-form-field>
+            <input matInput name="title" placeholder="title" [(ngModel)]="challenge.title"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="description" placeholder="description"
+                   [(ngModel)]="challenge.description"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #pickerFrom></mat-datepicker>
+            <input matInput [matDatepicker]="pickerFrom" placeholder="start date" [(ngModel)]="challenge.fromDate">
+
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #pickerTo></mat-datepicker>
+            <input matInput [matDatepicker]="pickerTo" placeholder="end date" [(ngModel)]="challenge.toDate">
+        </mat-form-field>
+
+        <mat-form-field ngDefaultControl >
+            <mat-label>challenge state</mat-label>
+            <mat-select ngDefaultControl name="addState" [(ngModel)]="challenge.state">
+                <mat-option *ngFor="let s of states" [value]="s">
+                    {{s.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="award1" placeholder="award first place" [(ngModel)]="challenge.award1"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="award2" placeholder="award second place" [(ngModel)]="challenge.award2"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput name="award3" placeholder="award third place" [(ngModel)]="challenge.award3"/>
+        </mat-form-field>
+        <mat-form-field *ngIf="tags">
+            <h4>tags</h4>
+            <mat-chip-list *ngFor="let tag of tags">
+                <mat-chip matInput ngDefaultControl name="addTags" class = badge [(ngModel)]="selectedTags" [removable]="removable" (removed)="removeTag(tag)">
+                    {{tag.name}}
+                    <mat-icon matChipRemove >cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-form-field>
+
+    </div>
+
+
+    <div class="participants-container">
+        <h3>available cheetahs</h3>
+        <!-- TODO PARTICIPANTS -->
+        <mat-selection-list *ngFor="let participant of participants" >
+            <mat-list-option ngDefaultControl name="addParticipants" class = badge [(ngModel)]="selectedParticipants"> {{participant.username}} </mat-list-option>
+        </mat-selection-list>
+    </div>
+
+    <div class="submit">
+        <button mat-raised-button color="primary" (click)="addClicked()">add</button>
+        <button mat-raised-button color="warn" (click)="cancelClicked()">cancel</button>
+    </div>
+</div>

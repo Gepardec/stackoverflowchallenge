@@ -1,7 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Participant} from '../../../../shared/models/participant';
+import {Component, Input, OnInit} from '@angular/core';
+import {MatListModule} from '@angular/material/list';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
 import {Challenge} from '../../../../shared/models/challenge';
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {AddChallengeComponent} from '../add-challenge/add-challenge.component';
+import {Participant} from '../../../../shared/models/participant';
+import {Tag} from '../../../../shared/models/tag';
+import {State} from '../../../../shared/models/state';
+
 
 @Component({
     selector: 'app-challenge',
@@ -9,58 +15,71 @@ import {Challenge} from '../../../../shared/models/challenge';
     styleUrls: ['./challenge.component.css']
 })
 export class ChallengeComponent implements OnInit {
-    ngOnInit() {
+    challenges: Challenge[];
+    challengeToEdit: Challenge;
+    challengePrototype: Challenge;
 
+    public showAddChallenge = false;
+
+    columnsToDisplay = ['title', 'fromDate', 'toDate', 'state', 'action'];
+
+    constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
     }
 
-
-    /*challenges: Challenge[];
-    errorMessage: boolean;
-
-    constructor(private service: EndpointService) {
-    }
-
     ngOnInit() {
-        this.service.getChallenges().subscribe(
+        this.endpointService.getChallenges().subscribe(
             data => {
                 this.challenges = data;
-                this.errorMessage = false;
+                console.log('show challenges');
             },
             error => {
                 console.log(error);
-                this.errorMessage = true;
+                this.snackBarService.warning('there are no challenges so far!');
             }
         );
+    }
+
+    selectChallenge(c: Challenge) {
+        let copy: Challenge;
+        if (c !== null) {
+            copy = JSON.parse(JSON.stringify(c));
+        }
+        this.challengeToEdit = copy;
     }
 
     deleteChallenge(c: Challenge) {
-        this.service.deleteChallenge(c.id).subscribe(
-            data => {
-                console.log(data);
-                this.ngOnInit();
-            },
-            error => {
-                console.log(error);
-            }
-        );
+        console.log(c);
+        if (confirm(`do you want to delete the challenge '${c.title}'?`)) {
+            this.endpointService.deleteChallenge(c.id).subscribe(
+                data => {
+                    this.refreshGUI();
+                    this.snackBarService.success(`the challenge '${data['title']}' was successfully added`);
+                },
+                error => {
+                    this.snackBarService.error(`something went wrong - the challenge '${c.title}' was not deleted`);
+                }
+            );
+        }
     }
 
-    /*addChallenge(id: string) {
-        /*if (id.trim().length === 0 || isNaN(+id)) {
-          alert('check your input again please');
-          return;
-        }*/
+    openAddChallengeComponent() {
+        this.showAddChallenge = true;
+        this.challengePrototype = new class implements Challenge {
+            award1: string;
+            award2: string;
+            award3: string;
+            description: string;
+            fromDate: Date;
+            id: number;
+            participantSet: Participant[];
+            state: State;
+            tagSet: Tag[];
+            title: string;
+            toDate: Date;
+        };
+    }
 
-        /*this.service.addParticipant((+id)).subscribe(
-            data => {
-                console.log(data);
-                this.ngOnInit();
-            },
-            error => {
-                console.log(error);
-                alert('There was an error:\nTry to provide valid input.\nThis user does not exist or is already in the list.');
-            }
-        );
-    }*/
-
+    refreshGUI() {
+        this.ngOnInit();
+    }
 }

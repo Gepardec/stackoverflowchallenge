@@ -6,11 +6,8 @@
 package com.gepardec.so.challenge.backend.model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -35,6 +32,17 @@ public class Participant implements Serializable {
     private String username;
 
     private String imageURL;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "participantSet")
+    Set<Challenge> challengeSet;
+
+    public Set<Challenge> getChallengeSet() {
+        return challengeSet;
+    }
+
+    public void setChallengeSet(Set<Challenge> challengeSet) {
+        this.challengeSet = challengeSet;
+    }
 
     public String getImageURL() {
         return imageURL;

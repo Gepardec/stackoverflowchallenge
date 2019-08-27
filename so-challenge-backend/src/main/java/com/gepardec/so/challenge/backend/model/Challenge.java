@@ -17,13 +17,13 @@ import javax.validation.constraints.Size;
  * @author praktikant_ankermann
  */
 @Entity
-@SequenceGenerator(sequenceName = "ch_id_seq", name = "ch_id_seq", allocationSize = 1)
+//@SequenceGenerator(sequenceName = "ch_id_seq", name = "ch_id_seq", allocationSize = 1)
 public class Challenge implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "ch_id_seq")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;

@@ -30,7 +30,6 @@ export class ChallengeComponent implements OnInit {
         this.endpointService.getChallenges().subscribe(
             data => {
                 this.challenges = data;
-                console.log('show challenges');
             },
             error => {
                 console.log(error);

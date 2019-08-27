@@ -5,10 +5,10 @@ import {SnackbarService} from '../../../../shared/services/snackbar.service';
 import {State} from '../../../../shared/models/state';
 import {Participant} from '../../../../shared/models/participant';
 import {Tag} from '../../../../shared/models/tag';
-import {MatFormFieldModule} from '@angular/material';
-import {MatInputModule} from '@angular/material/typings/input';
-import {MatChipList} from '@angular/material/typings/chips';
-import {ReactiveFormsModule} from '@angular/forms';
+import {MatSelectionListChange} from '@angular/material';
+import {SelectionModel} from '@angular/cdk/collections';
+import {MatListOption} from '@angular/material/typings/list';
+import {constructExclusionsMap} from 'tslint/lib/rules/completed-docs/exclusions';
 
 @Component({
     selector: 'app-add-challenge',
@@ -22,11 +22,12 @@ export class AddChallengeComponent implements OnInit {
 
     states: State[];
     participants: Participant[];
-    selectedParticipants: Participant[];
+    selectedParticipants: Participant[] = [];
     tags: Tag[];
     selectedTags = this.tags;
-    participantsString = '7858336';
+    participantsString = '';
     removable = true;
+
 
     tempIndex = -1;
 
@@ -58,7 +59,7 @@ export class AddChallengeComponent implements OnInit {
         );
     }
 
-    addClicked() {
+    addClicked(selected: MatListOption[]) {
         console.log(this.challenge);
 
         this.endpointService.addChallenge(this.challenge).subscribe(
@@ -73,12 +74,12 @@ export class AddChallengeComponent implements OnInit {
                 this.challenge = null;
             }
         );
-        // TODO call addparticipants to challenge function + concat participants id into ;-separeted strings
-        for (const p of this.selectedParticipants) {
-            this.participantsString = this.participantsString.concat(p.profileId.toString(), ';');
+        for (const s of selected) {
+            this.participantsString = this.participantsString.concat(s.value.valueOf().profileId, ':');
         }
+        console.log(this.participantsString);
 
-        this.endpointService.addParticipantsToChallenge(this.challenge.id, this.participantsString).subscribe(
+        this.endpointService.addParticipantsToChallenge(this.challenge.title, this.participantsString).subscribe(
             data => {
                 console.log(data.toString());
                 this.snackBarService.success(`the participants '${this.selectedParticipants.values()}' were added`);
@@ -98,6 +99,11 @@ export class AddChallengeComponent implements OnInit {
 
     cancelClicked() {
         this.challenge = null;
+        this.participantsString = '';
     }
 
+    onGroupsChange(selected: MatListOption[]) {
+        console.log(selected.values().toString());
+    }
 }
+

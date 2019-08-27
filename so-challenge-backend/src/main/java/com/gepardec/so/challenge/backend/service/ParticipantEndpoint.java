@@ -44,7 +44,7 @@ public class ParticipantEndpoint {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getParticipantById(@PathParam("id") Long id) {
-        Participant p = dao.findParticipant(id);
+        Participant p = dao.getParticipantById(id);
 
         if (p == null) {
             JsonObject o = EndpointUtils.sendRequestAndGetJson("users/" + id, "?order=desc&sort=reputation&site=stackoverflow", "GET");

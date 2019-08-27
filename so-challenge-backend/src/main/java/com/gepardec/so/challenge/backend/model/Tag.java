@@ -1,10 +1,17 @@
 package com.gepardec.so.challenge.backend.model;
 
+
+
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @SequenceGenerator(sequenceName = "tag_id_seq", name = "tag_id_seq", allocationSize = 1)
 public class Tag {
 
@@ -14,7 +21,9 @@ public class Tag {
 
     private String name;
 
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tagSet")
+    @JsonIgnore
     Set<Challenge> challengeSet;
 
     public Long getId() {

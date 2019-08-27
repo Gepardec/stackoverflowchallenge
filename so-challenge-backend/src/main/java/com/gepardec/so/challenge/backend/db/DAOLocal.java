@@ -84,7 +84,7 @@ public interface DAOLocal {
      * @return null if no participant with this id could be found, otherwise the
      * participant.
      */
-    Participant findParticipant(Long profileId);
+    Participant getParticipantById(Long profileId);
 
     /**
      * Tries to find a challenge with the given id.
@@ -94,6 +94,10 @@ public interface DAOLocal {
      * challenge.
      */
     Challenge getChallengeById(Long challengeId);
+
+    Challenge getChallengeByName(String name);
+
+    boolean addParticipantToChallenge(String name, Long participantId);
 
     /**
      * Adds a participant to a challenge

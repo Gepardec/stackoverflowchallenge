@@ -58,6 +58,13 @@ export class EndpointService {
         return this.http.get<State[]>(this.BASE_URL + 'state/all');
     }
 
+    getAvailableStates(s: State): Observable<State[]> {
+        if (s == null) {
+            this.getCreateStates();
+        }
+        return this.http.get<State[]>(this.BASE_URL + 'state/avaliable');
+    }
+
     getCreateStates(): Observable<State[]> {
         return this.http.get<State[]>(this.BASE_URL + 'state/startStates');
     }
@@ -75,10 +82,13 @@ export class EndpointService {
         return this.http.get<Tag[]>(this.BASE_URL + 'tag/all');
     }
 
-    addParticipantsToChallenge(chId: number, p: string) {
-        console.error(p);
-        return this.http.put(this.BASE_URL + `challenge/participants/add/${chId}/`, p, this.TEXT_PLAIN_OPTIONS);
+    addParticipantsToChallenge(chTitle: string, profileIds: string) {
+        return this.http.put(this.BASE_URL + `challenge/participants/add/${chTitle}/${profileIds}`, this.APPLICATION_JSON_OPTIONS);
     }
+
+    // addParticipantsToChallenge(c: Challenge, profileIds: string) {
+    //     return this.http.put(this.BASE_URL + `challenge/participants/add/${profileIds}`, c, this.APPLICATION_JSON_OPTIONS);
+    // }
 
     removeParticipantsFromChallenge(chId: number, p: string) {
         // TODO remove participants

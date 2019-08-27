@@ -10,7 +10,7 @@ import com.gepardec.so.challenge.backend.model.*;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 
 /**
@@ -25,7 +25,7 @@ public class DAO implements DAOLocal {
     @Override
     @Transactional
     public boolean createParticipant(Participant p) {
-        if (p == null || p.getProfileId() == null || findParticipant(p.getProfileId()) != null) {
+        if (p == null || p.getProfileId() == null || getParticipantById(p.getProfileId()) != null) {
             return false;
         } else {
             em.persist(p);
@@ -40,7 +40,7 @@ public class DAO implements DAOLocal {
             return false;
         } else {
             for (Participant p : c.getParticipantSet()) {
-                if (p == null || p.getProfileId() == null || findParticipant(p.getProfileId()) == null) {
+                if (p == null || p.getProfileId() == null || getParticipantById(p.getProfileId()) == null) {
                     return false;
                 }
             }
@@ -73,7 +73,7 @@ public class DAO implements DAOLocal {
     @Override
     @Transactional
     public Participant deleteParticipant(Long profileId) {
-        Participant p = findParticipant(profileId);
+        Participant p = getParticipantById(profileId);
         if (p == null) {
             return null;
         } else {
@@ -102,7 +102,7 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public Participant findParticipant(Long profileId) {
+    public Participant getParticipantById(Long profileId) {
         return em.find(Participant.class, profileId);
     }
 
@@ -111,11 +111,51 @@ public class DAO implements DAOLocal {
         return em.find(Challenge.class, challengeId);
     }
 
+    /**
+     * returns the challenge with given name
+     * @param name the title of the challenge
+     * @return Challenge
+     */
+    @Override
+    public Challenge getChallengeByName(String name) {
+       Challenge c = (Challenge) em.createQuery("SELECT c FROM Challenge c WHERE c.title = :name").setParameter("name", name).getSingleResult();
+       return c;
+    }
+
+    /**
+     * identify challenge by challenge.title
+     * @param name the name of the challenge
+     * @param participantId the id of the participant
+     * @return
+     */
+    @Override
+    @Transactional
+    public boolean addParticipantToChallenge(String name, Long participantId) {
+        Challenge c = getChallengeByName(name);
+        Participant p = getParticipantById(participantId);
+
+        if (c == null || p == null || c.getParticipantSet().contains(p)) {
+            System.err.println("Challenge with title: " + name + " is null");
+            return false;
+        } else {
+            c.addParticipant(p);
+            p.getChallengeSet().add(c);
+            em.merge(c);
+            return true;
+        }
+    }
+
+    /**
+     * identify challenge by challenge.id
+     * @param challengeId   the id of the challenge
+     * @param participantId the id of the participant
+     * @return
+     */
     @Override
     @Transactional
     public boolean addParticipantToChallenge(Long challengeId, Long participantId) {
         Challenge c = getChallengeById(challengeId);
-        Participant p = findParticipant(participantId);
+        Participant p = getParticipantById(participantId);
 
         if (c == null || p == null || c.getParticipantSet().contains(p)) {
             return false;
@@ -177,7 +217,7 @@ public class DAO implements DAOLocal {
     public boolean removeParticipantFromChallenge(Long challengeId, Long participantId) {
         // TODO also remove participants from the challenge_participants table
         Challenge c = getChallengeById(challengeId);
-        Participant p = findParticipant(participantId);
+        Participant p = getParticipantById(participantId);
 
         if (c == null || p == null || !c.getParticipantSet().contains(p)) {
             return false;

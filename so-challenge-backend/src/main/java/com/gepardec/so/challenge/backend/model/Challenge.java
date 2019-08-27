@@ -6,6 +6,7 @@
 package com.gepardec.so.challenge.backend.model;
 
 
+import com.fasterxml.jackson.annotation.*;
 
 import java.io.Serializable;
 import java.util.*;
@@ -17,7 +18,9 @@ import javax.validation.constraints.Size;
  * @author praktikant_ankermann
  */
 @Entity
-//@SequenceGenerator(sequenceName = "ch_id_seq", name = "ch_id_seq", allocationSize = 1)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Challenge implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +44,7 @@ public class Challenge implements Serializable {
     private Date toDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private State state;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -49,6 +53,7 @@ public class Challenge implements Serializable {
             joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id", referencedColumnName = "profileId")
     )
+    @JsonIgnore
     private Set<Participant> participantSet = new LinkedHashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -57,6 +62,7 @@ public class Challenge implements Serializable {
             joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
     )
+    @JsonIgnore
     private Set<Tag> tagSet = new LinkedHashSet<>();
 
     private String award1;

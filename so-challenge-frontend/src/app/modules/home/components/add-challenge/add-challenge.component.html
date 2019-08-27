@@ -58,13 +58,16 @@
     <div class="participants-container">
         <h3>available cheetahs</h3>
         <!-- TODO PARTICIPANTS -->
-        <mat-selection-list *ngFor="let participant of participants" >
-            <mat-list-option ngDefaultControl name="addParticipants" class = badge [(ngModel)]="selectedParticipants"> {{participant.username}} </mat-list-option>
+        <mat-selection-list #participantsList  (selectionChange)="onGroupsChange(participantsList.selectedOptions.selected)">
+            <mat-list-option ngDefaultControl name="addParticipants" class=badge [ngModel]="participant.profileId"
+                             *ngFor="let participant of participants" [value]="participant">
+                {{participant.username}}
+            </mat-list-option>
         </mat-selection-list>
     </div>
 
     <div class="submit">
-        <button mat-raised-button color="primary" (click)="addClicked()">add</button>
+        <button mat-raised-button color="primary" (click)="addClicked(participantsList.selectedOptions.selected)">add</button>
         <button mat-raised-button color="warn" (click)="cancelClicked()">cancel</button>
     </div>
 </div>

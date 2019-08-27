@@ -6,6 +6,7 @@
 package com.gepardec.so.challenge.backend.model;
 
 
+
 import java.io.Serializable;
 import java.util.*;
 import javax.json.bind.annotation.JsonbDateFormat;
@@ -33,10 +34,10 @@ public class Challenge implements Serializable {
     @Size(max = 500)
     private String description;
 
-    @JsonbDateFormat(value = "yyyy-mm-dd'T'hh:mm:ss.SSSZ")
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date fromDate;
 
-    @JsonbDateFormat(value = "yyyy-mm-dd'T'hh:mm:ss.SSSZ")
+    @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date toDate;
 
     @ManyToOne(fetch = FetchType.EAGER)

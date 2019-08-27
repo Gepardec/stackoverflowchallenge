@@ -55,7 +55,7 @@ import {ChartsModule} from 'ng2-charts';
                 {path: 'participants', component: ParticipantComponent},
                 {path: 'tags', component: TagComponent},
                 {path: 'participantInfo', component: PointsComponent},
-                {path: '', redirectTo: '/challenges', pathMatch: 'full'},
+                {path: '', redirectTo: '/', pathMatch: 'full'},
                 {path: '**', component: ChallengeComponent}
             ]
         ),

@@ -78,8 +78,10 @@ public class ChallengeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createChallenge(Challenge c) {
+        System.err.println("fromdate: " + c.getFromDate() + "| todate: " + c.getToDate());
         c.setFromDate(new Date());
         c.setToDate(Date.from(c.getFromDate().toInstant().plus(70, ChronoUnit.DAYS)));
+
 
         if (c.getFromDate().after(c.getToDate()) || c.getFromDate().after(new Date())
                 || c.getFromDate().equals(c.getToDate())

@@ -51,7 +51,7 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>copy-resources</id>
+                        <id>copy-database-migrations</id>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -175,7 +175,7 @@
                         <version>3.1.0</version>
                         <executions>
                             <execution>
-                                <id>copy-resources</id>
+                                <id>copy-native-image-to-parent-target-folder</id>
                                 <phase>package</phase>
                                 <goals>
                                     <goal>copy-resources</goal>

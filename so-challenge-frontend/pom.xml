@@ -164,6 +164,7 @@
                                 <goals>
                                     <goal>native-image</goal>
                                 </goals>
+                                <phase>prepare-package</phase>
                                 <configuration>
                                     <enableHttpUrlHandler>true</enableHttpUrlHandler>
                                 </configuration>

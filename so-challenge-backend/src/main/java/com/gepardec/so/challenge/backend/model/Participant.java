@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
  * @author praktikant_ankermann
  */
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class)
 public class Participant implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,16 +36,16 @@ public class Participant implements Serializable {
 
     private String imageURL;
 
-//    @JsonBackReference
+    @JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "participantSet")
     private Set<Challenge> challengeSet;
 
-//    @JsonBackReference
+    @JsonManagedReference
     public Set<Challenge> getChallengeSet() {
         return challengeSet;
     }
 
-//    @JsonBackReference
+    @JsonManagedReference
     public void setChallengeSet(Set<Challenge> challengeSet) {
         this.challengeSet = challengeSet;
     }

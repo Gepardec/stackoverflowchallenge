@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
  * @author praktikant_ankermann
  */
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class)
 public class Challenge implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,6 +42,7 @@ public class Challenge implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private State state;
 
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "challenge_participant",
@@ -50,7 +51,7 @@ public class Challenge implements Serializable {
     )
     private Set<Participant> participantSet = new LinkedHashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "challenge_tag",
             joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
@@ -58,14 +59,17 @@ public class Challenge implements Serializable {
     )
     private Set<Tag> tagSet = new HashSet<>();
 
+    @JsonBackReference
     public Set<Tag> getTagSet() {
         return tagSet;
     }
 
+    @JsonBackReference
     public Set<Participant> getParticipantSet() {
         return participantSet;
     }
 
+    @JsonBackReference
     public void setTagSet(Set<Tag> tagSet) {
     this.tagSet = tagSet;
     }

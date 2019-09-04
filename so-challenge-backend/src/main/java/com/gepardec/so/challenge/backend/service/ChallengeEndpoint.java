@@ -17,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.ws.rs.core.*;
 import javax.ws.rs.Consumes;
@@ -69,7 +70,7 @@ public class ChallengeEndpoint {
             return notFound();
         } else {
             return Response.ok(new GenericEntity<List<Challenge>>(c) {
-            }).type(MediaType.APPLICATION_JSON_TYPE).build();
+            }).build();
         }
     }
 

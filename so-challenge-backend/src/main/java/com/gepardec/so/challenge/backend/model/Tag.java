@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class)
 public class Tag implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,9 +22,11 @@ public class Tag implements Serializable {
 
     private String name;
 
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tagSet")
     private Set<Challenge> challengeSet;
 
+    @JsonBackReference
     public Set<Challenge> getChallengeSet() {
         return challengeSet;
     }

@@ -3,28 +3,35 @@ package com.gepardec.so.challenge.backend.model;
 
 
 import com.fasterxml.jackson.annotation.*;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
-@SequenceGenerator(sequenceName = "tag_id_seq", name = "tag_id_seq", allocationSize = 1)
-public class Tag {
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+public class Tag implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "tag_id_seq")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "tag_id_seq")
+    @Basic(optional = false)
+    @Column(name = "id")
     private Long id;
 
     private String name;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tagSet")
+    private Set<Challenge> challengeSet;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tagSet")
-    @JsonIgnore
-    Set<Challenge> challengeSet;
+    public Set<Challenge> getChallengeSet() {
+        return challengeSet;
+    }
+
+    public void setChallengeSet(Set<Challenge> challengeSet) {
+        this.challengeSet = challengeSet;
+    }
 
     public Long getId() {
         return id;
@@ -40,14 +47,6 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Challenge> getChallengeSet() {
-        return challengeSet;
-    }
-
-    public void setChallengeSet(Set<Challenge> challengeSet) {
-        this.challengeSet = challengeSet;
     }
 
     @Override

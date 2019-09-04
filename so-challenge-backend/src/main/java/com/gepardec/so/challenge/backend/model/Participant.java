@@ -7,7 +7,6 @@ package com.gepardec.so.challenge.backend.model;
 
 
 import com.fasterxml.jackson.annotation.*;
-
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
@@ -19,9 +18,7 @@ import javax.validation.constraints.Size;
  * @author praktikant_ankermann
  */
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "profileId")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class Participant implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,16 +36,16 @@ public class Participant implements Serializable {
 
     private String imageURL;
 
+//    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "participantSet")
+    private Set<Challenge> challengeSet;
 
-
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "participantSet")
-    @JsonIgnore
-    Set<Challenge> challengeSet;
-
+//    @JsonBackReference
     public Set<Challenge> getChallengeSet() {
         return challengeSet;
     }
 
+//    @JsonBackReference
     public void setChallengeSet(Set<Challenge> challengeSet) {
         this.challengeSet = challengeSet;
     }

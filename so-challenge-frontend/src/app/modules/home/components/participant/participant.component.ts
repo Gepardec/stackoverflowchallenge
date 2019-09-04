@@ -47,7 +47,7 @@ export class ParticipantComponent implements OnInit {
         this.endpointService.addParticipant((+id)).subscribe(
             data => {
                 this.ngOnInit();
-                this.snackBarService.success(`the user'${data}' was successfully registered`);
+                this.snackBarService.success(`the user '${id}' was successfully registered`);
             },
             error => {
                 this.snackBarService.error('something went wrong - user was not registered');

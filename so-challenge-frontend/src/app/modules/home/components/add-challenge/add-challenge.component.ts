@@ -61,39 +61,40 @@ export class AddChallengeComponent implements OnInit {
 
     addClicked(selected: MatListOption[]) {
         console.log(this.challenge);
-
-        this.endpointService.addChallenge(this.challenge).subscribe(
-            data => {
-                console.log(data);
-                this.snackBarService.success(`the challenge '${this.challenge.title}' was successfully added`);
-                this.onSuccessfulAdding.emit(true);
-                this.challenge = null;
-            }, error => {
-                console.log(error);
-                this.snackBarService.error(`something went wrong while creating the challenge`);
-                this.challenge = null;
+        if (Array.isArray(selected) && selected.length > 0) {
+            for (const s of selected) {
+                this.participantsString = this.participantsString.concat(s.value.valueOf().profileId, ':');
             }
-        );
-        for (const s of selected) {
-            this.participantsString = this.participantsString.concat(s.value.valueOf().profileId, ':');
+            this.endpointService.addParticipantsToNewChallenge(this.challenge, this.participantsString).subscribe(
+                data => {
+                    console.log(data);
+                    this.snackBarService.success(`the challenge '${this.challenge.title}' and it's participants were successfully added`);
+                    this.onSuccessfulAdding.emit(true);
+                    this.challenge = null;
+                },
+                error => {
+                    console.log(error);
+                    this.snackBarService.error(`something went wrong while creating the challenge and adding participants`);
+                    this.challenge = null;
+                }
+            );
+        } else {
+            this.endpointService.addChallenge(this.challenge).subscribe(
+                data => {
+                    console.log(data);
+                    this.snackBarService.success(`the challenge '${this.challenge.title}' was successfully added`);
+                    this.snackBarService.warning('this challenge has no participants');
+                    this.onSuccessfulAdding.emit(true);
+                    this.challenge = null;
+                }, error => {
+                    console.log(error);
+                    this.snackBarService.error(`something went wrong while creating the challenge`);
+                    this.challenge = null;
+                }
+            );
         }
-        console.log(this.participantsString);
 
-        this.endpointService.addParticipantsToChallenge(this.challenge.title, this.participantsString).subscribe(
-            data => {
-                console.log(data.toString());
-                this.snackBarService.success(`the participants '${this.selectedParticipants.values()}' were added`);
-                this.onSuccessfulAdding.emit(true);
-                this.participantsString = null;
-                this.selectedParticipants = null;
-                this.participants = null;
-            }, error => {
-                console.log(error);
-                this.snackBarService.error(`something went wrong while adding participants to challenge`);
-                this.selectedParticipants = null;
-            }
-        );
-         // TODO add selected tags to challenge the same way as participants
+        // TODO add selected tags to challenge the same way as participants
         this.endpointService.addTagsToChallenge(this.challenge.id, this.selectedTags);
     }
 
@@ -103,7 +104,7 @@ export class AddChallengeComponent implements OnInit {
     }
 
     onGroupsChange(selected: MatListOption[]) {
-        console.log(selected.values().toString());
+
     }
 }
 

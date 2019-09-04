@@ -35,11 +35,11 @@ export class EndpointService {
     }
 
     getParticipants(): Observable<Participant[]> {
-        return this.http.get<Participant[]>(this.BASE_URL + 'participant/all');
+        return this.http.get<Participant[]>(this.BASE_URL + 'participant/all', this.APPLICATION_JSON_OPTIONS);
     }
 
     addParticipant(profileId: number) {
-        return this.http.post(this.BASE_URL + 'participant/add', profileId, this.TEXT_PLAIN_OPTIONS);
+        return this.http.post(this.BASE_URL + 'participant/add', profileId, this.APPLICATION_JSON_OPTIONS);
     }
 
     deleteParticipant(profileId: number) {
@@ -47,11 +47,12 @@ export class EndpointService {
     }
 
     getChallenges() {
-        return this.http.get<Challenge[]>(this.BASE_URL + 'challenge/all'); // .pipe(map(res => res as Challenge[]));
+        return this.http.get<Challenge[]>(this.BASE_URL + 'challenge/all', this.APPLICATION_JSON_OPTIONS)
+            .pipe(map(res => res as Challenge[]));
     }
 
     deleteChallenge(id: number): Observable<Challenge> {
-        return this.http.delete<Challenge>(this.BASE_URL + `challenge/delete/${id}`);
+        return this.http.delete<Challenge>(this.BASE_URL + `challenge/delete/${id}`, this.APPLICATION_JSON_OPTIONS);
     }
 
     getStates(): Observable<State[]> {
@@ -62,11 +63,11 @@ export class EndpointService {
         if (s == null) {
             this.getCreateStates();
         }
-        return this.http.get<State[]>(this.BASE_URL + 'state/avaliable');
+        return this.http.get<State[]>(this.BASE_URL + 'state/available');
     }
 
     getCreateStates(): Observable<State[]> {
-        return this.http.get<State[]>(this.BASE_URL + 'state/startStates');
+        return this.http.get<State[]>(this.BASE_URL + 'state/startStates', this.APPLICATION_JSON_OPTIONS);
     }
 
 
@@ -75,7 +76,7 @@ export class EndpointService {
     }
 
     updateChallenge(c: Challenge) {
-        return this.http.put(this.BASE_URL + 'challenge/update', c, this.APPLICATION_JSON_OPTIONS);
+        return this.http.put(this.BASE_URL + 'challenge/update', c, this.TEXT_PLAIN_OPTIONS);
     }
 
     getTags(): Observable<Tag[]> {
@@ -84,6 +85,10 @@ export class EndpointService {
 
     addParticipantsToChallenge(chTitle: string, profileIds: string) {
         return this.http.put(this.BASE_URL + `challenge/participants/add/${chTitle}/${profileIds}`, this.APPLICATION_JSON_OPTIONS);
+    }
+
+    addParticipantsToNewChallenge(c: Challenge, profileIds: string) {
+        return this.http.post(this.BASE_URL + `challenge/participants/add/${profileIds}/new`, c, this.APPLICATION_JSON_OPTIONS);
     }
 
     // addParticipantsToChallenge(c: Challenge, profileIds: string) {
@@ -96,7 +101,7 @@ export class EndpointService {
 
     // TODO
     addTagsToChallenge(chId: number, t: Tag[]) {
-        return this.http.put(this.BASE_URL + `${chId}/tags/add`, t, this.APPLICATION_JSON_OPTIONS);
+        return this.http.put(this.BASE_URL + `${chId}/tags/add`, t, this.TEXT_PLAIN_OPTIONS);
     }
 
     async getPointsOfUser(id: number): Promise<Answer[]> {
@@ -138,6 +143,6 @@ export class EndpointService {
     }
 
     addTag(name: string) {
-        return this.http.post(this.BASE_URL + 'tag/add', name, this.TEXT_PLAIN_OPTIONS);
+        return this.http.post(this.BASE_URL + 'tag/add', name, this.APPLICATION_JSON_OPTIONS);
     }
 }

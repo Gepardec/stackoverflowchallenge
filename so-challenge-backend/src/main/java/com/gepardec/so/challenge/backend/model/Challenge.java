@@ -5,9 +5,7 @@
  */
 package com.gepardec.so.challenge.backend.model;
 
-
 import com.fasterxml.jackson.annotation.*;
-
 import java.io.Serializable;
 import java.util.*;
 import javax.json.bind.annotation.JsonbDateFormat;
@@ -18,15 +16,13 @@ import javax.validation.constraints.Size;
  * @author praktikant_ankermann
  */
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class Challenge implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY, generator = "challenge_id_seq")
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
@@ -43,27 +39,36 @@ public class Challenge implements Serializable {
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date toDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     private State state;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "challenge_participant",
             joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id", referencedColumnName = "profileId")
     )
-    @JsonIgnore
     private Set<Participant> participantSet = new LinkedHashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "challenge_tag",
             joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
     )
-    @JsonIgnore
-    private Set<Tag> tagSet = new LinkedHashSet<>();
+    private Set<Tag> tagSet = new HashSet<>();
+
+    public Set<Tag> getTagSet() {
+        return tagSet;
+    }
+
+    public Set<Participant> getParticipantSet() {
+        return participantSet;
+    }
+
+    public void setTagSet(Set<Tag> tagSet) {
+    this.tagSet = tagSet;
+    }
 
     private String award1;
 
@@ -72,10 +77,6 @@ public class Challenge implements Serializable {
     private String award3;
 
     public Challenge() {
-    }
-
-    public void setTagSet(Set<Tag> tagSet) {
-        this.tagSet = tagSet;
     }
 
     public Long getId() {
@@ -126,10 +127,6 @@ public class Challenge implements Serializable {
         this.state = status;
     }
 
-    public Set<Tag> getTagSet() {
-        return tagSet;
-    }
-
     public String getAward1() {
         return award1;
     }
@@ -152,10 +149,6 @@ public class Challenge implements Serializable {
 
     public void setAward3(String award3) {
         this.award3 = award3;
-    }
-
-    public Set<Participant> getParticipantSet() {
-        return participantSet;
     }
 
     public void setParticipantSet(Set<Participant> participantSet) {

@@ -54,19 +54,19 @@ public class ParticipantEndpoint {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
         } else {
-            return Response.ok(p).build();
+            return Response.ok(p).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
     @POST
     @Path("add")
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createParticipant(Long profileId) {
         JsonObject o = EndpointUtils.sendRequestAndGetJson("users/" + profileId, "?order=desc&sort=reputation&site=stackoverflow", "GET");
 
         if (o == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
 
         Participant p = new Participant(profileId);
@@ -76,9 +76,9 @@ public class ParticipantEndpoint {
 
         boolean success = dao.createParticipant(p);
         if (success) {
-            return Response.status(Response.Status.CREATED).entity(p).build();
+            return Response.status(Response.Status.CREATED).entity(p).type(MediaType.APPLICATION_JSON_TYPE).build();
         } else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
@@ -86,11 +86,11 @@ public class ParticipantEndpoint {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllParticipants() {
-        List<Participant> p = dao.readAllParticipants();
+        List<Participant> p = dao.getAllParticipants();
         if (p.isEmpty()) {
             return notFound();
         } else {
-            return Response.ok(p).build();
+            return Response.ok(p).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
@@ -102,7 +102,7 @@ public class ParticipantEndpoint {
         if (p != null) {
             return Response.ok(p).build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 }

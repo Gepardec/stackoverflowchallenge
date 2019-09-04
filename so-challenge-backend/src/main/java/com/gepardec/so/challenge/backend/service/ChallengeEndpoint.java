@@ -16,7 +16,6 @@ import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.core.*;
@@ -51,7 +50,7 @@ public class ChallengeEndpoint {
 
     @GET
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getChallengeById(@PathParam("id") long id) {
         Challenge challenge;
         if ((challenge = dao.getChallengeById(id)) == null) {
@@ -65,15 +64,28 @@ public class ChallengeEndpoint {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllChallenges() {
-        List<Challenge> c = dao.readAllChallenges();
+        List<Challenge> c = dao.getAllChallenges();
         if (c.isEmpty()) {
             return notFound();
         } else {
             return Response.ok(new GenericEntity<List<Challenge>>(c) {
-            }).build();
+            }).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
+    @POST
+    @Path("participants/add/{profileIds}/new")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createChallenge(@PathParam("profileIds") String profileIds, Challenge c) {
+        if(dao.addParticipantToChallenge(c, profileIds) || profileIds == null){
+            return notAcceptable();
+        } else {
+            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
+        }
+    }
+
+
+    // TODO check date
     @POST
     @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -82,20 +94,19 @@ public class ChallengeEndpoint {
         c.setFromDate(new Date());
         c.setToDate(Date.from(c.getFromDate().toInstant().plus(70, ChronoUnit.DAYS)));
 
-
         if (c.getFromDate().after(c.getToDate()) || c.getFromDate().after(new Date())
                 || c.getFromDate().equals(c.getToDate())
                 || !dao.createChallenge(c)) {
             return notAcceptable();
         } else {
-            return Response.status(Response.Status.CREATED).entity(c).build();
+            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
     @PUT
     @Path("update")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response updateChallenge(Challenge challenge) {
         if (challenge.getFromDate().after(challenge.getToDate())
                 || challenge.getFromDate().equals(challenge.getToDate())) {
@@ -104,7 +115,7 @@ public class ChallengeEndpoint {
 
         challenge = dao.updateChallenge(challenge);
         if (challenge != null) {
-            return Response.ok(challenge).build();
+            return Response.ok(challenge).type(MediaType.TEXT_PLAIN_TYPE).build();
         } else {
             return notFound();
         }
@@ -113,10 +124,11 @@ public class ChallengeEndpoint {
     @DELETE
     @Path("delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteChallenge(@PathParam("id") Long id) {
         Challenge challenge = dao.deleteChallenge(id);
         if (challenge != null) {
-            return Response.ok(challenge).build();
+            return Response.ok(challenge).type(MediaType.APPLICATION_JSON_TYPE).build();
         } else {
             return notFound();
         }
@@ -124,11 +136,11 @@ public class ChallengeEndpoint {
 
     @GET
     @Path("{chId}/participants/get")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getParticipantsOfChallenge(@PathParam("chId") Long chId) {
         return Response.ok(
                 new GenericEntity<List<Participant>>(
-                        dao.getParticipantsOfChallenge(chId)){})
+                        dao.getParticipantsOfChallenge(chId)){}).type(MediaType.TEXT_PLAIN_TYPE)
                 .build();
     }
 
@@ -157,29 +169,29 @@ public class ChallengeEndpoint {
 //        return Response.ok().build();
 //    }
 
-    @PUT
-    @Path("participants/add/{name}/{profileIds}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addParticipantsToChallenge(@PathParam("name") String name,@PathParam("profileIds") String profileIds) {
-        if (profileIds == null || profileIds.isEmpty()) {
-            return notAcceptable();
-        }
-        String[] profileIdsArray = profileIds.split(":");
-
-        List<Long> profileIdsList = new ArrayList<>();
-        for (String profileId : profileIdsArray) {
-            try {
-                profileIdsList.add(Long.parseLong(profileId));
-            } catch (NumberFormatException nfe) {
-                return notAcceptable();
-            }
-        }
-
-        for (Long profileId : profileIdsList) {
-            dao.addParticipantToChallenge(name, profileId);
-        }
-        return Response.ok().build();
-    }
+//    @PUT
+//    @Path("participants/add/{name}/{profileIds}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response addParticipantsToChallenge(@PathParam("name") String name,@PathParam("profileIds") String profileIds) {
+//        if (profileIds == null || profileIds.isEmpty()) {
+//            return notAcceptable();
+//        }
+//        String[] profileIdsArray = profileIds.split(":");
+//
+//        List<Long> profileIdsList = new ArrayList<>();
+//        for (String profileId : profileIdsArray) {
+//            try {
+//                profileIdsList.add(Long.parseLong(profileId));
+//            } catch (NumberFormatException nfe) {
+//                return notAcceptable();
+//            }
+//        }
+//
+//        for (Long profileId : profileIdsList) {
+//            dao.addParticipantToChallenge(name, profileId);
+//        }
+//        return Response.ok().build();
+//    }
 
     @PUT
     @Path("{chId}/tags/add")

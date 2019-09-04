@@ -43,17 +43,17 @@ public class TagEndpoint {
             return notFound();
         } else {
             return Response.ok(new GenericEntity<List<Tag>>(t) {
-            }).build();
+            }).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
     @DELETE
     @Path("delete/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response deleteTag(@PathParam("id") Long id) {
         Tag t = dao.deleteTag(id);
         if (t != null) {
-            return Response.ok(t).build();
+            return Response.ok(t).type(MediaType.TEXT_PLAIN_TYPE).build();
         } else {
             return notFound();
         }
@@ -61,7 +61,7 @@ public class TagEndpoint {
 
     @POST
     @Path("add")
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createTag(String name) {
         if (dao.isTagNameAlreadyPresent(name.toLowerCase())) {
@@ -77,7 +77,7 @@ public class TagEndpoint {
 
         boolean success = dao.createTag(t);
         if (success) {
-            return Response.status(Response.Status.CREATED).entity(t).build();
+            return Response.status(Response.Status.CREATED).entity(t).type(MediaType.APPLICATION_JSON_TYPE).build();
         } else {
             return notAcceptable();
         }

@@ -7,6 +7,7 @@ package com.gepardec.so.challenge.backend.db;
 
 import com.gepardec.so.challenge.backend.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -28,7 +29,7 @@ public class DAO implements DAOLocal {
         if (p == null || p.getProfileId() == null || getParticipantById(p.getProfileId()) != null) {
             return false;
         } else {
-            em.persist(p);
+                em.persist(p);
             return true;
         }
     }
@@ -50,13 +51,13 @@ public class DAO implements DAOLocal {
     }
 
     @Override
-    public List<Participant> readAllParticipants() {
+    public List<Participant> getAllParticipants() {
         return em.createQuery("SELECT p FROM Participant p ORDER BY p.profileId", Participant.class).getResultList();
     }
 
     @Override
-    public List<Challenge> readAllChallenges() {
-        return em.createQuery("SELECT c FROM Challenge c ORDER BY c.id", Challenge.class).getResultList();
+    public List<Challenge> getAllChallenges() {
+        return em.createQuery("SELECT c FROM Challenge c", Challenge.class).getResultList();
     }
 
     @Override
@@ -77,7 +78,7 @@ public class DAO implements DAOLocal {
         if (p == null) {
             return null;
         } else {
-            for (Challenge c : readAllChallenges()) {
+            for (Challenge c : getAllChallenges()) {
                 c = getChallengeById(c.getId());
                 if (c != null && c.getParticipantSet().contains(p)) {
                     c.getParticipantSet().remove(p);
@@ -273,7 +274,7 @@ public class DAO implements DAOLocal {
         if (t == null) {
             return null;
         } else {
-            for (Challenge c : readAllChallenges()) {
+            for (Challenge c : getAllChallenges()) {
                 c = getChallengeById(c.getId());
                 if (c != null && c.getParticipantSet().contains(t)) {
                     c.getTagSet().remove(t);
@@ -302,5 +303,39 @@ public class DAO implements DAOLocal {
                 .setParameter("name", name)
                 .getResultList()
                 .isEmpty();
+    }
+
+    //TODO rename
+    @Override
+    @Transactional
+    public boolean addParticipantToChallenge(Challenge c, String profileIds) {
+        if (c == null || c.getId() != null) {
+            return false;
+        } else {
+            for (Participant p : c.getParticipantSet()) {
+                if (p == null || p.getProfileId() == null || getParticipantById(p.getProfileId()) == null) {
+                    return false;
+                }
+            }
+            em.persist(c);
+
+            String[] profileIdsArray = profileIds.split(":");
+
+            List<Long> profileIdsList = new ArrayList<>();
+            for (String profileId : profileIdsArray) {
+                try {
+                    profileIdsList.add(Long.parseLong(profileId));
+                } catch (NumberFormatException nfe) {
+                    return false;
+                }
+            }
+
+            for (Long profileId : profileIdsList) {
+                this.addParticipantToChallenge(c.getId(), profileId);
+            }
+
+            return true;
+        }
+
     }
 }

@@ -24,14 +24,14 @@ public class StateEndpoint {
 
     @GET
     @Path("all")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getState() {
         List<State> states = dao.getAllStates();
         if (states.isEmpty()) {
             return notFound();
         } else {
             return Response.ok(new GenericEntity<List<State>>(states) {
-            }).build();
+            }).type(MediaType.TEXT_PLAIN_TYPE).build();
         }
     }
 
@@ -44,20 +44,20 @@ public class StateEndpoint {
             return notFound();
         } else {
             return Response.ok(new GenericEntity<List<State>>(states) {
-            }).build();
+            }).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
     @GET
     @Path("available")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getAvailableStates(State s) {
         List<State> states = dao.getAvailableStates();
         if(states == null || states.isEmpty()) {
             return notFound();
         } else {
             return Response.ok(new GenericEntity<List<State>>(states) {
-            }).build();
+            }).type(MediaType.TEXT_PLAIN_TYPE).build();
         }
     }
 

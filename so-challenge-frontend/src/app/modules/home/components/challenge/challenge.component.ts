@@ -33,6 +33,7 @@ export class ChallengeComponent implements OnInit {
             },
             error => {
                 console.log(error);
+                this.challenges = null;
                 this.snackBarService.warning('there are no challenges so far!');
             }
         );
@@ -47,15 +48,15 @@ export class ChallengeComponent implements OnInit {
     }
 
     deleteChallenge(c: Challenge) {
-        console.log(c);
         if (confirm(`do you want to delete the challenge '${c.title}'?`)) {
             this.endpointService.deleteChallenge(c.id).subscribe(
                 data => {
+                    this.snackBarService.success(`the challenge '${c.title}' was successfully deleted`);
                     this.refreshGUI();
-                    this.snackBarService.success(`the challenge '${data['title']}' was successfully added`);
                 },
                 error => {
                     this.snackBarService.error(`something went wrong - the challenge '${c.title}' was not deleted`);
+                    console.error(error);
                 }
             );
         }

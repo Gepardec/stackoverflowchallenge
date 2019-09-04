@@ -51,6 +51,9 @@
                 </mat-chip>
             </mat-chip-list>
         </mat-form-field>
+        <mat-list *ngFor="let p of selectedParticipants">
+            {{p.username}}
+        </mat-list>
 
     </div>
 

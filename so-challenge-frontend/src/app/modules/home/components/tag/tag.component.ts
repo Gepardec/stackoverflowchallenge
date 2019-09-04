@@ -50,11 +50,11 @@ export class TagComponent implements OnInit {
     addTag(name: string) {
         this.endpointService.addTag(name).subscribe(
             data => {
-                this.snackBarService.success(`the tag '${data['name']}' was successfully added`);
+                this.snackBarService.success(`the tag '${name}' was successfully added`);
                 this.ngOnInit();
             },
             error => {
-                this.snackBarService.error('something went wrong - tag was not added');
+                this.snackBarService.error(`something went wrong - tag '${name}' was not added`);
             }
         );
     }

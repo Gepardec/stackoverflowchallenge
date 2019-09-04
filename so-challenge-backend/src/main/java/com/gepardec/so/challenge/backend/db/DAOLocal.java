@@ -41,14 +41,14 @@ public interface DAOLocal {
      *
      * @return all participants as list.
      */
-    List<Participant> readAllParticipants();
+    List<Participant> getAllParticipants();
 
     /**
      * Reads all challenges from the database.
      *
      * @return all challenges as list.
      */
-    List<Challenge> readAllChallenges();
+    List<Challenge> getAllChallenges();
 
     /**
      * Updates the challenge c by merging it into the database.
@@ -143,4 +143,6 @@ public interface DAOLocal {
     boolean createTag(Tag t);
 
     boolean isTagNameAlreadyPresent(String name);
+
+    boolean addParticipantToChallenge(Challenge c, String profileId);
 }

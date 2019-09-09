@@ -6,6 +6,7 @@ import {State} from '../../../../shared/models/state';
 import {Participant} from '../../../../shared/models/participant';
 import {Tag} from '../../../../shared/models/tag';
 import {MatSelectionListChange} from '@angular/material';
+import {MatInputModule} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatListOption} from '@angular/material/typings/list';
 import {MatFormField} from '@angular/material';
@@ -22,12 +23,11 @@ export class AddChallengeComponent implements OnInit {
     @Output() onSuccessfulAdding = new EventEmitter<boolean>();
 
     states: State[];
-    participants: Participant[];
-    selectedParticipants: Participant[] = [];
-    tags: Tag[];
-    selectedTags: Tag[] = [];
-    participantsString = '';
-    tagString = '';
+    @Input() participants: Participant[];
+    @Input() tags: Tag[];
+    @Input() selectedTags: Tag[] = [];
+    @Input() participantsString = '';
+    @Input() tagString = '';
     removable = true;
 
 
@@ -115,3 +115,6 @@ export class AddChallengeComponent implements OnInit {
 
 }
 
+export class ChallengeFormControll {
+
+}

@@ -92,7 +92,7 @@ public class ChallengeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createChallenge(Challenge c) {
-        c.setFromDate(new Date());
+        c.setFromDate(new Date()); // TODO why new Date?
         c.setToDate(Date.from(c.getFromDate().toInstant().plus(70, ChronoUnit.DAYS)));
 
         if (c.getFromDate().after(c.getToDate()) || c.getFromDate().after(new Date())

@@ -60,7 +60,6 @@ export class AddChallengeComponent implements OnInit {
     }
 
     addClicked(selected: MatListOption[]) {
-        console.log(this.challenge);
         if (Array.isArray(selected) && selected.length > 0) {
             for (const s of selected) {
                 this.participantsString = this.participantsString.concat(s.value.valueOf().profileId, ':');

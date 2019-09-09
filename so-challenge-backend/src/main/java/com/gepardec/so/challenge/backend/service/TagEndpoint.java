@@ -6,6 +6,7 @@ import com.gepardec.so.challenge.backend.utils.EndpointUtils;
 
 import javax.inject.Inject;
 import javax.json.JsonObject;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.List;
@@ -20,7 +21,6 @@ import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
  */
 @Path("tag")
 public class TagEndpoint {
-
 
     @Context
     private UriInfo context;
@@ -49,11 +49,12 @@ public class TagEndpoint {
 
     @DELETE
     @Path("delete/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteTag(@PathParam("id") Long id) {
         Tag t = dao.deleteTag(id);
         if (t != null) {
-            return Response.ok(t).type(MediaType.TEXT_PLAIN_TYPE).build();
+            return Response.ok(t).type(MediaType.APPLICATION_JSON_TYPE).build();
         } else {
             return notFound();
         }

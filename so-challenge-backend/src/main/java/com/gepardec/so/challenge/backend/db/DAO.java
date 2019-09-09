@@ -253,9 +253,6 @@ public class DAO implements DAOLocal {
         return null;
     }
     // TODO REVIEW QUERY
-    // figure out how to query bridge table -> Select profileid, imageurl, link, username from participant as p
-    //INNER JOIN challenge_participant as cp On p.profileid = cp.participantid
-    //INNER JOIN challenge c on cp.challengeid = c.id -> does not work, because "challenge_participants" does not get recognized as table/entity
     @Override
     public List<Participant> getParticipantsOfChallenge(Long challengeId) {
         if(em.find(Challenge.class, challengeId) == null) return null;

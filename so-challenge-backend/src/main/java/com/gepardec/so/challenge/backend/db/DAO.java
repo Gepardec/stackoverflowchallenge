@@ -9,6 +9,7 @@ import com.gepardec.so.challenge.backend.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.*;
@@ -216,7 +217,6 @@ public class DAO implements DAOLocal {
     @Override
     @Transactional
     public boolean removeParticipantFromChallenge(Long challengeId, Long participantId) {
-        // TODO also remove participants from the challenge_participants table
         Challenge c = getChallengeById(challengeId);
         Participant p = getParticipantById(participantId);
 
@@ -333,6 +333,36 @@ public class DAO implements DAOLocal {
 
             return true;
         }
+    }
 
+    @Override
+    @Transactional
+    public boolean addTagsToChallenge(Challenge c, String tagIds) {
+        if (c == null) { // || c.getId() != null
+            return false;
+        } else {
+            for (Tag t : c.getTagSet()) {
+                if (t == null) {
+                    //return false;
+                }
+            }
+            em.merge(c);
+
+            String[] tagIdsArray = tagIds.split(":");
+
+            List<Long> tagIdsList = new ArrayList<>();
+            for (String ids : tagIdsArray) {
+                try {
+                    tagIdsList.add(Long.parseLong(ids));
+                } catch (NumberFormatException nfe) {
+                    return false;
+                }
+            }
+
+            for (Long profileId : tagIdsList) {
+                this.addTagsToChallenge(c.getId(), profileId);
+            }
+            return true;
+        }
     }
 }

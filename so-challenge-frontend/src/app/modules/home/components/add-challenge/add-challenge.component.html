@@ -42,19 +42,26 @@
         <mat-form-field>
             <input matInput name="award3" placeholder="award third place" [(ngModel)]="challenge.award3"/>
         </mat-form-field>
-        <mat-form-field *ngIf="tags">
-            <h4>tags</h4>
-            <mat-chip-list *ngFor="let tag of tags">
-                <mat-chip matInput ngDefaultControl name="addTags" class = badge [(ngModel)]="selectedTags" [removable]="removable" (removed)="removeTag(tag)">
+<!--        <mat-form-field *ngIf="tags">-->
+<!--            <h4>tags</h4>-->
+<!--            <mat-chip-list *ngFor="let tag of tags" [selectable]="true" >-->
+<!--                <mat-chip matInput ngDefaultControl name="addTags" class = badge [(ngModel)]="selectedTags" [removable]="removable" (removed)="removeTag(tag)" [value]="selectedTags">-->
+<!--                    {{tag.name}}-->
+<!--                    <mat-icon matChipRemove >cancel</mat-icon>-->
+<!--                </mat-chip>-->
+<!--            </mat-chip-list>-->
+<!--        </mat-form-field>-->
+    </div>
+    <div>
+        <h3>available tags</h3>
+        <mat-form-field ngDefaultControl>
+            <mat-selection-list #tagList (selectionChange)="onGroupsChange(tagList.selectedOptions.selected)">
+                <mat-list-option matinput ngDefaultControl class="badge" [ngModel]="tag.name"
+                                 *ngFor="let tag of tags" [value]="tag">
                     {{tag.name}}
-                    <mat-icon matChipRemove >cancel</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
+                </mat-list-option>
+            </mat-selection-list>
         </mat-form-field>
-        <mat-list *ngFor="let p of selectedParticipants">
-            {{p.username}}
-        </mat-list>
-
     </div>
 
 
@@ -62,15 +69,15 @@
         <h3>available cheetahs</h3>
         <!-- TODO PARTICIPANTS -->
         <mat-selection-list #participantsList  (selectionChange)="onGroupsChange(participantsList.selectedOptions.selected)">
-            <mat-list-option ngDefaultControl name="addParticipants" class=badge [ngModel]="participant.profileId"
+            <mat-list-option matinput ngDefaultControl name="addParticipants" class=badge [ngModel]="participant.profileId"
                              *ngFor="let participant of participants" [value]="participant">
                 {{participant.username}}
             </mat-list-option>
         </mat-selection-list>
     </div>
 
-    <div class="submit">
-        <button mat-raised-button color="primary" (click)="addClicked(participantsList.selectedOptions.selected)">add</button>
+    <ng-container class="submit">
+        <button mat-raised-button color="primary" (click)="addClicked(participantsList.selectedOptions.selected, tagList.selectedOptions.selected)">add</button>
         <button mat-raised-button color="warn" (click)="cancelClicked()">cancel</button>
-    </div>
+    </ng-container>
 </div>

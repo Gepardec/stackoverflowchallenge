@@ -88,12 +88,12 @@ export class EndpointService {
     }
 
     addParticipantsToNewChallenge(c: Challenge, profileIds: string) {
-        return this.http.post(this.BASE_URL + `challenge/participants/add/${profileIds}/new`, c, this.APPLICATION_JSON_OPTIONS);
+        return this.http.post(this.BASE_URL + `challenge/participants/add/new/${profileIds}`, c, this.APPLICATION_JSON_OPTIONS);
     }
 
-    // addParticipantsToChallenge(c: Challenge, profileIds: string) {
-    //     return this.http.put(this.BASE_URL + `challenge/participants/add/${profileIds}`, c, this.APPLICATION_JSON_OPTIONS);
-    // }
+    addParticipantsAndTagsToNewChallenge(c: Challenge, profileIds: string, tagIds: string) {
+        return this.http.post(this.BASE_URL + `challenge/participants/add/new/${profileIds}/${tagIds}`, c, this.APPLICATION_JSON_OPTIONS);
+    }
 
     removeParticipantsFromChallenge(chId: number, p: string) {
         // TODO remove participants

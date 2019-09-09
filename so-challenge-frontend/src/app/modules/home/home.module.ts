@@ -15,7 +15,6 @@ import {
     MatTabsModule,
     MatButtonModule,
     MatIconModule,
-    MatChipList,
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,

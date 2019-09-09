@@ -8,6 +8,7 @@ import {Tag} from '../../../../shared/models/tag';
 import {MatSelectionListChange} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatListOption} from '@angular/material/typings/list';
+import {MatFormField} from '@angular/material';
 import {constructExclusionsMap} from 'tslint/lib/rules/completed-docs/exclusions';
 
 @Component({
@@ -24,8 +25,9 @@ export class AddChallengeComponent implements OnInit {
     participants: Participant[];
     selectedParticipants: Participant[] = [];
     tags: Tag[];
-    selectedTags = this.tags;
+    selectedTags: Tag[] = [];
     participantsString = '';
+    tagString = '';
     removable = true;
 
 
@@ -34,10 +36,10 @@ export class AddChallengeComponent implements OnInit {
     constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
     }
     removeTag(tag: Tag): void {
-        const index = this.selectedTags.indexOf(tag);
+        const index = this.tags.indexOf(tag);
 
         if (index >= 0) {
-            this.selectedTags.splice(index, 1);
+            this.tags.splice(index, 1);
         }
     }
     ngOnInit() {
@@ -54,17 +56,22 @@ export class AddChallengeComponent implements OnInit {
         );
         this.endpointService.getTags().subscribe(
           data => {
-              this.selectedTags = this.tags = data;
+              this.tags = data;
           }
         );
     }
 
-    addClicked(selected: MatListOption[]) {
-        if (Array.isArray(selected) && selected.length > 0) {
-            for (const s of selected) {
+    // TODO review
+    addClicked(selectedParticipants: MatListOption[], selectedTags: MatListOption[]) {
+        if (Array.isArray(selectedParticipants) && selectedParticipants.length > 0) {
+            for (const s of selectedParticipants) {
                 this.participantsString = this.participantsString.concat(s.value.valueOf().profileId, ':');
             }
-            this.endpointService.addParticipantsToNewChallenge(this.challenge, this.participantsString).subscribe(
+            for (const s of selectedTags) {
+                this.tagString = this.tagString.concat(s.value.valueOf().id, ':');
+            }
+            console.log(this.tagString);
+            this.endpointService.addParticipantsAndTagsToNewChallenge(this.challenge, this.participantsString, this.tagString).subscribe(
                 data => {
                     console.log(data);
                     this.snackBarService.success(`the challenge '${this.challenge.title}' and it's participants were successfully added`);
@@ -105,5 +112,6 @@ export class AddChallengeComponent implements OnInit {
     onGroupsChange(selected: MatListOption[]) {
 
     }
+
 }
 

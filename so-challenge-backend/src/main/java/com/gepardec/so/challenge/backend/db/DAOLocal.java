@@ -11,6 +11,7 @@ import com.gepardec.so.challenge.backend.model.State;
 import com.gepardec.so.challenge.backend.model.Tag;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author praktikant_ankermann
@@ -145,4 +146,7 @@ public interface DAOLocal {
     boolean isTagNameAlreadyPresent(String name);
 
     boolean addParticipantToChallenge(Challenge c, String profileId);
+
+    boolean addTagsToChallenge(Challenge c, String tagIds);
+
 }

@@ -3,6 +3,8 @@ package com.gepardec.so.challenge.backend.model;
 
 
 import com.fasterxml.jackson.annotation.*;
+
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -26,7 +28,7 @@ public class Tag implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tagSet")
     private Set<Challenge> challengeSet;
 
-    @JsonBackReference
+    @JsonbTransient
     public Set<Challenge> getChallengeSet() {
         return challengeSet;
     }

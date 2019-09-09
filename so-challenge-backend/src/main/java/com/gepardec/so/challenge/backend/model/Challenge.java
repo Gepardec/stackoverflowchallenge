@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.*;
 import java.io.Serializable;
 import java.util.*;
 import javax.json.bind.annotation.JsonbDateFormat;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -59,12 +60,12 @@ public class Challenge implements Serializable {
     )
     private Set<Tag> tagSet = new HashSet<>();
 
-    @JsonBackReference
+    //@JsonbTransient
     public Set<Tag> getTagSet() {
         return tagSet;
     }
 
-    @JsonBackReference
+    @JsonbTransient
     public Set<Participant> getParticipantSet() {
         return participantSet;
     }

@@ -9,6 +9,7 @@ package com.gepardec.so.challenge.backend.model;
 import com.fasterxml.jackson.annotation.*;
 import java.io.Serializable;
 import java.util.Set;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -40,7 +41,7 @@ public class Participant implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "participantSet")
     private Set<Challenge> challengeSet;
 
-    @JsonManagedReference
+    @JsonbTransient
     public Set<Challenge> getChallengeSet() {
         return challengeSet;
     }

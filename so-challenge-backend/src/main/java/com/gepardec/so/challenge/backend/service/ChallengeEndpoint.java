@@ -13,7 +13,7 @@ import com.gepardec.so.challenge.backend.model.Tag;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notAcceptable;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 
-import java.time.temporal.ChronoUnit;
+
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,26 +75,32 @@ public class ChallengeEndpoint {
     }
 
     @POST
-    @Path("participants/add/{profileIds}/new")
+    @Path("participants/add/new/{profileIds}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createChallenge(@PathParam("profileIds") String profileIds, Challenge c) {
-        if(dao.addParticipantToChallenge(c, profileIds) || profileIds == null){
+        if(!dao.addParticipantToChallenge(c, profileIds) || profileIds == null){
             return notAcceptable();
         } else {
             return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
+    @POST
+    @Path("participants/add/new/{profileIds}/{tagIds}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createChallenge(@PathParam("profileIds") String profileIds, @PathParam("tagIds") String tagIds, Challenge c) {
+        if(!dao.addParticipantToChallenge(c, profileIds) || !dao.addTagsToChallenge(c, tagIds) || profileIds == null){
+            return notAcceptable();
+        } else {
+            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
+        }
+    }
 
-    // TODO check date
     @POST
     @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createChallenge(Challenge c) {
-        c.setFromDate(new Date()); // TODO why new Date?
-        c.setToDate(Date.from(c.getFromDate().toInstant().plus(70, ChronoUnit.DAYS)));
-
         if (c.getFromDate().after(c.getToDate()) || c.getFromDate().after(new Date())
                 || c.getFromDate().equals(c.getToDate())
                 || !dao.createChallenge(c)) {

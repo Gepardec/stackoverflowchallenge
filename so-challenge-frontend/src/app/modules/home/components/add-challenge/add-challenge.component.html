@@ -1,6 +1,10 @@
+<!DOCTYPE html>
+<body>
 <div *ngIf="challenge">
     <div class="form-container">
-        <h3>add new challenge</h3>
+
+        <h4>add new challenge</h4>
+
         <mat-form-field ngDefaultControl>
             <input matInput name="title" placeholder="title" [(ngModel)]="challenge.title"/>
         </mat-form-field>
@@ -42,8 +46,8 @@
         <mat-form-field ngDefaultControl>
             <input matInput name="award3" placeholder="award third place" [(ngModel)]="challenge.award3"/>
         </mat-form-field>
-
     </div>
+
     <div>
         <h4>available tags</h4>
         <div>
@@ -56,10 +60,8 @@
         </div>
     </div>
 
-
     <div class="participants-container">
         <h4>available cheetahs</h4>
-        <!-- TODO PARTICIPANTS -->
         <div>
             <mat-selection-list name = "addTag" ngDefaultControl #participantsList  (selectionChange)="onGroupsChange(participantsList.selectedOptions.selected)">
                 <mat-list-option class=badge [ngModel]="participant.username"
@@ -70,8 +72,10 @@
         </div>
     </div>
 
+
     <ng-container class="::ng-deep.submit">
         <button mat-raised-button color="primary" (click)="addClicked(participantsList.selectedOptions.selected, tagList.selectedOptions.selected)">add</button>
         <button mat-raised-button color="warn" (click)="cancelClicked()">cancel</button>
     </ng-container>
 </div>
+</body>

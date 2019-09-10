@@ -30,14 +30,17 @@ public class Participant implements Serializable {
     private Long profileId;
 
     @Size(max = 500)
+    @Column(name = "link")
     private String link;
 
     @Size(max = 300)
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "imageurl")
     private String imageURL;
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "participantSet")
     private Set<Challenge> challengeSet;
 
@@ -46,7 +49,7 @@ public class Participant implements Serializable {
         return challengeSet;
     }
 
-    @JsonManagedReference
+    @JsonbTransient
     public void setChallengeSet(Set<Challenge> challengeSet) {
         this.challengeSet = challengeSet;
     }

@@ -43,7 +43,7 @@ public class Challenge implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private State state;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "challenge_participant",
@@ -52,7 +52,8 @@ public class Challenge implements Serializable {
     )
     private Set<Participant> participantSet = new LinkedHashSet<>();
 
-    @JsonBackReference    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "challenge_tag",
             joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
@@ -60,7 +61,6 @@ public class Challenge implements Serializable {
     )
     private Set<Tag> tagSet = new HashSet<>();
 
-    //@JsonbTransient
     public Set<Tag> getTagSet() {
         return tagSet;
     }
@@ -70,7 +70,7 @@ public class Challenge implements Serializable {
         return participantSet;
     }
 
-    @JsonBackReference
+    @JsonbTransient
     public void setTagSet(Set<Tag> tagSet) {
     this.tagSet = tagSet;
     }

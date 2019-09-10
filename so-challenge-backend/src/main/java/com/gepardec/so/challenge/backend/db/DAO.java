@@ -120,8 +120,7 @@ public class DAO implements DAOLocal {
      */
     @Override
     public Challenge getChallengeByName(String name) {
-       Challenge c = (Challenge) em.createQuery("SELECT c FROM Challenge c WHERE c.title = :name").setParameter("name", name).getSingleResult();
-       return c;
+       return (Challenge) em.createQuery("SELECT c FROM Challenge c WHERE c.title = :name").setParameter("name", name).getSingleResult();
     }
 
     /**
@@ -151,7 +150,7 @@ public class DAO implements DAOLocal {
      * identify challenge by challenge.id
      * @param challengeId   the id of the challenge
      * @param participantId the id of the participant
-     * @return
+     * @return true if challenge and participant are not null and if participants are linked to the given challenge successfully
      */
     @Override
     @Transactional
@@ -233,13 +232,22 @@ public class DAO implements DAOLocal {
         return em.createQuery("SELECT s FROM State s ORDER BY s.id", State.class).getResultList();
     }
 
+    /**
+     *
+     * @return List of states for creating a challenge (active || planned)
+     */
     @Override
-    public List<State> getAvailableStates() {
+    public List<State> getCreateStates() {
         return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 4", State.class).getResultList();
     }
 
+    /**
+     *
+     * @param state
+     * @return List of states according to the stateflow
+     */
     @Override
-    public List<State> getAvailableStates(State state) {
+    public List<State> getCreateStates(State state) {
         switch (state.getName()) {
             case "planned" :
                 return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 3 OR s.id = 4", State.class).getResultList();
@@ -252,11 +260,14 @@ public class DAO implements DAOLocal {
         }
         return null;
     }
-    // TODO REVIEW QUERY
+
+    // TODO review query
     @Override
     public List<Participant> getParticipantsOfChallenge(Long challengeId) {
-        if(em.find(Challenge.class, challengeId) == null) return null;
-        return  em.createQuery("SELECT DISTINCT p FROM Participant p, Challenge c JOIN Challenge.participantSet part where part.profileId = :challengeId", Participant.class).getResultList();
+        if(em.find(Challenge.class, challengeId) == null){
+            return null;
+        }
+       return  em.createQuery("SELECT DISTINCT p FROM Participant p, Challenge c JOIN Challenge.participantSet part where part.profileId = :challengeId", Participant.class).getResultList();
     }
 
     @Override
@@ -314,7 +325,7 @@ public class DAO implements DAOLocal {
                     return false;
                 }
             }
-            em.persist(c);
+            em.merge(c);
 
             String[] profileIdsArray = profileIds.split(":");
 
@@ -338,12 +349,12 @@ public class DAO implements DAOLocal {
     @Override
     @Transactional
     public boolean addTagsToChallenge(Challenge c, String tagIds) {
-        if (c == null) { // || c.getId() != null
+        if (c == null) {
             return false;
         } else {
             for (Tag t : c.getTagSet()) {
                 if (t == null) {
-                    //return false;
+                    return false;
                 }
             }
             em.merge(c);

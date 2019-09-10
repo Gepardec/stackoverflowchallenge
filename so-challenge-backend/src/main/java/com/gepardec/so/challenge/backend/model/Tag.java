@@ -33,6 +33,7 @@ public class Tag implements Serializable {
         return challengeSet;
     }
 
+    @JsonbTransient
     public void setChallengeSet(Set<Challenge> challengeSet) {
         this.challengeSet = challengeSet;
     }

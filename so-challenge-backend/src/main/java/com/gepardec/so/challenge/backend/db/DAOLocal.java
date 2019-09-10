@@ -131,9 +131,9 @@ public interface DAOLocal {
 
     List<State> getAllStates();
 
-    List<State> getAvailableStates();
+    List<State> getCreateStates();
 
-    List<State> getAvailableStates(State state);
+    List<State> getCreateStates(State state);
 
     List<Participant> getParticipantsOfChallenge(Long challengeId);
 

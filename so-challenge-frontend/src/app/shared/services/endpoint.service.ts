@@ -38,6 +38,10 @@ export class EndpointService {
         return this.http.get<Participant[]>(this.BASE_URL + 'participant/all', this.APPLICATION_JSON_OPTIONS);
     }
 
+    getParticipantsOfChallenge(challengeId: number): Observable<Participant[]> {
+        return this.http.get<Participant[]>(this.BASE_URL + `challenge/${challengeId}/participants/get`, this.APPLICATION_JSON_OPTIONS);
+    }
+
     addParticipant(profileId: number) {
         return this.http.post(this.BASE_URL + 'participant/add', profileId, this.APPLICATION_JSON_OPTIONS);
     }
@@ -63,7 +67,7 @@ export class EndpointService {
         if (s == null) {
             this.getCreateStates();
         }
-        return this.http.get<State[]>(this.BASE_URL + 'state/available');
+        return this.http.get<State[]>(this.BASE_URL + 'state/available', this.APPLICATION_JSON_OPTIONS);
     }
 
     getCreateStates(): Observable<State[]> {
@@ -76,11 +80,15 @@ export class EndpointService {
     }
 
     updateChallenge(c: Challenge) {
-        return this.http.put(this.BASE_URL + 'challenge/update', c, this.TEXT_PLAIN_OPTIONS);
+        return this.http.put(this.BASE_URL + 'challenge/update', c, this.APPLICATION_JSON_OPTIONS);
     }
 
     getTags(): Observable<Tag[]> {
         return this.http.get<Tag[]>(this.BASE_URL + 'tag/all');
+    }
+
+    getTagsOfChallenge(chId: number): Observable<Tag[]> {
+        return this.http.get<Tag[]>(this.BASE_URL + `challenge/${chId}/tags`);
     }
 
     addParticipantsToChallenge(chTitle: string, profileIds: string) {

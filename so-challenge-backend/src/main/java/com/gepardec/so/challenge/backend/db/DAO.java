@@ -61,6 +61,7 @@ public class DAO implements DAOLocal {
         return em.createQuery("SELECT c FROM Challenge c", Challenge.class).getResultList();
     }
 
+    // TODO Exception: Unable to deserialize property 'state' because of: Error deserialize JSON value into type: class com.gepardec.so.challenge.backend.model.State.
     @Override
     @Transactional
     public Challenge updateChallenge(Challenge c) {
@@ -263,11 +264,10 @@ public class DAO implements DAOLocal {
 
     // TODO review query
     @Override
-    public List<Participant> getParticipantsOfChallenge(Long challengeId) {
-        if(em.find(Challenge.class, challengeId) == null){
-            return null;
-        }
-       return  em.createQuery("SELECT DISTINCT p FROM Participant p, Challenge c JOIN Challenge.participantSet part where part.profileId = :challengeId", Participant.class).getResultList();
+    public Set<Participant> getParticipantsOfChallenge(Long challengeId) {
+        Challenge c = em.find(Challenge.class, challengeId);
+        return c.getParticipantSet();
+       //return  em.createQuery("SELECT DISTINCT p FROM Participant p, Challenge c JOIN Challenge.participantSet part where part.profileId = :challengeId", Participant.class).getResultList();
     }
 
     @Override
@@ -375,5 +375,11 @@ public class DAO implements DAOLocal {
             }
             return true;
         }
+    }
+
+    @Override
+    public Set<Tag> getTagsOfChallenge(Long chId) {
+        Challenge c = em.find(Challenge.class, chId);
+        return c.getTagSet();
     }
 }

@@ -4,9 +4,9 @@
         <mat-list-item>
             <form>
                 <mat-form-field>
-                    <input #tagInput class="input" matInput name="tagInput" placeholder="Tag-Namen eingeben"/>
+                    <input #tagInput class="input" matInput name="tagInput" placeholder="enter tag name"/>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="addTag(tagInput.value); tagInput.value=''">add</button>
+                <button mat-raised-button align="end" color="primary" (click)="addTag(tagInput.value); tagInput.value=''">add</button>
             </form>
         </mat-list-item>
     </mat-list>

@@ -3,23 +3,23 @@
 <div *ngIf="challenge">
     <div class="form-container">
         <h3>edit challenge '{{challenge.title}}'</h3>
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <input matInput name="title" placeholder="title" [(ngModel)]="challenge.title"/>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <input matInput name="description" placeholder="description"
                    [(ngModel)]="challenge.description"/>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
             <mat-datepicker touchUi #pickerFrom></mat-datepicker>
             <input matInput [matDatepicker]="pickerFrom" placeholder="start date" [(ngModel)]="challenge.fromDate">
 
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
             <mat-datepicker touchUi #pickerTo></mat-datepicker>
             <input matInput [matDatepicker]="pickerTo" placeholder="end date" [(ngModel)]="challenge.toDate">
@@ -27,38 +27,53 @@
 
         <mat-form-field appearance="standard">
             <mat-label>Status</mat-label>
-            <mat-select name = "state"  *ngIf="states" [(ngModel)]="challenge.state">
-                <mat-option *ngFor="let s of states" [value]="s.id">
+            <mat-select name = "state" placeholder="{{challenge.state}}" [(ngModel)]="challenge.state">
+                <mat-option *ngFor="let s of states" [value]="s">
                     {{s.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <input matInput name="award1" placeholder="award first place" [(ngModel)]="challenge.award1"/>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <input matInput name="award2" placeholder="award second place" [(ngModel)]="challenge.award2"/>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <input matInput name="award3" placeholder="award third place" [(ngModel)]="challenge.award3"/>
         </mat-form-field>
 
 
         <!-- TODO Tags -->
+        <h3>tags</h3>
         <mat-form-field>
-            <input matInput name="tags" placeholder="Tags"/>
+            <mat-chip-list *ngFor="let t of challenge.tagSet" [(ngModel)]="this.tags">
+                <mat-chip *ngIf="tags">{{t.name}}</mat-chip>
+            </mat-chip-list>
         </mat-form-field>
-
     </div>
 
     <div class="participants-container">
+        <h3>participants</h3>
         <mat-list *ngFor="let participant of this.participants" title="participating cheethas">
-            <mat-list-item ngDefaultControl name="addParticipants" class = badge> {{participant.username}} </mat-list-item>
+            <br>
+            <mat-list-item formControl="control" name="addParticipants" class = badge> {{participant.username}} </mat-list-item>
         </mat-list>
     </div>
+
+        <h3>available participants</h3>
+        <div>
+            <mat-selection-list name = "addTag" #participantList>
+                <mat-list-option class=badge name="tag-option"
+                                 *ngFor="let participant of participants" [value]="participant.profileId">
+                    {{participant.username}}
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+
 
     <div class="">
         <button mat-raised-button color="primary" (click)="okClicked()">ok</button>

@@ -8,7 +8,7 @@
                 <mat-form-field>
                     <input #profileId class="input" matInput name="profileId" placeholder="enter stackoverflow user ID"/>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="addParticipant(profileId.value); profileId.value=''">add</button>
+                <button mat-raised-button color="primary" align="end" (click)="addParticipant(profileId.value); profileId.value=''">add</button>
             </form>
         </mat-list-item>
     </mat-list>

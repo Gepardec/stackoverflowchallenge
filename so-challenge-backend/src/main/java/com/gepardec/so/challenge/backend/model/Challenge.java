@@ -40,6 +40,7 @@ public class Challenge implements Serializable {
     @JsonbDateFormat(value = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date toDate;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     private State state;
 
@@ -59,18 +60,16 @@ public class Challenge implements Serializable {
             joinColumns = @JoinColumn(name = "challenge_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
     )
-    private Set<Tag> tagSet = new HashSet<>();
+    private Set<Tag> tagSet = new LinkedHashSet<>();
 
     public Set<Tag> getTagSet() {
         return tagSet;
     }
 
-    @JsonbTransient
     public Set<Participant> getParticipantSet() {
         return participantSet;
     }
 
-    @JsonbTransient
     public void setTagSet(Set<Tag> tagSet) {
     this.tagSet = tagSet;
     }

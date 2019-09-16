@@ -4,6 +4,13 @@ import {State} from '../../../../shared/models/state';
 import {EndpointService} from '../../../../shared/services/endpoint.service';
 import {Participant} from '../../../../shared/models/participant';
 import {SnackbarService} from '../../../../shared/services/snackbar.service';
+import {FormControl} from '@angular/forms';
+import {Tag} from '../../../../shared/models/tag';
+import {MatFormField} from '@angular/material';
+import {constructExclusionsMap} from 'tslint/lib/rules/completed-docs/exclusions';
+import {MatSelectionList, MatSelectionListChange} from '@angular/material';
+import {MatInputModule} from '@angular/material';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
     selector: 'app-challenge-detail',
@@ -16,6 +23,9 @@ export class ChallengeDetailComponent implements OnInit {
 
     states: State[];
     participants: Participant[];
+    tags: Tag[];
+
+    control = new FormControl();
 
     tempIndex = -1;
 
@@ -23,14 +33,19 @@ export class ChallengeDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.endpointService.getStates().subscribe(
+        this.endpointService.getAvailableStates(this.challenge.state).subscribe(
             data => {
                 this.states = data;
             }
         );
-        this.endpointService.getParticipants().subscribe(
+        this.endpointService.getParticipantsOfChallenge(this.challenge.id).subscribe(
             data => {
                 this.participants = data;
+            }
+        );
+        this.endpointService.getTagsOfChallenge(this.challenge.id).subscribe(
+            data => {
+                this.tags = data;
             }
         );
     }
@@ -41,11 +56,6 @@ export class ChallengeDetailComponent implements OnInit {
     }
 
     okClicked() {
-        if (this.tempIndex != -1) {
-            this.challenge.state = this.states[this.states.map(el => el.id).indexOf(this.tempIndex)];
-        } else {
-            this.challenge.state = null;
-        }
 
         console.log(this.challenge);
 

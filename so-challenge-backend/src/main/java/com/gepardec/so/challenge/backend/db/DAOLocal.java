@@ -135,7 +135,7 @@ public interface DAOLocal {
 
     List<State> getCreateStates(State state);
 
-    List<Participant> getParticipantsOfChallenge(Long challengeId);
+    Set<Participant> getParticipantsOfChallenge(Long challengeId);
 
     List<Tag> getAllTags();
 
@@ -149,4 +149,5 @@ public interface DAOLocal {
 
     boolean addTagsToChallenge(Challenge c, String tagIds);
 
+    Set<Tag> getTagsOfChallenge(Long chId);
 }

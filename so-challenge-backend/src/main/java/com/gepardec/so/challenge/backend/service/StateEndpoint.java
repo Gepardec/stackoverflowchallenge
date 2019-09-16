@@ -5,6 +5,7 @@ import com.gepardec.so.challenge.backend.model.State;
 
 import javax.inject.Inject;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,14 +25,14 @@ public class StateEndpoint {
 
     @GET
     @Path("all")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getState() {
         List<State> states = dao.getAllStates();
         if (states.isEmpty()) {
             return notFound();
         } else {
             return Response.ok(new GenericEntity<List<State>>(states) {
-            }).type(MediaType.TEXT_PLAIN_TYPE).build();
+            }).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
@@ -50,6 +51,7 @@ public class StateEndpoint {
 
     @GET
     @Path("available")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAvailableStates(State s) {
         List<State> states = dao.getCreateStates();

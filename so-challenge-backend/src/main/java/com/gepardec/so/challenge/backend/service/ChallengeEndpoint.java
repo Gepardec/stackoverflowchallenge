@@ -9,6 +9,7 @@ import com.gepardec.so.challenge.backend.db.DAOLocal;
 import com.gepardec.so.challenge.backend.model.Challenge;
 import com.gepardec.so.challenge.backend.model.Participant;
 import com.gepardec.so.challenge.backend.model.Tag;
+import org.junit.jupiter.api.Tags;
 
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notAcceptable;
 import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
@@ -17,6 +18,7 @@ import static com.gepardec.so.challenge.backend.utils.EndpointUtils.notFound;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.ws.rs.core.*;
 import javax.ws.rs.Consumes;
@@ -169,7 +171,7 @@ public class ChallengeEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getParticipantsOfChallenge(@PathParam("chId") Long chId) {
         return Response.ok(
-                new GenericEntity<List<Participant>>(
+                new GenericEntity<Set<Participant>>(
                         dao.getParticipantsOfChallenge(chId)){}).type(MediaType.APPLICATION_JSON_TYPE)
                 .build();
     }
@@ -186,6 +188,17 @@ public class ChallengeEndpoint {
             dao.addTagsToChallenge(c.getId(), tag.getId());
         }
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("{chId}/tags")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTagsOfChallenge(@PathParam("chId") Long chId) {
+        return Response.ok(
+                new GenericEntity<Set<Tag>>(
+                        dao.getTagsOfChallenge(chId)
+                ){}
+        ).type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 
     @DELETE

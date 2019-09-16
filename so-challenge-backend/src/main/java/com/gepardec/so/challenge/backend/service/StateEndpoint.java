@@ -36,8 +36,12 @@ public class StateEndpoint {
         }
     }
 
+    /**
+     *
+     * @return valid states for creating a new challenge (active|planned)
+     */
     @GET
-    @Path("startStates")
+    @Path("create")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCreateStates() {
         List<State> states = dao.getCreateStates();
@@ -49,6 +53,11 @@ public class StateEndpoint {
         }
     }
 
+    /**
+     *
+     * @param s the current state of a challenge
+     * @return available states based on param according to stateflow
+     */
     @GET
     @Path("available")
     @Consumes(MediaType.APPLICATION_JSON)

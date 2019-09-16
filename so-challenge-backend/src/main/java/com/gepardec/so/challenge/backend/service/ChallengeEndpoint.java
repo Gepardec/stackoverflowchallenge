@@ -76,47 +76,6 @@ public class ChallengeEndpoint {
     }
 
     @POST
-    @Path("participants/add/new/{profileIds}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response createChallenge(@PathParam("profileIds") String profileIds, Challenge c) {
-        if(!dao.addParticipantToChallenge(c, profileIds) || profileIds == null){
-            return notAcceptable();
-        } else {
-            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
-        }
-    }
-
-//    @POST
-//    @Path("participants/add/new/{profileIds}/{tagIds}")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response createChallenge(@PathParam("profileIds") String profileIds, @PathParam("tagIds") String tagIds, Challenge c) {
-//        boolean success = false;
-//        if(profileIds.isEmpty() && tagIds.isEmpty()) {
-//           success = dao.createChallenge(c);
-//        } else if(profileIds.isEmpty()) {
-//            success = dao.addTagsToChallenge(c, tagIds);
-//        } else if(tagIds.isEmpty()) {
-//            success = dao.addParticipantToChallenge(c, profileIds);
-//        }
-//        if(success) {
-//            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
-//        } else {
-//            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
-//        }
-//    }
-
-    @POST
-    @Path("participants/add/new/{profileIds}/{tagIds}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response createChallenge(@PathParam("profileIds") String profileIds, @PathParam("tagIds") String tagIds, Challenge c) {
-        if(!dao.addParticipantToChallenge(c, profileIds) || !dao.addTagsToChallenge(c, tagIds) || profileIds == null){
-            return notAcceptable();
-        } else {
-            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
-        }
-    }
-
-    @POST
     @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -132,6 +91,41 @@ public class ChallengeEndpoint {
             }
         } catch (Exception e) {
             return notAcceptable();
+        }
+    }
+
+    /**
+     *
+     * @param profileIds full-colon separated stackoverflow-ids as String
+     * @param c Challenge object
+     * @return response ok if participants were added successfully to challenge, not acceptable if not
+     */
+    @POST
+    @Path("add/new/{profileIds}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createChallenge(@PathParam("profileIds") String profileIds, Challenge c) {
+        if(!dao.addParticipantToChallenge(c, profileIds) || profileIds == null){
+            return notAcceptable();
+        } else {
+            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
+        }
+    }
+
+    /**
+     *
+     * @param profileIds Stackoverflow-id as String
+     * @param tagIds full-colon separated Id of tags
+     * @param c Challenge object
+     * @return response ok if participants and tags were added successfully to challenge, not acceptable if not
+     */
+    @POST
+    @Path("add/new/{profileIds}/{tagIds}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createChallenge(@PathParam("profileIds") String profileIds, @PathParam("tagIds") String tagIds, Challenge c) {
+        if(!dao.addParticipantToChallenge(c, profileIds) || !dao.addTagsToChallenge(c, tagIds) || profileIds == null){
+            return notAcceptable();
+        } else {
+            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
@@ -166,6 +160,11 @@ public class ChallengeEndpoint {
         }
     }
 
+    /**
+     *
+     * @param chId Id of a challenge
+     * @return a Set of Participants registered to the given challenge
+     */
     @GET
     @Path("{chId}/participants/get")
     @Produces(MediaType.APPLICATION_JSON)

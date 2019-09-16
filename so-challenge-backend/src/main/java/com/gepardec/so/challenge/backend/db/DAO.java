@@ -267,7 +267,6 @@ public class DAO implements DAOLocal {
     public Set<Participant> getParticipantsOfChallenge(Long challengeId) {
         Challenge c = em.find(Challenge.class, challengeId);
         return c.getParticipantSet();
-       //return  em.createQuery("SELECT DISTINCT p FROM Participant p, Challenge c JOIN Challenge.participantSet part where part.profileId = :challengeId", Participant.class).getResultList();
     }
 
     @Override

@@ -71,7 +71,7 @@ export class EndpointService {
     }
 
     getCreateStates(): Observable<State[]> {
-        return this.http.get<State[]>(this.BASE_URL + 'state/startStates', this.APPLICATION_JSON_OPTIONS);
+        return this.http.get<State[]>(this.BASE_URL + 'state/create', this.APPLICATION_JSON_OPTIONS);
     }
 
 
@@ -96,11 +96,11 @@ export class EndpointService {
     }
 
     addParticipantsToNewChallenge(c: Challenge, profileIds: string) {
-        return this.http.post(this.BASE_URL + `challenge/participants/add/new/${profileIds}`, c, this.APPLICATION_JSON_OPTIONS);
+        return this.http.post(this.BASE_URL + `challenge/add/new/${profileIds}`, c, this.APPLICATION_JSON_OPTIONS);
     }
 
     addParticipantsAndTagsToNewChallenge(c: Challenge, profileIds: string, tagIds: string) {
-        return this.http.post(this.BASE_URL + `challenge/participants/add/new/${profileIds}/${tagIds}`, c, this.APPLICATION_JSON_OPTIONS);
+        return this.http.post(this.BASE_URL + `challenge/add/new/${profileIds}/${tagIds}`, c, this.APPLICATION_JSON_OPTIONS);
     }
 
     removeParticipantsFromChallenge(chId: number, p: string) {

@@ -17,7 +17,7 @@
         <mat-form-field ngDefaultControl>
             <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
             <mat-datepicker touchUi #pickerFrom></mat-datepicker>
-            <input matInput [matDatepicker]="pickerFrom" placeholder="start date" [(ngModel)]="challenge.fromDate">
+            <input matInput [matDatepicker]="pickerFrom" placeholder="start date" [(ngModel)]="challenge.fromDate" >
         </mat-form-field>
 
         <mat-form-field ngDefaultControl>
@@ -51,9 +51,9 @@
     <div>
         <h4>available tags</h4>
         <div>
-            <mat-selection-list #tagList (selectionChange)="onGroupsChange(tagList.selectedOptions.selected)">
-                <mat-list-option class="badge" [ngModel]="tag.name"
-                                 *ngFor="let tag of tags">
+            <mat-selection-list name="addParticipant" #tagList>
+                <mat-list-option class="badge" name="participant-option"
+                                 *ngFor="let tag of tags" [value]="tag.id">
                     {{tag.name}}
                 </mat-list-option>
             </mat-selection-list>
@@ -63,9 +63,9 @@
     <div class="participants-container">
         <h4>available cheetahs</h4>
         <div>
-            <mat-selection-list name = "addTag" ngDefaultControl #participantsList  (selectionChange)="onGroupsChange(participantsList.selectedOptions.selected)">
-                <mat-list-option class=badge [ngModel]="participant.username"
-                                 *ngFor="let participant of participants">
+            <mat-selection-list name = "addTag" #participantList>
+                <mat-list-option class=badge name="tag-option"
+                                 *ngFor="let participant of participants" [value]="participant.profileId">
                     {{participant.username}}
                 </mat-list-option>
             </mat-selection-list>
@@ -74,7 +74,7 @@
 
 
     <ng-container class="::ng-deep.submit">
-        <button mat-raised-button color="primary" (click)="addClicked(participantsList.selectedOptions.selected, tagList.selectedOptions.selected)">add</button>
+        <button mat-raised-button color="primary" (click)="addClicked(participantList.selectedOptions.selected, tagList.selectedOptions.selected)">add</button>
         <button mat-raised-button color="warn" (click)="cancelClicked()">cancel</button>
     </ng-container>
 </div>

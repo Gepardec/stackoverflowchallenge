@@ -84,22 +84,33 @@ public class ChallengeEndpoint {
         }
     }
 
+//    @POST
+//    @Path("participants/add/new/{profileIds}/{tagIds}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response createChallenge(@PathParam("profileIds") String profileIds, @PathParam("tagIds") String tagIds, Challenge c) {
+//        boolean success = false;
+//        if(profileIds.isEmpty() && tagIds.isEmpty()) {
+//           success = dao.createChallenge(c);
+//        } else if(profileIds.isEmpty()) {
+//            success = dao.addTagsToChallenge(c, tagIds);
+//        } else if(tagIds.isEmpty()) {
+//            success = dao.addParticipantToChallenge(c, profileIds);
+//        }
+//        if(success) {
+//            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
+//        } else {
+//            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
+//        }
+//    }
+
     @POST
     @Path("participants/add/new/{profileIds}/{tagIds}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createChallenge(@PathParam("profileIds") String profileIds, @PathParam("tagIds") String tagIds, Challenge c) {
-        boolean success = false;
-        if(profileIds.isEmpty() && tagIds.isEmpty()) {
-           success = dao.createChallenge(c);
-        } else if(profileIds.isEmpty()) {
-            success = dao.addTagsToChallenge(c, tagIds);
-        } else if(tagIds.isEmpty()) {
-            success = dao.addParticipantToChallenge(c, profileIds);
-        }
-        if(success) {
-            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
+        if(!dao.addParticipantToChallenge(c, profileIds) || !dao.addTagsToChallenge(c, tagIds) || profileIds == null){
+            return notAcceptable();
         } else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
+            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 
@@ -108,13 +119,17 @@ public class ChallengeEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createChallenge(Challenge c) {
-        if (c.getFromDate().after(c.getToDate())
-                || c.getFromDate().after(new Date())
-                || c.getFromDate().equals(c.getToDate())
-                || !dao.createChallenge(c)) {
+        try {
+            if (c.getFromDate().after(c.getToDate())
+                    || c.getFromDate().after(new Date())
+                    || c.getFromDate().equals(c.getToDate())
+                    || !dao.createChallenge(c)) {
+                return notAcceptable();
+            } else {
+                return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
+            }
+        } catch (Exception e) {
             return notAcceptable();
-        } else {
-            return Response.status(Response.Status.CREATED).entity(c).type(MediaType.APPLICATION_JSON_TYPE).build();
         }
     }
 

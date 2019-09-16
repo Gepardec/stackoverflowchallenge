@@ -27,8 +27,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TagComponent } from './components/tag/tag.component';
 import {AddChallengeComponent} from './components/add-challenge/add-challenge.component';
 import {ChartsModule} from 'ng2-charts';
-import {MatCardModule} from "@angular/material/typings/card";
-import {MatSidenavModule} from "@angular/material/typings/sidenav";
+import {MatCardModule} from "@angular/material/card";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({

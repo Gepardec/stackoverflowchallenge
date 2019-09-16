@@ -325,7 +325,7 @@ public class DAO implements DAOLocal {
                     return false;
                 }
             }
-            em.merge(c);
+            em.persist(c);
 
             String[] profileIdsArray = profileIds.split(":");
 

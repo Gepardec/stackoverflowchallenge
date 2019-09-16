@@ -1,5 +1,5 @@
 # Warning
-This README.rd contains only technical and licencing related issues and will not describe the application itself and its features! For an indepth description of the app itself, please read our wiki entry.  
+This README.md contains only technical and licencing related issues and will not describe the application itself and its features! For an indepth description of the app itself, please read our wiki entry.  
 Thank you!  
 
 # Installation

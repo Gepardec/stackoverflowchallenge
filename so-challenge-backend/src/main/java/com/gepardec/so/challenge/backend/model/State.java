@@ -11,19 +11,22 @@ import java.util.Objects;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class)
 public class State implements Serializable {
 
+    /**
+     * changed to int because state id only ranges from 1-4
+     */
     @Id
-    private Long id;
+    private int id;
 
     private String name;
 
     public State() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -29,9 +29,6 @@ export class AddChallengeComponent implements OnInit {
     participantsString = '';
     tagString = '';
 
-
-    tempIndex = -1;
-
     constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
     }
     removeTag(tag: Tag): void {
@@ -62,7 +59,7 @@ export class AddChallengeComponent implements OnInit {
 
     addClicked(selectedParticipants: MatListOption[], selectedTags: MatListOption[]) {
         if (selectedParticipants.length > 0) {
-            // TODO review -> cannot read 'value' of undefinded
+            // TODO review -> cannot read 'value' of undefined
             // console.log(selectedTags, selectedTags);
             for (const s of selectedParticipants) {
                 console.log(s.value.valueOf());
@@ -114,6 +111,3 @@ export class AddChallengeComponent implements OnInit {
 
 }
 
-export class ChallengeFormControll {
-
-}

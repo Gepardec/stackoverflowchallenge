@@ -5,10 +5,7 @@ import com.gepardec.so.challenge.backend.model.State;
 
 import javax.inject.Inject;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.util.List;
 
@@ -55,15 +52,15 @@ public class StateEndpoint {
 
     /**
      *
-     * @param s the current state of a challenge
+     *
      * @return available states based on param according to stateflow
      */
     @GET
-    @Path("available")
+    @Path("{stateId}/available")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAvailableStates(State s) {
-        List<State> states = dao.getCreateStates();
+    public Response getAvailableStates(@PathParam("stateId") int stateId) {
+        List<State> states = dao.getCreateStates(stateId);
         if(states == null || states.isEmpty()) {
             return notFound();
         } else {

@@ -26,12 +26,13 @@
         </mat-form-field>
 
         <mat-form-field appearance="standard">
-            <mat-label>state</mat-label>
+            <mat-label>{{this.challenge.state.name}}</mat-label>
             <mat-select name = "state" [(ngModel)]="challenge.state">
-                <mat-option *ngFor="let s of states" [value]="s">
+                <mat-option *ngFor="let s of states" [value]="s" (onSelectionChange)="onStateChange()">
                     {{s.name}}
                 </mat-option>
             </mat-select>
+
         </mat-form-field>
 
         <mat-form-field ngDefaultControl>
@@ -47,11 +48,10 @@
         </mat-form-field>
 
 
-        <!-- TODO Tags -->
         <mat-label>tags</mat-label>
-        <mat-form-field>
+        <mat-form-field ngDefaultControl>
             <mat-chip-list *ngFor="let t of challenge.tagSet" [(ngModel)]="this.tags">
-                <mat-chip *ngIf="tags">{{t.name}}</mat-chip>
+                <mat-chip matinput *ngIf="tags">{{t.name}}</mat-chip>
             </mat-chip-list>
         </mat-form-field>
     </div>
@@ -60,7 +60,7 @@
         <mat-label>participants</mat-label>
         <mat-list *ngFor="let participant of this.participants" title="participating cheethas">
             <br>
-            <mat-list-item formControl="control" name="addParticipants" class = badge> {{participant.username}} </mat-list-item>
+            <mat-list-item matinput ngDefaultControl name="addParticipants" class = badge> {{participant.username}} </mat-list-item>
         </mat-list>
     </div>
 

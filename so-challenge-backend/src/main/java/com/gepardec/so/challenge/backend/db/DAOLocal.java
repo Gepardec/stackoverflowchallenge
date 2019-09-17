@@ -133,7 +133,7 @@ public interface DAOLocal {
 
     List<State> getCreateStates();
 
-    List<State> getCreateStates(State state);
+    List<State> getCreateStates(int stateId);
 
     Set<Participant> getParticipantsOfChallenge(Long challengeId);
 

@@ -6,7 +6,7 @@
         <h4>add new challenge</h4>
 
         <mat-form-field ngDefaultControl>
-            <input matInput name="title" placeholder="title" [(ngModel)]="challenge.title"/>
+            <input matInput name="title" placeholder="title" [(ngModel)]="challenge.title" [required]="true"/>
         </mat-form-field>
 
         <mat-form-field ngDefaultControl>
@@ -17,18 +17,18 @@
         <mat-form-field ngDefaultControl>
             <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
             <mat-datepicker touchUi #pickerFrom></mat-datepicker>
-            <input matInput [matDatepicker]="pickerFrom" placeholder="start date" [(ngModel)]="challenge.fromDate" >
+            <input matInput [matDatepicker]="pickerFrom" placeholder="start date" [(ngModel)]="challenge.fromDate" [required]="true">
         </mat-form-field>
 
         <mat-form-field ngDefaultControl>
             <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
             <mat-datepicker touchUi #pickerTo></mat-datepicker>
-            <input matInput [matDatepicker]="pickerTo" placeholder="end date" [(ngModel)]="challenge.toDate">
+            <input matInput [matDatepicker]="pickerTo" placeholder="end date" [(ngModel)]="challenge.toDate" [required]="true">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>challenge state</mat-label>
-            <mat-select name="addState" [(ngModel)]="challenge.state">
+            <mat-select name="addState" [(ngModel)]="challenge.state" [required]="true">
                 <mat-option *ngFor="let s of states" [value]="s">
                     {{s.name}}
                 </mat-option>

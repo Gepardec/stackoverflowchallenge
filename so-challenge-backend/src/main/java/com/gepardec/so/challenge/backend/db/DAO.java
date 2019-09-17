@@ -61,7 +61,6 @@ public class DAO implements DAOLocal {
         return em.createQuery("SELECT c FROM Challenge c", Challenge.class).getResultList();
     }
 
-    // TODO Exception: Unable to deserialize property 'state' because of: Error deserialize JSON value into type: class com.gepardec.so.challenge.backend.model.State.
     @Override
     @Transactional
     public Challenge updateChallenge(Challenge c) {
@@ -137,7 +136,6 @@ public class DAO implements DAOLocal {
         Participant p = getParticipantById(participantId);
 
         if (c == null || p == null || c.getParticipantSet().contains(p)) {
-            System.err.println("Challenge with title: " + name + " is null");
             return false;
         } else {
             c.addParticipant(p);
@@ -244,25 +242,29 @@ public class DAO implements DAOLocal {
 
     /**
      *
-     * @param state
+     * @param stateId id of the current state
      * @return List of states according to the stateflow
+     *1 active
+     *2	completed
+     *3	canceld
+     *4	planned
      */
     @Override
-    public List<State> getCreateStates(State state) {
-        switch (state.getName()) {
-            case "planned" :
+    public List<State> getCreateStates(int stateId) {
+
+        switch (stateId) {
+            case 4 :
                 return em.createQuery("SELECT s FROM State s WHERE s.id = 1 OR s.id = 3 OR s.id = 4", State.class).getResultList();
-            case "active":
+            case 1:
                 return em.createQuery("SELECT s FROM State s WHERE s.id = 2 OR s.id = 3 OR s.id = 1", State.class).getResultList();
-            case "canceled":
+            case 3:
                 return em.createQuery("SELECT s FROM State s WHERE s.id = 3", State.class).getResultList();
-            case "completed":
+            case 2:
                 return em.createQuery("SELECT s FROM State s WHERE s.id = 2", State.class).getResultList();
         }
-        return null;
+        return em.createQuery("SELECT s FROM State s", State.class).getResultList();
     }
 
-    // TODO review query
     @Override
     public Set<Participant> getParticipantsOfChallenge(Long challengeId) {
         Challenge c = em.find(Challenge.class, challengeId);
@@ -283,8 +285,9 @@ public class DAO implements DAOLocal {
         } else {
             for (Challenge c : getAllChallenges()) {
                 c = getChallengeById(c.getId());
-                if (c != null && c.getParticipantSet().contains(t)) {
+                if (c != null && c.getTagSet().contains(t)) {
                     c.getTagSet().remove(t);
+                    t.getChallengeSet().remove(c);
                     em.merge(c);
                 }
             }
@@ -312,7 +315,6 @@ public class DAO implements DAOLocal {
                 .isEmpty();
     }
 
-    //TODO rename
     @Override
     @Transactional
     public boolean addParticipantToChallenge(Challenge c, String profileIds) {
@@ -368,7 +370,6 @@ public class DAO implements DAOLocal {
                     return false;
                 }
             }
-
             for (Long profileId : tagIdsList) {
                 this.addTagsToChallenge(c.getId(), profileId);
             }

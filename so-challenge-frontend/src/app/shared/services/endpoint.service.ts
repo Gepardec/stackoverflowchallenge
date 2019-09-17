@@ -65,9 +65,10 @@ export class EndpointService {
 
     getAvailableStates(s: State): Observable<State[]> {
         if (s == null) {
+            console.log('+++++ state is null +++++')
             this.getCreateStates();
         }
-        return this.http.get<State[]>(this.BASE_URL + 'state/available', this.APPLICATION_JSON_OPTIONS);
+        return this.http.get<State[]>(this.BASE_URL + `state/${s.id}/available`, this.APPLICATION_JSON_OPTIONS);
     }
 
     getCreateStates(): Observable<State[]> {

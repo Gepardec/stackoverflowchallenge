@@ -25,10 +25,6 @@ export class ChallengeDetailComponent implements OnInit {
     participants: Participant[];
     tags: Tag[];
 
-    control = new FormControl();
-
-    tempIndex = -1;
-
     constructor(private endpointService: EndpointService, private snackBarService: SnackbarService) {
     }
 
@@ -48,11 +44,6 @@ export class ChallengeDetailComponent implements OnInit {
                 this.tags = data;
             }
         );
-    }
-
-    ngOnChanges() {
-        this.tempIndex = -1;
-        this.tempIndex = this.challenge.state == null ? -1 : this.challenge.state.id;
     }
 
     okClicked() {
@@ -78,4 +69,14 @@ export class ChallengeDetailComponent implements OnInit {
     cancelClicked() {
         this.challenge = null;
     }
+    onStateChange() {
+        this.endpointService.updateChallenge(this.challenge).subscribe();
+        this.endpointService.getAvailableStates(this.challenge.state).subscribe(
+            data => {
+                console.log(data);
+                this.states = data;
+            }
+        );
+    }
+
 }
